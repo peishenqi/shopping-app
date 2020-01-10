@@ -1,6 +1,155 @@
 <template>
   <div class="home">
-    <h1>首页</h1>
+    <van-sticky>
+    <header>
+      <van-icon class="icon-left" name="qr" />
+      <van-nav-bar
+        title="没名字"
+        @click-left="onClickLeft"
+        @click-right="onClickRight"
+      />
+      <i class="icon-right van-icon van-icon-service"></i>
+    </header>
+    </van-sticky>
+
+    <section>
+
+      <!-- 轮播 -->
+      <van-swipe :autoplay="3000" indicator-color="white">
+        <van-swipe-item>
+          <img src="https://img02.hua.com/slider/18_youflower_m.jpg?830" alt="">
+        </van-swipe-item>
+        <van-swipe-item>
+          <img src="https://img02.hua.com/slider/20_valentine_banner_m.jpg" alt="">
+        </van-swipe-item>
+        <van-swipe-item>
+          <img src="https://img02.hua.com/slider/19_birthday_banner_m.jpg" alt="">
+        </van-swipe-item>
+        <van-swipe-item>
+          <img src="https://img02.hua.com/slider/17_mjz_m.jpg" alt="">
+        </van-swipe-item>
+      </van-swipe>
+
+      <!-- 分类 -->
+      <van-grid>
+        <van-grid-item to="/Birthday" icon="birthday-cake-o" text="生日" />
+        <van-grid-item to="/Commemorate" icon="flower-o" text="纪念日" />
+        <van-grid-item to="/Festival" icon="gift-o" text="节日" />
+        <van-grid-item to="/Surprise" icon="gem-o" text="惊喜" />
+      </van-grid>
+
+      <!-- 选择 -->
+      <h5 style="margin:0.5rem 1rem">| 一秒选择</h5>
+      <div class="someone">
+        <div>
+          <van-image
+            round
+            width="10rem"
+            height="10rem"
+            src="https://img.yzcdn.cn/vant/cat.jpeg"
+          />
+          <p>送女友</p>
+        </div>
+        <div>
+          <van-image
+            round
+            width="10rem"
+            height="10rem"
+            src="https://img.yzcdn.cn/vant/cat.jpeg"
+          />
+          <p>送长辈</p>
+        </div>
+        <div>
+          <van-image
+            round
+            width="10rem"
+            height="10rem"
+            src="https://img.yzcdn.cn/vant/cat.jpeg"
+          />
+          <p>送朋友</p>
+        </div>
+      </div>
+
+      <!-- 热卖 -->
+      <div class="select">
+        <div class="hot">
+          <h4>热卖榜</h4>
+          <p>集万千宠爱</p>
+          <img src="http://img1.imgtn.bdimg.com/it/u=1769307511,4173135256&fm=26&gp=0.jpg" alt="">
+        </div>
+
+         <div class="special">
+          <h4>特价专区</h4>
+          <p>超值好货</p>
+          <img src="http://dpic.tiankong.com/7d/u9/QJ8445891788.jpg" alt="">
+        </div>
+      </div>
+      
+      <!-- 送女友 -->
+      <div class="girlfriend">
+        <p>/~送女友~/</p>
+        <van-card
+          price="2.00"
+          desc="描述信息"
+          title="商品标题"
+          thumb="https://img.yzcdn.cn/vant/t-thirt.jpg"
+        >
+          <div slot="tags">
+            <van-tag plain type="danger">标签</van-tag>
+            <van-tag plain type="danger">标签</van-tag>
+          </div>
+          <div slot="footer">
+            <van-button size="mini">
+              <van-icon class="cart" name="shopping-cart-o" />
+            </van-button>
+          </div>
+        </van-card>
+      </div>
+
+      <!-- 送长辈 -->
+      <div class="eldership">
+        <p>/~送长辈~/</p>
+        <van-card
+          price="2.00"
+          desc="描述信息"
+          title="商品标题"
+          thumb="https://img.yzcdn.cn/vant/t-thirt.jpg"
+        >
+          <div slot="tags">
+            <van-tag plain type="danger">标签</van-tag>
+            <van-tag plain type="danger">标签</van-tag>
+          </div>
+          <div slot="footer">
+            <van-button size="mini">
+              <van-icon class="cart" name="shopping-cart-o" />
+            </van-button>
+          </div>
+        </van-card>
+      </div>
+
+      <!-- 送朋友 -->
+      <div class="friend">
+        <p>/~送朋友~/</p>
+        <van-card
+          price="2.00"
+          desc="描述信息"
+          title="商品标题"
+          thumb="https://img.yzcdn.cn/vant/t-thirt.jpg"
+        >
+          <div slot="tags">
+            <van-tag plain type="danger">标签</van-tag>
+            <van-tag plain type="danger">标签</van-tag>
+          </div>
+          <div slot="footer">
+            <van-button size="mini">
+              <van-icon class="cart" name="shopping-cart-o" />
+            </van-button>
+          </div>
+        </van-card>
+      </div>
+
+    </section>
+    <footer></footer>
   </div>
 </template>
 
@@ -8,7 +157,136 @@
 export default {
   name: 'Home',
   components: {
-
+   
+  },
+   methods: {
+    onClickLeft() {
+      Toast('返回');
+    },
+    onClickRight() {
+      Toast('按钮');
+    },
+    // jump(){
+    //   this.$router.push({path:'Service'})
+    // }
   }
 }
 </script>
+
+<style scoped>
+*{
+  margin: 0;
+  padding: 0;
+}
+.home{
+  display: flex;
+  flex-direction: column;
+  height:100%;
+  width:100%;
+}
+header{
+  /* background: black; */
+  position: relative;
+}
+header .van-icon{
+  position: absolute;
+  font-size: 1.6rem;
+  top:1.4rem;
+  z-index:10;
+}
+header .van-nav-bar{
+  height:4rem;
+  line-height: 4rem;
+  background:#ccc;
+}
+header .van-nav-bar__title{
+  margin: 0 auto;
+  font-size: 1.4rem;
+}
+.icon-left{
+  left: 0;
+  margin: 0 1rem;
+}
+.icon-right{
+  right:0;
+  margin: 0 1rem;
+}
+
+section{
+  flex: 1;
+  /* overflow-y:auto; */
+}
+.van-swipe-item img{
+  width:100%;
+  vertical-align:middle
+}
+/* 选择 */
+.someone{
+  display: flex;
+  justify-content: space-around;
+  text-align: center;
+}
+section .van-image{
+  width:5rem !important;
+  height:5rem !important;
+}
+.someone p{
+  margin-bottom: 0.3rem;
+  font-size: 0.8rem;
+}
+/* 热卖榜 */
+.select{
+  width:100%;
+  height:10rem;
+}
+.hot,.special{
+  width:50%;
+  box-sizing: border-box;
+  position: relative;
+  border: 5px solid #ccc;
+  border-radius: 23%;
+}
+.hot img,.special img{
+  width:100%;
+  height:9rem;
+}
+.hot h4,.special h4{
+  position: absolute;
+  top: 0.5rem;
+  left:1rem;
+  color: #4b555f;
+}
+.hot p,.special p{
+  position: absolute;
+  top: 2rem;
+  left: 1rem;
+  color: #6465668f;
+}
+.hot{
+  float: left;
+}
+.special{
+  float:right;
+}
+/* 送女友 */
+.cart{
+  font-size: 1.3rem;
+}
+.van-button{
+  border:0;
+}
+.van-card{
+  background: #fff;
+}
+.girlfriend p,.eldership p,.friend p{
+
+  text-align: center;
+  margin: 0.5rem 0;
+}
+
+
+footer{
+  height:50px;
+  background: #fff;
+}
+</style>
