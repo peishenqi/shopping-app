@@ -1,9 +1,9 @@
 <template>
-    <div class="Girlfriend">
+    <div class="Elder">
         <header>
             <van-icon @click="onClickLeft" class="icon-left" name="arrow-left"/>
             <van-nav-bar
-            title="送女友"
+            title="送长辈"
             />
             <van-icon @click="showPopup" class="icon-right" name="wap-nav"/>
              <van-popup
@@ -18,7 +18,7 @@
                 </van-popup>
             <div>
                 <van-grid :column-num="2">
-                    <van-grid-item to="/elder" text="送长辈" />
+                    <van-grid-item to="/girlfriend" text="送女友" />
                     <van-grid-item to="/friend" text="送朋友" />
                 </van-grid>
             </div>
