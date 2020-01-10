@@ -79,7 +79,23 @@ const routes = [{
     path: '/login',
     name: 'Login',
     component: () => import('../views/Login.vue')
-  },
+  },{
+    path: '/surprise',
+    name: 'Surprise',
+    component: () => import('../views/home/Surprise.vue')
+  },{
+    path: '/festival',
+    name: 'Festival',
+    component: () => import('../views/home/Festival.vue')
+  },{
+    path: '/commemorate',
+    name: 'Commemorate',
+    component: () => import('../views/home/Commemorate.vue')
+  },{
+    path: '/birthday',
+    name: 'Birthday',
+    component: () => import('../views/home/Birthday.vue')
+  }
 ]
 
 const router = new VueRouter({
