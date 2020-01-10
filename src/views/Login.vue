@@ -22,7 +22,7 @@
       </div>
       <van-button type="default" round :class="class1">手机号登录/注册</van-button>
 
-      <p class="phone">手机号短信登录</p>
+      <p class="phone">手机号短信登录aaa</p>
     </div>
   </div>
 </template>
