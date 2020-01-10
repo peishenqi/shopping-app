@@ -4,11 +4,32 @@
     <div class="header">
       <van-nav-bar title="登录注册" left-arrow @click="header_left">
         <van-icon name="wap-nav" slot="right" @click="showPopup">
-          <van-popup v-model="show" position="right" :style="{ width: '20%' }">pp</van-popup>
+          <van-popup
+            v-model="show"
+            position="top"
+            :style="{height:'30%'}"
+            :overlay="true"
+            @click-overlay="aa"
+          >
+            <ul class="nav_list">
+              <li to="/">
+                <van-icon name="wap-home" />首页
+              </li>
+              <li to="/sort">
+                <van-icon name="star" />分类搜索
+              </li>
+              <li to="/cart">
+                <van-icon name="shopping-cart" />购物车
+              </li>
+              <li to="/user">
+                <van-icon name="manager" />我的
+              </li>
+            </ul>
+          </van-popup>
         </van-icon>
       </van-nav-bar>
     </div>
-    <div class="main">
+    <div class="main" v-if="ischange">
       <h2>Hua.com花礼网</h2>
       <div>
         <p>手机号</p>
@@ -22,7 +43,23 @@
       </div>
       <van-button type="default" round :class="class1">手机号登录/注册</van-button>
 
-      <p class="phone">手机号短信登录aaa</p>
+      <p class="phone" @click="isChange">手机号短信登录</p>
+    </div>
+    <div class="main" v-else="ischange">
+      <h2>Hua.com花礼网</h2>
+      <div>
+        <p>手机号/邮箱</p>
+        <input type="text" placeholder="请输入手机号或邮箱" />
+        <span></span>
+      </div>
+      <div>
+        <p>密码</p>
+        <input type="password" placeholder="请输入密码" autocomplete="off" />
+        <span>忘记密码</span>
+      </div>
+      <van-button type="default" round :class="class1">登录</van-button>
+
+      <p class="phone" @click="isChange">手机号短信登录</p>
     </div>
   </div>
 </template>
@@ -31,13 +68,22 @@ export default {
   data() {
     return {
       class1: ["reg"],
-      show: false
+      class2: ["popup"],
+      show: false,
+      ischange: true
     };
   },
   methods: {
     header_left() {},
     showPopup() {
       this.show = true;
+    },
+    isChange() {
+      // console.log("这是手机号切换");
+      this.ischange = !this.ischange;
+    },
+    aa() {
+      this.show = false;
     }
   }
 };
@@ -87,5 +133,25 @@ export default {
 .phone {
   text-align: center;
   color: #ccc;
+}
+.van-popup--top {
+  width: 25%;
+
+  left: 20rem;
+  top: 2rem;
+}
+.nav_list {
+  position: absolute;
+  /* top: 1rem; */
+  width: 25%;
+  height: 8rem;
+  color: #ccc;
+}
+.nav_list {
+  width: 100%;
+  height: 2rem;
+  line-height: 2rem;
+  text-align: left;
+  text-indent: 0.3rem;
 }
 </style>

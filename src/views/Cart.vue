@@ -88,7 +88,7 @@ export default {
       // path: "/fl";
       // name: "Fl";
       this.$router.push({
-        path: "fl"
+        path: "sort"
       });
     },
     toLook() {
@@ -207,6 +207,7 @@ export default {
   max-height: 19rem;
 }
 .guess dl dd {
+  margin-left: 0;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
