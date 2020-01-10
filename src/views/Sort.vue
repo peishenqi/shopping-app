@@ -74,7 +74,6 @@ export default {
       value: "",
       activeKey: 0,
       isFixed: false,
-      navFixed: false,
       offsetTop: 0
     }
   },
@@ -82,7 +81,7 @@ export default {
     window.addEventListener("scroll", this.initHeight)
     this.$nextTick(() => {
       //获取对象相对于版面或由 offsetTop 属性指定的父坐标的计算顶端位置
-      this.offsetTop1 = document.querySelector("#boxFixed").offsetTop
+      this.offsetTop = document.querySelector("#boxFixed").offsetTop
     })
   },
   methods: {

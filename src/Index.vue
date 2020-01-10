@@ -2,10 +2,10 @@
   <div id="app">
     <div id="nav">
       <van-tabbar v-model="active">
-        <van-tabbar-item icon="wap-home" to="/">首页</van-tabbar-item>
-        <van-tabbar-item icon="star" to="/Sort">分类</van-tabbar-item>
-        <van-tabbar-item icon="shopping-cart" to="/Cart">购物车</van-tabbar-item>
-        <van-tabbar-item icon="manager" to="/User">我的</van-tabbar-item>
+        <van-tabbar-item icon="wap-home-o" to="/">首页</van-tabbar-item>
+        <van-tabbar-item icon="apps-o" to="/Sort">分类</van-tabbar-item>
+        <van-tabbar-item icon="shopping-cart-o" to="/Cart">购物车</van-tabbar-item>
+        <van-tabbar-item icon="user-circle-o" to="/User">我的</van-tabbar-item>
       </van-tabbar>
     </div>
     <router-view />
