@@ -2,11 +2,9 @@
   <div class="home">
     <van-sticky>
     <header>
-      <van-icon class="icon-left" name="qr" />
+      <van-icon @click="Sort" class="icon-left" name="qr" />
       <van-nav-bar
         title="没名字"
-        @click-left="onClickLeft"
-        @click-right="onClickRight"
       />
       <i class="icon-right van-icon van-icon-service"></i>
     </header>
@@ -42,7 +40,7 @@
       <h5 style="margin:0.5rem 1rem">| 一秒选择</h5>
       <div class="someone">
         <div>
-          <van-image
+          <van-image @click="Girlfriend"
             round
             width="10rem"
             height="10rem"
@@ -51,7 +49,7 @@
           <p>送女友</p>
         </div>
         <div>
-          <van-image
+          <van-image @click="Elder"
             round
             width="10rem"
             height="10rem"
@@ -60,7 +58,7 @@
           <p>送长辈</p>
         </div>
         <div>
-          <van-image
+          <van-image @click="Friend"
             round
             width="10rem"
             height="10rem"
@@ -72,13 +70,13 @@
 
       <!-- 热卖 -->
       <div class="select">
-        <div class="hot">
+        <div class="hot" @click="HotSale">
           <h4>热卖榜</h4>
           <p>集万千宠爱</p>
           <img src="http://img1.imgtn.bdimg.com/it/u=1769307511,4173135256&fm=26&gp=0.jpg" alt="">
         </div>
-
-         <div class="special">
+        <!-- 特价 -->
+         <div class="special" @click="Special">
           <h4>特价专区</h4>
           <p>超值好货</p>
           <img src="http://dpic.tiankong.com/7d/u9/QJ8445891788.jpg" alt="">
@@ -160,11 +158,23 @@ export default {
    
   },
    methods: {
-    onClickLeft() {
-      Toast('返回');
+    Sort(){
+       this.$router.push({path:'Sort'})
     },
-    onClickRight() {
-      Toast('按钮');
+    Girlfriend(){
+      this.$router.push({path:'Girlfriend'})
+    },
+    Elder(){
+      this.$router.push({path:'Elder'})
+    },
+    Friend(){
+      this.$router.push({path:'Friend'})
+    },
+    HotSale(){
+      this.$router.push({path:'HotSale'})
+    },
+    Special(){
+      this.$router.push({path:'Special'})
     },
     // jump(){
     //   this.$router.push({path:'Service'})

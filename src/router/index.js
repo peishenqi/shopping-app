@@ -95,7 +95,28 @@ const routes = [{
     path: '/birthday',
     name: 'Birthday',
     component: () => import('../views/home/Birthday.vue')
-  }
+  },{
+    path: '/girlfriend',
+    name: 'Girlfriend',
+    component: () => import('../views/home/Girlfriend.vue')
+  },{
+    path: '/elder',
+    name: 'Elder',
+    component: () => import('../views/home/Elder.vue')
+  },{
+    path: '/friend',
+    name: 'Friend',
+    component: () => import('../views/home/Friend.vue')
+  },{
+    path: '/hotSale',
+    name: 'HotSale',
+    component: () => import('../views/home/HotSale.vue')
+  },
+  {
+    path: '/special',
+    name: 'Special',
+    component: () => import('../views/home/Special.vue')
+  },
 ]
 
 const router = new VueRouter({

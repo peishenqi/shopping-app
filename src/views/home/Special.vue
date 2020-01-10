@@ -1,9 +1,9 @@
 <template>
-    <div class="Girlfriend">
+    <div class="Special">
         <header>
             <van-icon @click="onClickLeft" class="icon-left" name="arrow-left"/>
             <van-nav-bar
-            title="送女友"
+            title="特价专区"
             />
             <van-icon @click="showPopup" class="icon-right" name="wap-nav"/>
              <van-popup
@@ -16,12 +16,12 @@
                 <p><van-icon name="shopping-cart"/>购物车</p>
                 <p><van-icon name="manager"/>我的</p>
                 </van-popup>
-            <div>
+            <!-- <div>
                 <van-grid :column-num="2">
                     <van-grid-item to="/elder" text="送长辈" />
-                    <van-grid-item to="/friend" text="送朋友" />
+                    <van-grid-item to="/friend" text="送女友" />
                 </van-grid>
-            </div>
+            </div> -->
         </header>
         
         <section>
