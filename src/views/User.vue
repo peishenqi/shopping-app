@@ -1,26 +1,24 @@
-
-
 <template>
   <div class="user-wrap">
     <div class="User">
       <van-nav-bar title="个人中心" left-arrow @click-left="onClickLeft" />
       <div class="login">
         <p>Hi,欢迎来到花礼网</p>
-        <van-button round type="info">登录/注册</van-button>
+        <van-button to="/login" round type="info">登录/注册</van-button>
       </div>
       <div class="user_main">
         <div class="order">
-          <van-cell title="我的订单" is-link value="全部订单" />
+          <van-cell title="我的订单" is-link value="全部订单" to="/all-orders"/>
           <van-grid :column-num="3" :border="false">
-            <van-grid-item
+            <van-grid-item to="/obligation"
               icon="https://img02.hua.com/m/member/center/myinfo_pendingpay.png"
               text="待付款"
             />
-            <van-grid-item
+            <van-grid-item to="/distribution"
               icon="https://img02.hua.com/m/member/center/myinfo_distribution.png"
               text="今日配送"
             />
-            <van-grid-item
+            <van-grid-item to="/evaluated"
               icon="https://img02.hua.com/m/member/center/myinfo_evaluation.png"
               text="待评价"
             />
@@ -28,23 +26,23 @@
         </div>
         <div class="user_main_middle">
           <van-grid class="middle_top" square :border="false">
-            <van-grid-item icon="coupon-o" text="优惠券" />
-            <van-grid-item icon="vip-card-o" text="权益卡" />
-            <van-grid-item icon="gold-coin-o" text="余额" />
-            <van-grid-item icon="gem-o" text="会员积分" />
+            <van-grid-item to="/coupon" icon="coupon-o" text="优惠券" />
+            <van-grid-item to="/equity-card" icon="vip-card-o" text="权益卡" />
+            <van-grid-item to="/remaining" icon="gold-coin-o" text="余额" />
+            <van-grid-item to="/member" icon="gem-o" text="会员积分" />
           </van-grid>
           <van-grid square :border="false">
-            <van-grid-item icon="location-o" text="收货地址" />
-            <van-grid-item icon="bulb-o" text="生日纪念提醒" />
-            <van-grid-item icon="star-o" text="我的收藏" />
-            <van-grid-item icon="clock-o" text="浏览记录" />
+            <van-grid-item to="/site" icon="location-o" text="收货地址" />
+            <van-grid-item to="/reminder" icon="bulb-o" text="生日纪念提醒" />
+            <van-grid-item to="/favorite" icon="star-o" text="我的收藏" />
+            <van-grid-item to="/history" icon="clock-o" text="浏览记录" />
           </van-grid>
         </div>
         <van-grid class="user_main_bottom" :border="false">
-          <van-grid-item icon="service-o" text="联系客服" />
-          <van-grid-item icon="question-o" text="帮助中心" />
-          <van-grid-item icon="info-o" text="关于花礼" />
-          <van-grid-item icon="setting-o" text="设置" />
+          <van-grid-item to="/contact" icon="service-o" text="联系客服" />
+          <van-grid-item to="/help" icon="question-o" text="帮助中心" />
+          <van-grid-item to="/about" icon="info-o" text="关于花礼" />
+          <van-grid-item to="/set" icon="setting-o" text="设置" />
         </van-grid>
       </div>
     </div>
