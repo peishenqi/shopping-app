@@ -1,20 +1,41 @@
 <template>
   <div class="contact">
     <div class="header">
-      <van-nav-bar title="客服" left-arrow @click-left="back1">
-        <van-icon name="wap-nav" slot="right" />
-      </van-nav-bar>
+      <van-nav-bar title="客服" left-arrow @click-left="onClickLeft" />
+      <van-icon name="wap-nav" slot="right" @click="showPopup" />
+
+      <van-popup
+        v-model="show"
+        position="top"
+        :style="{ height: '30%' }"
+        :overlay="false"
+        :closeable="true"
+      >
+        <ul class="nav_list">
+          <li to="/"><van-icon name="wap-home" />首页</li>
+          <li to="/sort"><van-icon name="star" />分类搜索</li>
+          <li to="/cart"><van-icon name="shopping-cart" />购物车</li>
+          <li to="/user"><van-icon name="manager" />我的</li>
+        </ul>
+      </van-popup>
     </div>
     <div class="main">
       <div class="main_t">
         <div>
-          <img src="http://img4.imgtn.bdimg.com/it/u=3824642019,3199656362&fm=214&gp=0.jpg" alt />
+          <img
+            src="http://img4.imgtn.bdimg.com/it/u=3824642019,3199656362&fm=214&gp=0.jpg"
+            alt
+          />
           <span>专属秘书|喜棠</span>
         </div>
-        <div class="mess">Hi，我是您的专属秘书喜棠，添加我微信，我将帮您催单，有需求时，1对1帮您走绿色通道。</div>
+        <div class="mess">
+          Hi，我是您的专属秘书喜棠，添加我微信，我将帮您催单，有需求时，1对1帮您走绿色通道。
+        </div>
         <div class="wxh">
           <span>微信号：huali_duebass</span>
-          <van-button type="default" size="small" @click="add">加我微信</van-button>
+          <van-button type="default" size="small" @click="add"
+            >加我微信</van-button
+          >
         </div>
       </div>
       <div class="main_c">
@@ -28,9 +49,7 @@
         </div>
       </div>
       <div class="main_b">
-        <span>
-          <van-icon name="chat" />&nbsp;&nbsp;&nbsp;在线留言
-        </span>
+        <span> <van-icon name="chat" />&nbsp;&nbsp;&nbsp;在线留言 </span>
         <b>&gt;</b>
       </div>
     </div>
@@ -41,30 +60,68 @@
 import Vue from "vue";
 import { Dialog } from "vant";
 export default {
+  data() {
+    return {
+      show: "",
+    };
+  },
   methods: {
-    back1() {
-      console.log(11);
+    onClickLeft() {
       this.$router.push({
-        path: "user"
+        path: "user",
       });
     },
-
+    showPopup() {
+      this.show = true;
+    },
     add() {
       Dialog.confirm({
         title: "复制成功",
-        message: "微信号已复制成功，是否跳转到微信添加好友？"
+        message: "微信号已复制成功，是否跳转到微信添加好友？",
       })
         .then(() => {
           // on confirm
+          alert("已复制成功");
         })
         .catch(() => {
           // on cancel
         });
-    }
-  }
+    },
+  },
 };
 </script>
-<style  scoped>
+<style scoped>
+.header {
+  position: relative;
+}
+.van-icon-wap-nav {
+  position: absolute;
+  right: 1rem;
+  margin-top: -2rem;
+  z-index: 33;
+}
+.van-popup--top {
+  width: 30%;
+  box-shadow: 1px 1px 1px 1px #ccc;
+  left: 15rem;
+  top: 3rem;
+}
+.nav_list {
+  position: absolute;
+
+  width: 45%;
+  height: 9rem;
+  color: #999;
+}
+.nav_list {
+  width: 100%;
+  line-height: 2rem;
+  text-indent: 0.3rem;
+}
+.nav_list li {
+  height: 3rem;
+  line-height: 3rem;
+}
 .contact {
   min-height: 40rem;
   background: #ccc;
