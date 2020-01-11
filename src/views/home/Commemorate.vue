@@ -18,7 +18,7 @@
                 </van-popup>
             <div>
                 <van-grid :column-num="3">
-                    <van-grid-item to="/commemorate" text="纪念日礼物" />
+                    <van-grid-item to="/birthday" text="生日" />
                     <van-grid-item to="/festival" text="节日礼物" />
                     <van-grid-item to="/surprise" text="惊喜" />
                 </van-grid>
@@ -30,17 +30,16 @@
                 <img src="https://img01.hua.com/uploadpic/newpic/9010999.jpg_220x240.jpg" alt="">
                 <p>一往情深</p>
                 <p>勿忘初心，方得始终</p>
-                <p>￥2999.00</p>
+                <p class="color">￥2999.00</p>
             </div>
             <div>
                 <img src="https://img01.hua.com/uploadpic/newpic/9010999.jpg_220x240.jpg" alt="">
                 <p>一往情深</p>
                 <p>勿忘初心，方得始终</p>
-                <p>￥2999.00</p>
+                <p class="color">￥2999.00</p>
             </div>
 
         </section>
-        <footer></footer>
     </div>
 </template>
 
@@ -99,7 +98,7 @@ header .van-icon{
 header .van-nav-bar{
   height:4rem;
   line-height: 4rem;
-  background:#ccc;
+  /* background:#ccc; */
 }
 header .van-nav-bar__title{
   margin: 0 auto;
@@ -130,7 +129,7 @@ header .van-nav-bar__title{
 section{
   flex: 1;
   overflow-y:auto;
-  background: #ccc;
+  background: #cccccc7a;
 }
 section div{
     width:46%;
@@ -141,6 +140,7 @@ section div{
     float:left;
     margin-left: 0.6rem;
     max-height: 18.5rem;
+    margin-bottom: 0.3rem;
 }
 section div:nth-child(2n){
     float:right;
@@ -155,8 +155,7 @@ section div p{
     padding:0 1rem;
 }
 
-footer{
-  height:50px;
-  background: red;
+.color{
+  color: red;
 }
 </style>
