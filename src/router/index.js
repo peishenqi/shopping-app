@@ -20,6 +20,7 @@ const routes = [{
       {
         path: '/sort',
         name: 'Sort',
+        redirect: "hot", //   重定向，指向  hot
         // route level code-splitting
         // this generates a separate chunk (about.[hash].js) for this route
         // which is lazy-loaded when the route is visited.
@@ -28,7 +29,7 @@ const routes = [{
           // 热门推荐
           path: "/hot",
           component: () => import("../views/Sort/hot.vue"),
-          name: "hot"
+          name: "hot",
         }, {
           // 鲜花
           path: "/flower",
@@ -79,22 +80,35 @@ const routes = [{
     path: '/login',
     name: 'Login',
     component: () => import('../views/Login.vue')
-  },{
+  }, {
     path: '/surprise',
     name: 'Surprise',
     component: () => import('../views/home/Surprise.vue')
-  },{
+  }, {
     path: '/festival',
     name: 'Festival',
     component: () => import('../views/home/Festival.vue')
-  },{
+  }, {
     path: '/commemorate',
     name: 'Commemorate',
     component: () => import('../views/home/Commemorate.vue')
-  },{
+  }, {
     path: '/birthday',
     name: 'Birthday',
     component: () => import('../views/home/Birthday.vue')
+  },
+  // 详情页
+  {
+    path: '/product_detail',
+    name: 'product_detail',
+    component: () => import('../views/product_detail.vue'),
+
+  },
+  // 评论页
+  {
+    path: '/comment',
+    name: 'comment',
+    component: () => import('../views/comment/comment.vue')
   }
 ]
 
