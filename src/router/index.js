@@ -106,6 +106,109 @@ const routes = [{
     name: 'Birthday',
     component: () => import('../views/home/Birthday.vue')
   },
+  //我的页面 关于我们
+  {
+    path: '/about',
+    name: 'About',
+    component: () => import('../views/user/About.vue')
+  },
+  //我的页面 设置
+  {
+    path: '/set',
+    name: 'Set',
+    component: () => import('../views/user/Set.vue')
+  },
+  //我的页面 联系客服
+  {
+    path: '/contact',
+    name: 'Contact',
+    component: () => import('../views/user/Contact.vue')
+  },
+  //我的页面 帮助中心
+  {
+    path: '/help',
+    name: 'Help',
+    component: () => import('../views/user/Help.vue')
+  },
+  //我的页面 优惠劵
+  {
+    path: '/coupon',
+    name: 'Coupon',
+    component: () => import('../views/user/Coupon.vue')
+  },
+  //我的页面 今日配送
+  {
+    path: '/distribution',
+    name: 'Distribution',
+    component: () => import('../views/user/Distribution.vue')
+  },
+  //我的页面 权益卡
+  {
+    path: '/equity-card',
+    name: 'Equity-card',
+    component: () => import('../views/user/Equity-card.vue')
+  },
+  //我的页面 待评价
+  {
+    path: '/evaluated',
+    name: 'Evaluated',
+    component: () => import('../views/user/Evaluated.vue')
+  },
+  //我的页面 我的收藏
+  {
+    path: '/favorite',
+    name: 'Favorite',
+    component: () => import('../views/user/Favorite.vue')
+  },
+  //我的页面 浏览记录
+  {
+    path: '/history',
+    name: 'History',
+    component: () => import('../views/user/History.vue')
+  },
+  //我的页面 会员积分
+  {
+    path: '/member',
+    name: 'Member',
+    component: () => import('../views/user/Member.vue')
+  },
+  //我的页面 待付款
+  {
+    path: '/obligation',
+    name: 'Obligation',
+    component: () => import('../views/user/Obligation.vue')
+  },
+  //我的页面 余额
+  {
+    path: '/remaining',
+    name: 'Remaining',
+    component: () => import('../views/user/Remaining.vue')
+  },
+  //我的页面 生日纪念提醒
+  {
+    path: '/reminder',
+    name: 'Reminder',
+    component: () => import('../views/user/Reminder.vue')
+  },
+  //我的页面 收货地址
+  {
+    path: '/site',
+    name: 'Site',
+    component: () => import('../views/user/Site.vue')
+  },
+  //我的页面 全部订单
+  {
+    path: '/all-orders',
+    name: 'All-orders',
+    component: () => import('../views/user/All-orders.vue')
+  },
+  //我的页面 新增收货地址
+  {
+    path: '/address',
+    name: 'Address',
+    component: () => import('../views/user/Address.vue')
+  },
+
   // 详情页
   {
     path: '/product_detail',
@@ -119,6 +222,7 @@ const routes = [{
     name: 'comment',
     component: () => import('../views/comment/comment.vue')
   }
+
 ]
 
 const router = new VueRouter({
