@@ -2,15 +2,9 @@
 <template>
   <div class="login">
     <div class="header">
-      <van-nav-bar title="登录注册" left-arrow @click="header_left">
-        <van-icon name="wap-nav" slot="right" @click="showPopup">
-          <van-popup
-            v-model="show"
-            position="top"
-            :style="{height:'30%'}"
-            :overlay="true"
-            @click-overlay="aa"
-          >
+      <van-nav-bar title="登录注册" left-arrow @click-left="header_left">
+        <van-icon name="wap-nav" slot="right" @click-right="showPopup">
+          <van-popup v-model="show" position="top" :style="{height:'30%'}" overlay>
             <ul class="nav_list">
               <li to="/">
                 <van-icon name="wap-home" />首页
@@ -29,7 +23,7 @@
         </van-icon>
       </van-nav-bar>
     </div>
-    <div class="main" v-if="ischange">
+    <div class="main" v-if="isreg">
       <h2>Hua.com花礼网</h2>
       <div>
         <p>手机号</p>
@@ -45,7 +39,7 @@
 
       <p class="phone" @click="isChange">手机号短信登录</p>
     </div>
-    <div class="main" v-else="ischange">
+    <div class="main" v-if="islogin">
       <h2>Hua.com花礼网</h2>
       <div>
         <p>手机号/邮箱</p>
@@ -59,7 +53,7 @@
       </div>
       <van-button type="default" round :class="class1">登录</van-button>
 
-      <p class="phone" @click="isChange">手机号短信登录</p>
+      <p class="phone" @click="isChange">{{ischange}}</p>
     </div>
   </div>
 </template>
@@ -70,17 +64,25 @@ export default {
       class1: ["reg"],
       class2: ["popup"],
       show: false,
-      ischange: true
+      islogin: false,
+      isreg: true,
+      ischange: ""
     };
   },
   methods: {
-    header_left() {},
+    header_left() {
+      this.$router.push({
+        path: "user"
+      });
+    },
     showPopup() {
       this.show = true;
     },
     isChange() {
       // console.log("这是手机号切换");
-      this.ischange = !this.ischange;
+      this.islogin = !this.islogin;
+      this.isreg = !this.isreg;
+      this.ischang ? "手机短信登录" : "账号密码登录";
     },
     aa() {
       this.show = false;
@@ -104,6 +106,10 @@ export default {
 .login .main div {
   height: 3.5rem;
   border-bottom: #ccc solid 1px;
+}
+.van-icon-arrow-left,
+.van-icon-wap-nav {
+  color: #ccc;
 }
 .login .main div p {
   line-height: 1;
