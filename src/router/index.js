@@ -231,6 +231,12 @@ const routes = [{
     name: 'All-orders',
     component: () => import('../views/user/All-orders.vue')
   },
+   //我的页面 新增收货地址
+   {
+    path: '/address',
+    name: 'Address',
+    component: () => import('../views/user/Address.vue')
+  },
 ]
 
 const router = new VueRouter({
