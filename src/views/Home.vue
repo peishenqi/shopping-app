@@ -207,7 +207,7 @@ header .van-icon{
 header .van-nav-bar{
   height:4rem;
   line-height: 4rem;
-  background:#ccc;
+  /* background:#ccc; */
 }
 header .van-nav-bar__title{
   margin: 0 auto;

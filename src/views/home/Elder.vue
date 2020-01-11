@@ -39,7 +39,6 @@
             </div>
 
         </section>
-        <footer></footer>
     </div>
 </template>
 
@@ -98,7 +97,7 @@ header .van-icon{
 header .van-nav-bar{
   height:4rem;
   line-height: 4rem;
-  background:#ccc;
+  /* background:#ccc; */
 }
 header .van-nav-bar__title{
   margin: 0 auto;
@@ -129,7 +128,7 @@ header .van-nav-bar__title{
 section{
   flex: 1;
   overflow-y:auto;
-  background: #ccc;
+  background: #cccccc7a;
 }
 section div{
     width:46%;
@@ -140,6 +139,7 @@ section div{
     float:left;
     margin-left: 0.6rem;
     max-height: 18.5rem;
+    margin-bottom: 0.3rem;
 }
 section div:nth-child(2n){
     float:right;
@@ -152,10 +152,5 @@ section img{
 }
 section div p{
     padding:0 1rem;
-}
-
-footer{
-  height:50px;
-  background: red;
 }
 </style>
