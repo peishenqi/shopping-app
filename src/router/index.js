@@ -106,6 +106,36 @@ const routes = [{
     name: 'Birthday',
     component: () => import('../views/home/Birthday.vue')
   },
+  //首页 送女友
+  {
+    path: '/girlfriend',
+    name: 'Girlfriend',
+    component: () => import('../views/home/Girlfriend.vue')
+  },
+  //首页 送长辈
+  {
+    path: '/elder',
+    name: 'Elder',
+    component: () => import('../views/home/Elder.vue')
+  },
+  //首页 送朋友
+  {
+    path: '/friend',
+    name: 'Friend',
+    component: () => import('../views/home/Friend.vue')
+  },
+  //首页 热卖榜
+  {
+    path: '/hotSale',
+    name: 'HotSale',
+    component: () => import('../views/home/HotSale.vue')
+  },
+  //首页 特价专区
+  {
+    path: '/special',
+    name: 'Special',
+    component: () => import('../views/home/Special.vue')
+  },
   //我的页面 关于我们
   {
     path: '/about',
