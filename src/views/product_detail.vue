@@ -150,7 +150,7 @@
             <van-cell class="address" title="江苏南京市江宁区" icon="location-o" />
           </div>
         </div>
-        <van-button type="default" class="more">查看更多评论</van-button>
+        <van-button type="default" class="more" to="/comment">查看更多评论</van-button>
       </div>
       <!-- 图文详情 -->
       <div class="details">

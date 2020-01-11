@@ -1,13 +1,8 @@
 <template>
   <div class="sort">
     <!-- 搜索 -->
-    <div class="search" id="boxFixed" :class="{ is_fixed: isFixed }">
-      <van-search
-        placeholder="搜索鲜花、蛋糕、礼品"
-        shape="round"
-        v-model="value"
-      />
-    </div>
+
+    <van-search class="search" placeholder="搜索鲜花、蛋糕、礼品" shape="round" v-model="value" />
     <div class="sort_main">
       <!-- 侧栏导航 -->
       <div class="nav">
@@ -35,6 +30,9 @@
 .search {
   width: 100%;
   border-bottom: 1px solid #ccc;
+  position: fixed;
+  top: 0;
+  z-index: 999;
 }
 .sort_main {
   display: flex;
@@ -56,14 +54,8 @@
 }
 .view_show {
   flex: 1;
-  margin: 0.6rem 0.8rem;
+  margin: 3.6rem 0.8rem;
   padding-left: 5.3rem;
-}
-
-.is_fixed {
-  position: fixed;
-  z-index: 999;
-  top: 0;
 }
 </style>
 
@@ -75,14 +67,14 @@ export default {
       activeKey: 0,
       isFixed: false,
       offsetTop: 0
-    }
+    };
   },
   mounted() {
-    window.addEventListener("scroll", this.initHeight)
+    window.addEventListener("scroll", this.initHeight);
     this.$nextTick(() => {
       //获取对象相对于版面或由 offsetTop 属性指定的父坐标的计算顶端位置
-      this.offsetTop = document.querySelector("#boxFixed").offsetTop
-    })
+      this.offsetTop = document.querySelector("#boxFixed").offsetTop;
+    });
   },
   methods: {
     initHeight() {
@@ -90,14 +82,14 @@ export default {
       var scrollTop =
         window.pageYOffset ||
         document.documentElement.scrollTop ||
-        document.body.scrollTop
+        document.body.scrollTop;
       //如果被卷曲的高度大于吸顶元素到顶端位置 的距离
-      this.isFixed = scrollTop > this.offsetTop ? true : false
+      this.isFixed = scrollTop > this.offsetTop ? true : false;
     }
   },
   //回调中移除监听
   destroyed() {
-    window.removeEventListener("scroll", this.handleScroll)
+    window.removeEventListener("scroll", this.handleScroll);
   }
-}
+};
 </script>
