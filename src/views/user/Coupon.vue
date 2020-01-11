@@ -5,10 +5,12 @@
     </div>
     <div class="main">
       <div class="main_t">
-        <!-- <p class="red" :class="{'isunuser':true,islost:false}" @click="unuser">未使用</p>
-        <p @click="lost" :class="{'isunuser':false,islost:false}">已失效</p>-->
-        <p class="red" :class="class1" @click="unuser">未使用</p>
-        <p @click="lost" :class="class1">已失效</p>
+        <van-tabs v-model="active">
+          <van-tab title="未使用 ">—哦欧！~小主一张券都没有—</van-tab>
+          <van-tab title="已失效 "></van-tab>
+        </van-tabs>
+        <!-- <p class="red" :class="class1" @click="unuser">未使用</p>
+        <p @click="lost" :class="class1">已失效</p>-->
       </div>
     </div>
   </div>
@@ -17,29 +19,23 @@
 export default {
   data() {
     return {
-      Toast: "",
-      //   class1: ["isunuser", "islost"],
-      class1: { isunuser: true, islost: false }
+      active: 2
     };
   },
+
   methods: {
     onClickLeft() {
-      Toast("返回");
-    },
-    unuser() {
-      console.log(544);
-      this.class1.islost = !this.class1.islost;
-      this.class1.isunuser = !this.class1.isunuser;
-    },
-    lost() {
-      console.log("55");
-      this.class1.islost = !this.class1.islost;
-      this.class1.isunuser = !this.class1.isunuser;
+      this.$router.push({
+        path: "user"
+      });
     }
   }
 };
 </script>
 <style  scoped>
+.van-icon-arrow-left {
+  color: #ccc;
+}
 .main_t p {
   padding: 0;
   margin: 0;
@@ -51,16 +47,14 @@ export default {
   /* color: #ff734c;
   border-bottom: #ff734c 1px solid; */
 }
-.isunuser {
+
+.van-tab--active {
   color: #ff734c;
   border-bottom: #ff734c 1px solid;
 }
-.islost {
-  color: #ff734c;
-  border-bottom: #ff734c 1px solid;
+.van-tab__pane {
+  color: #ccc;
+  text-align: center;
+  line-height: 4rem;
 }
-/* .red {
-  color: #ff734c;
-  border-bottom: #ff734c 1px solid;
-} */
 </style>

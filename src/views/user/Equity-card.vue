@@ -19,7 +19,9 @@ export default {
   },
   methods: {
     onClickLeft() {
-      Toast("返回");
+      this.$router.push({
+        path: "user"
+      });
     }
   }
 };
@@ -28,6 +30,9 @@ export default {
 .Equity-card {
   background: #ccc;
   min-height: 100rem;
+}
+.van-icon-arrow-left {
+  color: #ccc;
 }
 .main {
   height: 20rem;
