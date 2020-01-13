@@ -13,7 +13,7 @@
                 <van-icon name="star" />分类搜索
               </li>
               <li to="/cart">
-                <van-icon name="shopping-cart" />购物车
+                <van-icon name="shopping-cart" />j
               </li>
               <li to="/user">
                 <van-icon name="manager" />我的
@@ -51,13 +51,14 @@
         <input type="password" placeholder="请输入密码" autocomplete="off" />
         <span>忘记密码</span>
       </div>
-      <van-button type="default" round :class="class1">登录</van-button>
+      <van-button  @click="loginHandl" type="default" round :class="class1">登录</van-button>
 
       <p class="phone" @click="isChange">{{ischange}}</p>
     </div>
   </div>
 </template>
 <script>
+import axios from "axios";
 export default {
   data() {
     return {
@@ -66,7 +67,9 @@ export default {
       show: false,
       islogin: false,
       isreg: true,
-      ischange: ""
+      ischange: "",
+      // userName:"",
+      // password:"",
     };
   },
   methods: {
@@ -86,7 +89,16 @@ export default {
     },
     aa() {
       this.show = false;
-    }
+    },
+    // loginHandl(){
+    //   let data = {
+    //     userName:this.userName,
+    //     password:this.password
+    //   };
+    //   axios.post("http://api.cat-shop.penkuoer.com/api/v1/auth/login",data).then(res=>{
+    //     console.log(res);
+    //   })
+    // }
   }
 };
 </script>

@@ -20,16 +20,16 @@
 </template>
 
 <style  scoped>
-.header .van-nav-bar {
+/* .header .van-nav-bar {
   background: #ff734c;
-}
+} */
 .header .van-nav-bar__arrow,
-.header .van-icon-wap-nav {
-  color: #ccc;
+.header .van-icon-wap-nav ,.van-nav-bar__title{
+  color: black;
 }
-.van-nav-bar__title {
+ /* {
   color: #fff;
-}
+} */
 .main {
   overflow-x: hidden;
   width: 100%;

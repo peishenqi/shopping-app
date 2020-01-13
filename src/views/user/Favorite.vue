@@ -1,10 +1,12 @@
 <template>
   <div class="reminder">
+    <van-sticky>
     <div class="header">
       <van-nav-bar title="我的收藏" left-arrow>
         <van-icon name="wap-nav" slot="right" />
       </van-nav-bar>
     </div>
+    </van-sticky>
     <div class="main">
       <div class="pic">
         <p>哦欧！~你还没有收藏的商品</p>
@@ -50,14 +52,14 @@
 
 <style  scoped>
 .header .van-nav-bar {
-  background: #ff734c;
+  background: #fff;
 }
 .header .van-nav-bar__arrow,
 .header .van-icon-wap-nav {
-  color: #ccc;
+  color: black;
 }
 .van-nav-bar__title {
-  color: #fff;
+  color: black;
 }
 .main {
   min-height: 27rem;
