@@ -2,7 +2,7 @@
   <div class="login">
     <div class="header">
       <van-nav-bar title="登录注册" left-arrow @click-left="header_left" />
-      <van-icon name="wap-nav" slot="right" @click="showPopup" />
+      <van-icon name="wap-nav" slot="right" size="1.5rem" @click="showPopup" />
       <!-- 右上角导航 -->
       <div class="nav" v-show="navShow">
         <router-link class="nav_link" to="/">
@@ -90,7 +90,7 @@ export default {
       this.isreg = !this.isreg;
     },
     regBtn() {
-      console.log(this.phone, this.autoCode);
+      // console.log(this.phone, this.autoCode);
       post("/api/v1/auth/reg", {
         // url: "/api/v1/auth/login",
         userName: this.phone,
@@ -101,11 +101,14 @@ export default {
       }).then(res => {
         if (res.data.code == "success") {
           this.$toast.success({ message: "注册成功" });
-          let timer = setTimeout(() => {
+          this.phone = "";
+          this.autoCode = "";
+          var timer = setInterval(() => {
             this.isreg = false;
             this.islogin = true;
+            clearInterval(timer);
+            console.log(1);
           }, 3000);
-          clearTimeout(timer);
         } else {
           this.$toast.success({ message: res.data.message });
         }
@@ -117,8 +120,9 @@ export default {
         userName: this.userName,
         password: this.password
       };
-      axios.post("/api/v1/auth/login", data).then(res => {
+      post("/api/v1/auth/login", data).then(res => {
         console.log(res);
+        
         // if(){
 
         // }else{
