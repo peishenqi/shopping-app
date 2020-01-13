@@ -1,5 +1,6 @@
 <template>
   <div class="reminder">
+    <van-sticky>
     <div class="header">
       <van-nav-bar title="我的收藏" left-arrow @click-left="onClickLeft" />
       <van-icon name="wap-nav" slot="right" @click="showPopup" />
@@ -27,6 +28,7 @@
         </ul>
       </van-popup>
     </div>
+    </van-sticky>
     <div class="main">
       <div class="pic">
         <p>哦欧！~你还没有收藏的商品</p>
@@ -100,14 +102,14 @@ export default {
   z-index: 33;
 }
 .header .van-nav-bar {
-  background: #ff734c;
+  background: #fff;
 }
 .header .van-nav-bar__arrow,
 .header .van-icon-wap-nav {
-  color: #ccc;
+  color: black;
 }
 .van-nav-bar__title {
-  color: #fff;
+  color: black;
 }
 .van-popup--top {
   width: 30%;

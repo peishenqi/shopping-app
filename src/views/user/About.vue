@@ -1,4 +1,5 @@
 <template>
+<<<<<<< HEAD
   <div class="about">
     <header>
       <van-icon @click="onClickLeft" class="icon-left" name="arrow-left" />
@@ -19,6 +20,32 @@
         </p>
       </van-popup>
     </header>
+=======
+    <div class="about">
+        <van-sticky>
+        <header>
+            <van-icon @click="onClickLeft" class="icon-left" name="arrow-left"/>
+            <van-nav-bar
+            title="关于我们"
+            />
+            <van-icon @click="showPopup" class="icon-right" name="wap-nav"/>
+            <van-popup
+                v-model="show"
+                position="top"
+                :style="{ height: '25%' }"
+                >
+                <p><van-icon name="wap-home"/>首页</p>
+                <p><van-icon name="star"/>分类</p>
+                <p><van-icon name="shopping-cart"/>购物车</p>
+                <p><van-icon name="manager"/>我的</p>
+                </van-popup>
+        </header>
+        </van-sticky>
+        <section>
+            <div>
+                <img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1578651779158&di=f178e51922131e89e465fc6b4d69f791&imgtype=0&src=http%3A%2F%2Fimg.mp.itc.cn%2Fupload%2F20170513%2F463c6150d4264b2793d1731323f1cf21_th.jpg" alt="">
+            </div>
+>>>>>>> psq
 
     <section>
       <div>
@@ -108,7 +135,11 @@ header .van-icon {
 header .van-nav-bar {
   height: 4rem;
   line-height: 4rem;
+<<<<<<< HEAD
   background: #ccc;
+=======
+  /* background:#ccc; */
+>>>>>>> psq
 }
 header .van-nav-bar__title {
   margin: 0 auto;
