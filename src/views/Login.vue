@@ -126,7 +126,6 @@ export default {
         userName: this.userName,
         password: this.password,
       };
-<<<<<<< HEAD
       post("/api/v1/auth/login",data).then(res=>{
         // console.log(res);
         if(res.data.code == "success"){
@@ -144,18 +143,6 @@ export default {
       })
     }
   }
-=======
-      axios.post("/api/v1/auth/login", data).then(res => {
-        console.log(res);
-        // if(){
-
-        // }else{
-
-        // }
-      });
-    },
-  },
->>>>>>> 69d24e9a4a61d8ff2f16d041fd8cc73a7c366e0a
 };
 </script>
 <style scoped>
