@@ -59,34 +59,6 @@ export default {
 };
 </script>
 <style  scoped>
-/* .header .van-nav-bar {
-  background: #ff734c;
-} 
-.header .van-nav-bar__arrow,
-.header .van-icon-wap-nav ,.van-nav-bar__title{
-  
-  color: #fff;
-}
-.van-popup--top {
-  width: 30%;
-  box-shadow: 1px 1px 1px 1px #ccc;
-  left: 15rem;
-  top: 3rem;
-}
-.nav_list {
-  position: absolute;
-
-  width: 45%;
-  height: 9rem;
-  color: #999;
-}
-.nav_list {
-  width: 100%;
-  /* height: 3rem; */
-  /* line-height: 2rem; */
-  /* text-align: left; */
-  /* text-indent: 0.3rem; */
-/* } */
 .nav_list li {
   height: 3rem;
   line-height: 3rem;
