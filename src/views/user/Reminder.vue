@@ -61,12 +61,10 @@ export default {
 <style  scoped>
 /* .header .van-nav-bar {
   background: #ff734c;
-} */
+} 
 .header .van-nav-bar__arrow,
 .header .van-icon-wap-nav ,.van-nav-bar__title{
-  color: black;
-}
- /* {
+  
   color: #fff;
 }
 .van-popup--top {
