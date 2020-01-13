@@ -8,17 +8,20 @@
       </div>
       <div class="user_main">
         <div class="order">
-          <van-cell title="我的订单" is-link value="全部订单" to="/all-orders"/>
+          <van-cell title="我的订单" is-link value="全部订单" to="/all-orders" />
           <van-grid :column-num="3" :border="false">
-            <van-grid-item to="/obligation"
+            <van-grid-item
+              to="/obligation"
               icon="https://img02.hua.com/m/member/center/myinfo_pendingpay.png"
               text="待付款"
             />
-            <van-grid-item to="/distribution"
+            <van-grid-item
+              to="/distribution"
               icon="https://img02.hua.com/m/member/center/myinfo_distribution.png"
               text="今日配送"
             />
-            <van-grid-item to="/evaluated"
+            <van-grid-item
+              to="/evaluated"
               icon="https://img02.hua.com/m/member/center/myinfo_evaluation.png"
               text="待评价"
             />
@@ -108,10 +111,7 @@
 export default {
   methods: {
     onClickLeft() {
-      alert("返回");
-    },
-    onClickRight() {
-      alert("返回");
+      this.$router.back(-1);
     }
   }
 };

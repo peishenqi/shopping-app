@@ -3,71 +3,64 @@
     <div class="header">
       <van-nav-bar title="登录注册" left-arrow @click-left="header_left" />
       <van-icon name="wap-nav" slot="right" @click="showPopup" />
-
-      <van-popup
-        v-model="show"
-        position="top"
-        :style="{ height: '30%' }"
-        :overlay="false"
-        :closeable="true"
-      >
-        <ul class="nav_list">
-          <li>
-            <router-link :to="{ name: 'Home' }">
-              <van-icon name="wap-home" />首页
-            </router-link>
-          </li>
-          <li>
-            <router-link :to="{ name: 'Sort' }">
-              <van-icon name="star" />分类搜索
-            </router-link>
-          </li>
-          <li to="/cart">
-            <router-link :to="{ name: 'Cart' }">
-              <van-icon name="shopping-cart" />购物车
-            </router-link>
-          </li>
-          <li to="/user">
-            <router-link :to="{ name: 'User' }">
-              <van-icon name="manager" />我的
-            </router-link>
-          </li>
-        </ul>
-      </van-popup>
+      <!-- 右上角导航 -->
+      <div class="nav" v-show="navShow">
+        <router-link class="nav_link" to="/">
+          <van-icon name="wap-home-o" />
+          <span>首页</span>
+        </router-link>
+        <router-link class="nav_link" to="/Sort">
+          <van-icon name="apps-o" />
+          <span>分类</span>
+        </router-link>
+        <router-link class="nav_link" to="/Cart">
+          <van-icon name="shopping-cart-o" />
+          <span>购物车</span>
+        </router-link>
+        <router-link class="nav_link" to="/User">
+          <van-icon name="user-circle-o" />
+          <span>我的</span>
+        </router-link>
+      </div>
     </div>
     <!-- 注册 -->
     <div class="main" v-if="isreg">
       <h2>Hua.com花礼网</h2>
       <div>
-        <p>手机号</p>
-        <input type="text" placeholder="请输入手机号" v-model="phone" />
-        <span></span>
+        <p>用户名</p>
+        <input type="text" placeholder="请设置用户名" v-model="phone" />
       </div>
       <div>
-        <p>验证码</p>
-        <input type="text" placeholder="请输入验证码" v-model="autoCode" />
-        <span>获取验证码</span>
+        <p>密码</p>
+        <input type="text" placeholder="请设置密码" v-model="autoCode" />
       </div>
-      <van-button type="default" round :class="class1" @click="regBtn">手机号登录/注册</van-button>
+      <van-button type="default" round :class="class1" @click="regBtn"
+        >注册</van-button
+      >
 
-      <p class="phone" @click="isChange">手机号短信登录</p>
+      <p class="phone" @click="isChange">登录</p>
     </div>
     <!-- 登录 -->
     <div class="main" v-if="islogin">
       <h2>Hua.com花礼网</h2>
       <div>
-        <p>手机号/邮箱</p>
-        <input type="text" placeholder="请输入手机号或邮箱" v-model="userName" />
-        <span></span>
+        <p>用户名</p>
+        <input type="text" placeholder="请输入用户名" v-model="userName" />
       </div>
       <div>
         <p>密码</p>
-        <input type="password" placeholder="请输入密码" autocomplete="off" v-model="password" />
-        <span>忘记密码</span>
+        <input
+          type="password"
+          placeholder="请输入密码"
+          autocomplete="off"
+          v-model="password"
+        />
       </div>
-      <van-button @click="loginHandl" type="default" round :class="class1">登录</van-button>
+      <van-button @click="loginHandl" type="default" round :class="class1"
+        >登录</van-button
+      >
 
-      <p class="phone" @click="isChange">手机短信登录</p>
+      <p class="phone" @click="isChange">注册</p>
     </div>
   </div>
 </template>
@@ -79,28 +72,25 @@ export default {
   data() {
     return {
       phone: "",
-      pwd: "",
       autoCode: "",
       class1: ["reg"],
       class2: ["popup"],
-      show: false,
+      navShow: false,
       islogin: false,
       isreg: true,
       ischange: "",
-
-      show: false,
-      userName:"",
-      password:"",
+      userName: "",
+      password: "",
     };
   },
   methods: {
     header_left() {
       this.$router.push({
-        path: "user"
+        path: "user",
       });
     },
     showPopup() {
-      this.show = true;
+      this.navShow = !this.navShow;
     },
 
     isChange() {
@@ -116,20 +106,27 @@ export default {
         password: this.autoCode,
         // nickName: "admin",
         avatar:
-          "https://dss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=2310791297,2082199243&fm=26&gp=0.jpg"
+          "https://dss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=2310791297,2082199243&fm=26&gp=0.jpg",
       }).then(res => {
-        console.log(res);
+        if (res.data.code == "success") {
+          this.$toast.success({ message: "注册成功" });
+          let timer = setTimeout(() => {
+            this.isreg = false;
+            this.islogin = true;
+          }, 3000);
+          clearTimeout(timer);
+        } else {
+          this.$toast.success({ message: res.data.message });
+        }
       });
     },
-    aa() {
-      this.show = false;
-    },
     //登录请求
-    loginHandl(){
+    loginHandl() {
       let data = {
-        userName:this.userName,
-        password:this.password
+        userName: this.userName,
+        password: this.password,
       };
+<<<<<<< HEAD
       post("/api/v1/auth/login",data).then(res=>{
         // console.log(res);
         if(res.data.code == "success"){
@@ -147,6 +144,18 @@ export default {
       })
     }
   }
+=======
+      axios.post("/api/v1/auth/login", data).then(res => {
+        console.log(res);
+        // if(){
+
+        // }else{
+
+        // }
+      });
+    },
+  },
+>>>>>>> 69d24e9a4a61d8ff2f16d041fd8cc73a7c366e0a
 };
 </script>
 <style scoped>
@@ -185,14 +194,6 @@ export default {
   border: 0;
   width: 75%;
 }
-.login .main div span {
-  outline: 0;
-  border: 0;
-  width: 25%;
-  font-size: 0.7rem;
-  color: #ccc;
-  float: right;
-}
 .reg {
   width: 100%;
   background: #ff734c;
@@ -202,30 +203,28 @@ export default {
 }
 .phone {
   text-align: center;
-  color: #ccc;
+  color: #71797f;
 }
-.van-popup--top {
-  width: 30%;
-  box-shadow: 1px 1px 1px 1px #ccc;
-  left: 15rem;
-  top: 2rem;
-}
-.nav_list {
-  position: absolute;
 
-  width: 45%;
-  height: 9rem;
-  color: #ccc;
+/* 弹出窗---->导航 */
+.nav {
+  position: absolute;
+  width: 7rem;
+  right: 0;
+  top: 3rem;
+  z-index: 999;
+  background: #fff;
+  border-radius: 5px;
+  border: 1px solid #ccc;
 }
-.nav_list {
-  width: 100%;
-  /* height: 3rem; */
-  line-height: 2rem;
-  /* text-align: left; */
-  text-indent: 0.3rem;
-}
-.nav_list li {
+.nav_link {
+  display: block;
+  padding: 0 1rem;
   height: 3rem;
   line-height: 3rem;
+  color: #666;
+}
+.nav_link span {
+  margin-left: 0.5rem;
 }
 </style>

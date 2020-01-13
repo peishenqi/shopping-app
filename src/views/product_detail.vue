@@ -311,6 +311,7 @@ export default {
 .nav_link span {
   margin-left: 0.5rem;
 }
+
 .van-swipe {
   transform: translateZ(0);
 }
