@@ -65,7 +65,7 @@
         <input type="password" placeholder="请输入密码" autocomplete="off" v-model="pwd" />
         <span>忘记密码</span>
       </div>
-      <van-button  @click="loginHandl" type="default" round :class="class1">登录</van-button>
+      <van-button @click="loginHandl" type="default" round :class="class1">登录</van-button>
 
       <p class="phone" @click="isChange">手机短信登录</p>
     </div>
@@ -88,7 +88,7 @@ export default {
       isreg: true,
       ischange: "",
 
-      show: false,
+      show: false
       // userName:"",
       // password:"",
     };
@@ -123,7 +123,7 @@ export default {
     },
     aa() {
       this.show = false;
-    },
+    }
     // loginHandl(){
     //   let data = {
     //     userName:this.userName,
