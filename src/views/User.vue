@@ -9,7 +9,7 @@
         <van-button to="/login" round type="info">登录/注册</van-button>
       </div>
       <!-- 登录之后显示 -->
-      <div class="login" v-show="isLogin">
+      <div class="login isLogin" v-show="isLogin">
         <van-image
           class="portrait fl"
           round
@@ -18,16 +18,19 @@
           src="https://img02.hua.com/pc/assets/img/avatar_default_09.jpg"
         />
         <div class="username fl">
-          <div class="name">1237280</div>
-          <div class="vip">
-            <van-icon name="gem" />会员
-          </div>
+          <div class="name">{{ nickName }}</div>
+          <div class="vip"><van-icon name="gem" /><span>VIP会员</span></div>
         </div>
       </div>
 
       <div class="user_main">
         <div class="order">
-          <van-cell title="我的订单" is-link value="全部订单" to="/all-orders" />
+          <van-cell
+            title="我的订单"
+            is-link
+            value="全部订单"
+            to="/all-orders"
+          />
           <van-grid :column-num="3" :border="false">
             <van-grid-item
               to="/obligation"
@@ -71,27 +74,39 @@
   </div>
 </template>
 <script>
+import { get, post } from "../utils/ajax"
+import axios from "axios"
+
 export default {
   data() {
     return {
-      notLogin: false,
-      isLogin: true
-    };
+      notLogin: true,
+      isLogin: false,
+      nickName: ""
+    }
   },
   methods: {
     onClickLeft() {
-      this.$router.back(-1);
+      this.$router.back(-1)
     }
   },
-  beforeCreate() {
-    let token = localStorage.getItem("token");
-    if (token == "") {
-      isLogin: true;
-    } else {
-      notLogin: false;
+  created() {
+    let token = localStorage.getItem("token")
+    if (token) {
+      this.isLogin = true
+      this.notLogin = false
+      let userData = {
+        headers: {
+          authorization: "Bearer" + token
+        }
+      }
+      get("/api/v1/users/info", userData).then(res => {
+        // console.log(res)
+        this.nickName = res.data.userName
+      })
     }
   }
-};
+}
 </script>
 <style scoped>
 .clean:after {
@@ -139,8 +154,33 @@ export default {
 .login p {
   line-height: 1;
 }
+.isLogin {
+  padding-top: 1.5rem;
+}
 .portrait {
+  margin-left: 25%;
   border: 2px solid #fff;
+}
+.username {
+  margin-top: 0.8rem;
+  margin-left: 1.5rem;
+}
+.vip {
+  margin-top: 0.25rem;
+  margin-left: 0.6rem;
+  padding: 0.2rem 0.5rem;
+  width: 4rem;
+  height: 1rem;
+  line-height: 1rem;
+  font-size: 0.8rem;
+  background: #fe6600;
+  border-radius: 1rem;
+}
+.van-icon {
+  top: 0.1rem;
+}
+.vip span {
+  margin-left: 0.3rem;
 }
 
 .user_main {
@@ -167,4 +207,3 @@ export default {
   border-radius: 5px;
 }
 </style>
-

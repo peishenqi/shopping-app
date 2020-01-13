@@ -65,8 +65,8 @@
   </div>
 </template>
 <script>
-import { get, post } from "../utils/ajax";
-import axios from "axios";
+import { get, post } from "../utils/ajax"
+import axios from "axios"
 
 export default {
   data() {
@@ -76,77 +76,72 @@ export default {
       class1: ["reg"],
       class2: ["popup"],
       navShow: false,
-      islogin: false,
-      isreg: true,
+      islogin: true,
+      isreg: false,
       ischange: "",
       userName: "",
-      password: "",
-    };
+      password: ""
+    }
   },
   methods: {
     header_left() {
       this.$router.push({
-        path: "user",
-      });
+        path: "user"
+      })
     },
     showPopup() {
-      this.navShow = !this.navShow;
+      this.navShow = !this.navShow
     },
 
     isChange() {
       // console.log("这是手机号切换");
-      this.islogin = !this.islogin;
-      this.isreg = !this.isreg;
+      this.islogin = !this.islogin
+      this.isreg = !this.isreg
     },
     regBtn() {
       // console.log(this.phone, this.autoCode);
       post("/api/v1/auth/reg", {
-        // url: "/api/v1/auth/login",
         userName: this.phone,
         password: this.autoCode,
-        // nickName: "admin",
-        avatar:
-          "https://dss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=2310791297,2082199243&fm=26&gp=0.jpg",
+        nickName: this.phone,
+        avatar: "https://img02.hua.com/m/member/center/myinfo_pendingpay.png"
       }).then(res => {
         if (res.data.code == "success") {
-          this.$toast.success({ message: "注册成功" });
-          this.phone = "";
-          this.autoCode = "";
+          this.$toast.success({ message: "注册成功" })
+          this.phone = ""
+          this.autoCode = ""
           var timer = setInterval(() => {
-            this.isreg = false;
-            this.islogin = true;
-            clearInterval(timer);
-            console.log(1);
-          }, 3000);
+            this.isreg = false
+            this.islogin = true
+            clearInterval(timer)
+          }, 3000)
         } else {
-          this.$toast.success({ message: res.data.message });
+          this.$toast.success({ message: res.data.message })
         }
-      });
+      })
     },
     //登录请求
     loginHandl() {
       let data = {
         userName: this.userName,
-        password: this.password,
-      };
-      post("/api/v1/auth/login",data).then(res=>{
+        password: this.password
+      }
+      post("/api/v1/auth/login", data).then(res => {
         // console.log(res);
-        if(res.data.code == "success"){
-          // console.log(res.data.token)
+        if (res.data.code == "success") {
           let token = res.data.token
-          localStorage.setItem('token',token);
-          this.$toast.success({message:'登录成功'});
+          localStorage.setItem("token", token)
+          this.$toast.success({ message: "登录成功" })
           this.$router.push({
-            path:"/user"
+            path: "/user"
           })
-        }else{
-          this.$toast.fail({message:'用户名或密码错误'});
-          // console.log(111)
+        } else {
+          this.$toast.fail({ message: "用户名或密码错误" })
         }
       })
     }
   }
-};
+}
 </script>
 <style scoped>
 .header {
