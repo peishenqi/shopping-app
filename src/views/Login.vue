@@ -130,13 +130,20 @@ export default {
         userName:this.userName,
         password:this.password
       };
-      axios.post("/api/v1/auth/login",data).then(res=>{
-        console.log(res);
-        // if(){
-          
-        // }else{
-
-        // }
+      post("/api/v1/auth/login",data).then(res=>{
+        // console.log(res);
+        if(res.data.code == "success"){
+          // console.log(res.data.token)
+          let token = res.data.token
+          localStorage.setItem('token',token);
+          this.$toast.success({message:'登录成功'});
+          this.$router.push({
+            path:"/user"
+          })
+        }else{
+          this.$toast.fail({message:'用户名或密码错误'});
+          // console.log(111)
+        }
       })
     }
   }
