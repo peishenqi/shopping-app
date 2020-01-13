@@ -34,7 +34,9 @@
         <p>密码</p>
         <input type="text" placeholder="请设置密码" v-model="autoCode" />
       </div>
-      <van-button type="default" round :class="class1" @click="regBtn">注册</van-button>
+      <van-button type="default" round :class="class1" @click="regBtn"
+        >注册</van-button
+      >
 
       <p class="phone" @click="isChange">登录</p>
     </div>
@@ -47,9 +49,16 @@
       </div>
       <div>
         <p>密码</p>
-        <input type="password" placeholder="请输入密码" autocomplete="off" v-model="password" />
+        <input
+          type="password"
+          placeholder="请输入密码"
+          autocomplete="off"
+          v-model="password"
+        />
       </div>
-      <van-button @click="loginHandl" type="default" round :class="class1">登录</van-button>
+      <van-button @click="loginHandl" type="default" round :class="class1"
+        >登录</van-button
+      >
 
       <p class="phone" @click="isChange">注册</p>
     </div>
@@ -71,13 +80,13 @@ export default {
       isreg: true,
       ischange: "",
       userName: "",
-      password: ""
+      password: "",
     };
   },
   methods: {
     header_left() {
       this.$router.push({
-        path: "user"
+        path: "user",
       });
     },
     showPopup() {
@@ -97,7 +106,7 @@ export default {
         password: this.autoCode,
         // nickName: "admin",
         avatar:
-          "https://dss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=2310791297,2082199243&fm=26&gp=0.jpg"
+          "https://dss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=2310791297,2082199243&fm=26&gp=0.jpg",
       }).then(res => {
         if (res.data.code == "success") {
           this.$toast.success({ message: "注册成功" });
@@ -115,7 +124,7 @@ export default {
     loginHandl() {
       let data = {
         userName: this.userName,
-        password: this.password
+        password: this.password,
       };
       axios.post("/api/v1/auth/login", data).then(res => {
         console.log(res);
@@ -125,8 +134,8 @@ export default {
 
         // }
       });
-    }
-  }
+    },
+  },
 };
 </script>
 <style scoped>
