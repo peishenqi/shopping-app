@@ -35,6 +35,7 @@
         </ul>
       </van-popup>
     </div>
+    <!-- 注册 -->
     <div class="main" v-if="isreg">
       <h2>Hua.com花礼网</h2>
       <div>
@@ -47,12 +48,11 @@
         <input type="text" placeholder="请输入验证码" v-model="autoCode" />
         <span>获取验证码</span>
       </div>
-      <van-button type="default" round :class="class1" @click="regBtn"
-        >手机号登录/注册</van-button
-      >
+      <van-button type="default" round :class="class1" @click="regBtn">手机号登录/注册</van-button>
 
       <p class="phone" @click="isChange">手机号短信登录</p>
     </div>
+    <!-- 登录 -->
     <div class="main" v-if="islogin">
       <h2>Hua.com花礼网</h2>
       <div>
@@ -62,12 +62,7 @@
       </div>
       <div>
         <p>密码</p>
-        <input
-          type="password"
-          placeholder="请输入密码"
-          autocomplete="off"
-          v-model="pwd"
-        />
+        <input type="password" placeholder="请输入密码" autocomplete="off" v-model="pwd" />
         <span>忘记密码</span>
       </div>
       <van-button type="default" round :class="class1">登录</van-button>
@@ -93,13 +88,13 @@ export default {
       isreg: true,
       ischange: "",
 
-      show: false,
+      show: false
     };
   },
   methods: {
     header_left() {
       this.$router.push({
-        path: "user",
+        path: "user"
       });
     },
     showPopup() {
@@ -113,18 +108,18 @@ export default {
     },
     regBtn() {
       console.log(this.phone, this.autoCode);
-      post("/api/v1/auth/login", {
+      post("/api/v1/auth/reg", {
         // url: "/api/v1/auth/login",
-        userName: "admin",
-        password: "admin@12138",
+        userName: this.phone,
+        password: this.autoCode,
         // nickName: "admin",
         avatar:
-          "https://dss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=2310791297,2082199243&fm=26&gp=0.jpg",
+          "https://dss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=2310791297,2082199243&fm=26&gp=0.jpg"
       }).then(res => {
         console.log(res);
       });
-    },
-  },
+    }
+  }
 };
 </script>
 <style scoped>
