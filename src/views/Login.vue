@@ -155,7 +155,6 @@ export default {
   margin-top: -2rem;
   z-index: 33;
 }
-
 .login {
   margin: 0 1rem;
 }
