@@ -12,10 +12,26 @@
         :closeable="true"
       >
         <ul class="nav_list">
-          <li to="/"><van-icon name="wap-home" />首页</li>
-          <li to="/sort"><van-icon name="star" />分类搜索</li>
-          <li to="/cart"><van-icon name="shopping-cart" />购物车</li>
-          <li to="/user"><van-icon name="manager" />我的</li>
+          <li>
+            <router-link :to="{ name: 'Home' }">
+              <van-icon name="wap-home" />首页
+            </router-link>
+          </li>
+          <li>
+            <router-link :to="{ name: 'Sort' }">
+              <van-icon name="star" />分类搜索
+            </router-link>
+          </li>
+          <li to="/cart">
+            <router-link :to="{ name: 'Cart' }">
+              <van-icon name="shopping-cart" />购物车
+            </router-link>
+          </li>
+          <li to="/user">
+            <router-link :to="{ name: 'User' }">
+              <van-icon name="manager" />我的
+            </router-link>
+          </li>
         </ul>
       </van-popup>
     </div>
@@ -61,6 +77,9 @@
   </div>
 </template>
 <script>
+import { get, post } from "../utils/ajax";
+import axios from "axios";
+
 export default {
   data() {
     return {
@@ -94,6 +113,16 @@ export default {
     },
     regBtn() {
       console.log(this.phone, this.autoCode);
+      post("/api/v1/auth/login", {
+        // url: "/api/v1/auth/login",
+        userName: "admin",
+        password: "admin@12138",
+        // nickName: "admin",
+        avatar:
+          "https://dss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=2310791297,2082199243&fm=26&gp=0.jpg",
+      }).then(res => {
+        console.log(res);
+      });
     },
   },
 };
