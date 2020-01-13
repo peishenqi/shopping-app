@@ -126,7 +126,13 @@
       </div>
       <!-- 评价 -->
       <div class="comment">
-        <van-cell title="订单评价" is-link value="最近已有8071条评价" @click="toComment" />
+        <van-cell
+          class="comment_title"
+          title="订单评价"
+          is-link
+          value="最近已有8071条评价"
+          @click="toComment"
+        />
         <!-- <router-view></router-view> -->
         <div class="com_content">
           <div class="one_com_content clean">
@@ -408,6 +414,9 @@ export default {
   position: relative;
   padding-bottom: 4rem;
   background: #fff;
+}
+.comment_title {
+  font-size: 0.8rem;
 }
 .one_com_content {
   padding: 0 1rem;
