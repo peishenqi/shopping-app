@@ -42,17 +42,16 @@
     <div class="main" v-if="islogin">
       <h2>Hua.com花礼网</h2>
       <div>
-        <p>手机号/邮箱</p>
-        <input type="text" placeholder="请输入手机号或邮箱" v-model="phone" />
-        <span></span>
+        <p>用户名</p>
+        <input type="text" placeholder="请输入用户名" v-model="userName" />
       </div>
       <div>
         <p>密码</p>
-        <input type="password" placeholder="请输入密码" autocomplete="off" v-model="pwd" />
+        <input type="password" placeholder="请输入密码" autocomplete="off" v-model="password" />
       </div>
       <van-button @click="loginHandl" type="default" round :class="class1">登录</van-button>
 
-      <p class="phone" @click="isChange">手机短信登录</p>
+      <p class="phone" @click="isChange">注册</p>
     </div>
   </div>
 </template>
@@ -71,10 +70,8 @@ export default {
       islogin: false,
       isreg: true,
       ischange: "",
-
-      show: false
-      // userName:"",
-      // password:"",
+      userName: "",
+      password: ""
     };
   },
   methods: {
@@ -114,18 +111,21 @@ export default {
         }
       });
     },
-    aa() {
-      this.show = false;
+    //登录请求
+    loginHandl() {
+      let data = {
+        userName: this.userName,
+        password: this.password
+      };
+      axios.post("/api/v1/auth/login", data).then(res => {
+        console.log(res);
+        // if(){
+
+        // }else{
+
+        // }
+      });
     }
-    // loginHandl(){
-    //   let data = {
-    //     userName:this.userName,
-    //     password:this.password
-    //   };
-    //   axios.post("http://api.cat-shop.penkuoer.com/api/v1/auth/login",data).then(res=>{
-    //     console.log(res);
-    //   })
-    // }
   }
 };
 </script>

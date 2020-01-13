@@ -59,29 +59,13 @@ export default {
 };
 </script>
 <style  scoped>
-<<<<<<< HEAD
-.header {
-  position: relative;
-}
-.van-icon-wap-nav {
-  position: absolute;
-  right: 1rem;
-  margin-top: -2rem;
-  z-index: 33;
-}
-.header .van-nav-bar {
-=======
 /* .header .van-nav-bar {
->>>>>>> psq
   background: #ff734c;
-} */
+} 
 .header .van-nav-bar__arrow,
 .header .van-icon-wap-nav ,.van-nav-bar__title{
-  color: black;
-}
- /* {
+  
   color: #fff;
-<<<<<<< HEAD
 }
 .van-popup--top {
   width: 30%;
@@ -99,17 +83,14 @@ export default {
 .nav_list {
   width: 100%;
   /* height: 3rem; */
-  line-height: 2rem;
+  /* line-height: 2rem; */
   /* text-align: left; */
-  text-indent: 0.3rem;
-}
+  /* text-indent: 0.3rem; */
+/* } */
 .nav_list li {
   height: 3rem;
   line-height: 3rem;
 }
-=======
-} */
->>>>>>> psq
 .main {
   overflow-x: hidden;
   width: 100%;
