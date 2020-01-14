@@ -88,10 +88,7 @@
       <div class="select">
         <van-cell class="selected" is-link @click="showPopup">
           已选
-          <span class="seleName0">
-            <!-- {{seleNameText}} -->
-            一往情深
-          </span>
+          <span class="seleName0">一往情深</span>
         </van-cell>
         <van-popup
           v-model="selectedsShow"
@@ -253,7 +250,6 @@ export default {
       current: 0,
       navShow: false,
       selectedsShow: false,
-      // seleNameText: "",
       showDelivery: false,
       areaList: area,
       addrInfo: "",
