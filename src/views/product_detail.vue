@@ -308,6 +308,7 @@ export default {
     //   页面滚动距离
     handleScroll() {
       let scollTop = window.scrollY;
+
       if (scollTop > 1000) {
         this.totop = true; // 回到顶部
       } else {

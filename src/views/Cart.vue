@@ -3,46 +3,24 @@
     <!-- header -->
     <div>
       <!-- <van-nav-bar left-arrow @click-left="onClickLeft" :class="classA" title="购物车" /> -->
-      <van-nav-bar
-        title="购物车"
-        left-arrow
-        @click-left="onClickLeft"
-        :class="classA"
-      />
+      <van-nav-bar title="购物车" left-arrow @click-left="onClickLeft" :class="classA" />
     </div>
     <!-- main  -->
     <div class="main" v-if="isNothing">
       <div class="top">
         <span class="span">登录后将同步您的购物车商品</span>
-        <van-button
-          type="primary"
-          round
-          size="small"
-          :class="class2"
-          @click="login"
-          >登录</van-button
-        >
+        <van-button type="primary" round size="small" :class="class2" @click="login">登录</van-button>
       </div>
       <div class="emptycart">
         <div class="emptycart_t">
-          <img
-            src="https://img02.hua.com/m/Shopping/m_shopping_empty_cart.png?v2"
-            alt
-          />
+          <img src="https://img02.hua.com/m/Shopping/m_shopping_empty_cart.png?v2" alt />
         </div>
         <div class="emptycart_c">
           <p>购物车内暂时没有商品</p>
         </div>
 
         <div class="emptycart_b">
-          <van-button
-            type="primary"
-            round
-            size="small"
-            :class="class3"
-            @click="toLook"
-            >去逛逛</van-button
-          >
+          <van-button type="primary" round size="small" :class="class3" @click="toLook">去逛逛</van-button>
         </div>
       </div>
       <div class="guess">
@@ -82,9 +60,7 @@
             <div class="recommend_list">
               <dl>
                 <dt>
-                  <img
-                    src="https://img01.hua.com/uploadpic/newpic/9010966.jpg"
-                  />
+                  <img src="https://img01.hua.com/uploadpic/newpic/9010966.jpg" />
                 </dt>
                 <dd>￥254</dd>
               </dl>
@@ -94,9 +70,7 @@
             <div class="recommend_list">
               <dl>
                 <dt>
-                  <img
-                    src="https://img01.hua.com/uploadpic/newpic/9010966.jpg"
-                  />
+                  <img src="https://img01.hua.com/uploadpic/newpic/9010966.jpg" />
                 </dt>
                 <dd>￥254</dd>
               </dl>
@@ -105,11 +79,7 @@
         </van-tabs>
       </div>
       <div class="main_bottom">
-        <van-submit-bar
-          :price="30350"
-          button-text="去结算"
-          @submit="onSubmit"
-        />
+        <van-submit-bar :price="30350" button-text="去结算" @submit="onSubmit" />
       </div>
     </div>
     <div class="foot"></div>
@@ -172,9 +142,7 @@ export default {
       });
     },
     onClickLeft() {
-      this.$router.push({
-        path: "sort",
-      });
+      this.$router.back(-1);
     },
     toLook() {
       this.$router.push({

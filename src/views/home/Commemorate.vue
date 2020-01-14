@@ -28,27 +28,24 @@
     </header>
 
     <section>
-      <div>
-        <img src="https://img01.hua.com/uploadpic/newpic/9010999.jpg_220x240.jpg" alt />
-        <p>一往情深</p>
-        <p>勿忘初心，方得始终</p>
-        <p class="color">￥2999.00</p>
-      </div>
-      <div>
-        <img src="https://img01.hua.com/uploadpic/newpic/9010999.jpg_220x240.jpg" alt />
-        <p>一往情深</p>
-        <p>勿忘初心，方得始终</p>
-        <p class="color">￥2999.00</p>
+      <div @click="toDetail" v-for="(item, index) in list" :key="index">
+        <img :src="item.coverImg" alt />
+        <p>{{item.name}}</p>
+        <p class="desc">{{item.descriptions}}</p>
+        <p class="price">￥ {{item.price}}</p>
       </div>
     </section>
   </div>
 </template>
 
 <script>
+import { get } from "../../utils/ajax";
+
 export default {
   data() {
     return {
-      show: false
+      show: false,
+      list: []
     };
   },
 
@@ -60,7 +57,25 @@ export default {
       console.log("返回上一次");
       // this.$router.push({ path: "/" });
       this.$router.back(-1);
+    },
+    toDetail() {
+      this.$router.push("product_detail");
+    },
+    loadProduct() {
+      let listData = {
+        per: 10,
+        page: 2,
+        name: "",
+        product_category: ""
+      };
+      get("/api/v1/products", listData).then(res => {
+        console.log(res);
+        this.list = res.data.products;
+      });
     }
+  },
+  created() {
+    this.loadProduct();
   }
 };
 </script>
@@ -150,9 +165,16 @@ section img {
 }
 section div p {
   padding: 0 1rem;
+  line-height: 1.4rem;
 }
 
-.color {
-  color: red;
+.desc {
+  width: 90%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.price {
+  color: #ff734c;
 }
 </style>

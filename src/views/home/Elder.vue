@@ -5,10 +5,18 @@
       <van-nav-bar title="送长辈" />
       <van-icon @click="showPopup" class="icon-right" name="wap-nav" />
       <van-popup v-model="show" position="top" :style="{ height: '25%' }">
-        <p><van-icon name="wap-home" />首页</p>
-        <p><van-icon name="star" />分类</p>
-        <p><van-icon name="shopping-cart" />购物车</p>
-        <p><van-icon name="manager" />我的</p>
+        <p>
+          <van-icon name="wap-home" />首页
+        </p>
+        <p>
+          <van-icon name="star" />分类
+        </p>
+        <p>
+          <van-icon name="shopping-cart" />购物车
+        </p>
+        <p>
+          <van-icon name="manager" />我的
+        </p>
       </van-popup>
       <div>
         <van-grid :column-num="2">
@@ -17,35 +25,25 @@
         </van-grid>
       </div>
     </header>
-
     <section>
-      <div>
-        <img
-          src="https://img01.hua.com/uploadpic/newpic/9010999.jpg_220x240.jpg"
-          alt=""
-        />
-        <p>一往情深</p>
-        <p>勿忘初心，方得始终</p>
-        <p>￥2999.00</p>
-      </div>
-      <div>
-        <img
-          src="https://img01.hua.com/uploadpic/newpic/9010999.jpg_220x240.jpg"
-          alt=""
-        />
-        <p>一往情深</p>
-        <p>勿忘初心，方得始终</p>
-        <p>￥2999.00</p>
+      <div @click="toDetail" v-for="(item, index) in list" :key="index">
+        <img :src="item.coverImg" alt />
+        <p>{{item.name}}</p>
+        <p class="desc">{{item.descriptions}}</p>
+        <p class="price">￥ {{item.price}}</p>
       </div>
     </section>
   </div>
 </template>
 
 <script>
+import { get } from "../../utils/ajax";
+
 export default {
   data() {
     return {
       show: false,
+      list: []
     };
   },
 
@@ -57,10 +55,25 @@ export default {
       console.log(111);
       this.$router.push({ path: "/" });
     },
-    // onClickRight() {
-    //   Toast('按钮');
-    // }
+    toDetail() {
+      this.$router.push("product_detail");
+    },
+    loadProduct() {
+      let listData = {
+        per: 10,
+        page: 2,
+        name: "",
+        product_category: ""
+      };
+      get("/api/v1/products", listData).then(res => {
+        console.log(res);
+        this.list = res.data.products;
+      });
+    }
   },
+  created() {
+    this.loadProduct();
+  }
 };
 </script>
 
@@ -149,5 +162,15 @@ section img {
 }
 section div p {
   padding: 0 1rem;
+  line-height: 1.4rem;
+}
+.desc {
+  width: 90%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.price {
+  color: #ff734c;
 }
 </style>

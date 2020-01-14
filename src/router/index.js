@@ -7,7 +7,7 @@ Vue.use(VueRouter)
 const routes = [{
     path: '/',
     name: 'Index',
-    redirect: '/home',
+    // redirect: '/home',
     component: () => import('@/Index.vue'),
     children: [
       // 首页
