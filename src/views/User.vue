@@ -19,18 +19,16 @@
         />
         <div class="username fl">
           <div class="name">{{ nickName }}</div>
-          <div class="vip"><van-icon name="gem" /><span>VIP会员</span></div>
+          <div class="vip">
+            <van-icon name="gem" />
+            <span>VIP会员</span>
+          </div>
         </div>
       </div>
 
       <div class="user_main">
         <div class="order">
-          <van-cell
-            title="我的订单"
-            is-link
-            value="全部订单"
-            to="/all-orders"
-          />
+          <van-cell title="我的订单" is-link value="全部订单" to="/all-orders" />
           <van-grid :column-num="3" :border="false">
             <van-grid-item
               to="/obligation"
@@ -74,8 +72,8 @@
   </div>
 </template>
 <script>
-import { get, post } from "../utils/ajax"
-import axios from "axios"
+import { get, post } from "../utils/ajax";
+import axios from "axios";
 
 export default {
   data() {
@@ -83,30 +81,34 @@ export default {
       notLogin: true,
       isLogin: false,
       nickName: ""
-    }
+    };
   },
   methods: {
     onClickLeft() {
-      this.$router.back(-1)
+      this.$router.back(-1);
     }
   },
   created() {
-    let token = localStorage.getItem("token")
+    let token = localStorage.getItem("token");
     if (token) {
-      this.isLogin = true
-      this.notLogin = false
+      this.isLogin = true;
+      this.notLogin = false;
       let userData = {
         headers: {
           authorization: "Bearer" + token
         }
-      }
+      };
       get("/api/v1/users/info", userData).then(res => {
-        // console.log(res)
-        this.nickName = res.data.userName
-      })
+        console.log(res);
+        this.nickName = res.data.userName;
+      });
+      /* get("/api/v1/users/info").then(res => {
+        console.log(res);
+        this.nickName = res.data.userName;
+      }); */
     }
   }
-}
+};
 </script>
 <style scoped>
 .clean:after {

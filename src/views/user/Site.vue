@@ -5,21 +5,20 @@
     </header>
 
     <section>
-      <div class="no">
-        <img
-          src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1578656831451&di=68dfa6e40aaedaf512bc301f5f0f3617&imgtype=0&src=http%3A%2F%2Fres.smzdm.com%2Fzhuanti%2Fdouble12-2019%2Fimg%2Fblank-state.png"
-          alt=""
-        />
-        <p>没有收货地址呐~</p>
-        <button @click="address">设置收货地址</button>
+      <div class="no" v-show="notAdress">
+        <van-address-list @add="onAdd">
+          <van-image
+            class="notAdress_pic"
+            src="https://img02.hua.com/m/images/m_no_address.png?v3"
+          />
+          <p>暂无收货地址呐~</p>
+        </van-address-list>
       </div>
 
-      <div class="yes">
+      <div class="yes" v-show="hasAddress">
         <van-address-list
           v-model="chosenAddressId"
-          :list="list"
-          :disabled-list="disabledList"
-          disabled-text="以下地址超出配送范围"
+          :list="addressList"
           default-tag-text="默认"
           @add="onAdd"
           @edit="onEdit"
@@ -30,62 +29,83 @@
 </template>
 
 <script>
-import { get } from "../../utils/ajax";
+import { get, put } from "../../utils/ajax";
 export default {
   data() {
     return {
       chosenAddressId: "1",
-      list: [
-        {
-          id: "1",
-          name: "张三",
-          tel: "13000000000",
-          address: "浙江省杭州市西湖区文三路 138 号东方通信大厦 7 楼 501 室",
-        },
-        {
-          id: "2",
-          name: "李四",
-          tel: "1310000000",
-          address: "浙江省杭州市拱墅区莫干山路 50 号",
-        },
-      ],
-      disabledList: [
-        {
-          id: "3",
-          name: "王五",
-          tel: "1320000000",
-          address: "浙江省杭州市滨江区江南大道 15 号",
-        },
-      ],
+      addressList: [],
+      notAdress: true,
+      hasAddress: false
     };
   },
   methods: {
     onClickLeft() {
-      this.$router.push({ path: "/user" });
+      this.$router.back(-1);
     },
     address() {
       this.$router.push({ path: "/address" });
     },
+    //获取地址信息
+    getAddress() {
+      let token = localStorage.getItem("token");
+      if (token) {
+        let addressData = {
+          headers: {
+            authorization: "Bearer" + token
+          },
+          per: 3,
+          page: 1
+        };
+        get("/api/v1/addresses", addressData).then(res => {
+          // console.log(res.data.addresses);
+          let result = res.data.addresses;
+          if (result.length !== 0) {
+            this.notAdress = false;
+            this.hasAddress = true;
+            result.forEach(v => {
+              let addressArr = {
+                id: v._id,
+                name: v.receiver,
+                tel: v.mobile,
+                address: v.regions + "-" + v.address,
+                isDefault: false
+              };
+              this.addressList.push(addressArr);
+            });
+          }
+        });
+      } else {
+        this.$router.push("Login");
+      }
+    },
+    // 新增地址
     onAdd() {
       this.$router.push({ path: "/address" });
     },
-
+    // 编辑地址
     onEdit(item, index) {
-      Toast("编辑地址:" + index);
-    },
-    //获取地址信息
-    getAddress() {
-      get("/api/v1/addresses", { per: 3, page: 1 }).then(res => {
-        console.log(res.data);
-        for (let i = 0; i < res.data.addresses.length; i++) {
-          this.list.push(res.data.addresses[i]);
-        }
-      });
-    },
+      console.log(item);
+      console.log(index);
+      /* let editAddressData = {
+        receiver: item.name,
+        mobile: item.tel,
+        regions: item.address,
+        address: item.address,
+        idDefault: item.isDefault
+      };
+      put("/api/v1/addresses/" + item.id, editAddressData)
+        .then(res => {
+          console.log(res);
+        })
+        .catch(err => {
+          console.error(err);
+        }); */
+    }
   },
-  mounted() {
+  created() {
     this.getAddress();
-  },
+  }
 };
 </script>
 
@@ -105,25 +125,12 @@ header,
 section {
   flex: 1;
 }
-.no {
-  display: none;
-}
-.no img {
-  width: 100%;
-  max-height: 15rem;
+.notAdress_pic {
+  margin-left: 28%;
+  width: 10rem;
 }
 .no p {
   text-align: center;
-  font-size: 0.8rem;
-}
-.no button {
-  font-size: 0.8rem;
-  display: block;
-  height: 2rem;
-  width: 30%;
-  margin: 0 auto;
-  border: 0;
-  background: #fa7651;
-  border-radius: 10px;
+  font-size: 1rem;
 }
 </style>
