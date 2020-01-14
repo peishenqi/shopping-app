@@ -15,10 +15,16 @@
           <img src="https://img02.hua.com/slider/18_youflower_m.jpg?830" alt />
         </van-swipe-item>
         <van-swipe-item>
-          <img src="https://img02.hua.com/slider/20_valentine_banner_m.jpg" alt />
+          <img
+            src="https://img02.hua.com/slider/20_valentine_banner_m.jpg"
+            alt
+          />
         </van-swipe-item>
         <van-swipe-item>
-          <img src="https://img02.hua.com/slider/19_birthday_banner_m.jpg" alt />
+          <img
+            src="https://img02.hua.com/slider/19_birthday_banner_m.jpg"
+            alt
+          />
         </van-swipe-item>
         <van-swipe-item>
           <img src="https://img02.hua.com/slider/17_mjz_m.jpg" alt />
@@ -73,7 +79,10 @@
         <div class="hot" @click="HotSale">
           <h4>热卖榜</h4>
           <p>集万千宠爱</p>
-          <img src="http://img1.imgtn.bdimg.com/it/u=1769307511,4173135256&fm=26&gp=0.jpg" alt />
+          <img
+            src="http://img1.imgtn.bdimg.com/it/u=1769307511,4173135256&fm=26&gp=0.jpg"
+            alt
+          />
         </div>
         <!-- 特价 -->
         <div class="special" @click="Special">
@@ -130,19 +139,23 @@
       <div class="friend">
         <p>/~送朋友~/</p>
         <ul>
-          <li v-for="item in product_list" :key="item._id" @click="getDetail(item._id)">
-            <van-card
-              :price="item.price"
-              :desc="item.descriptions"
-              :title="item.name"
-              :thumb="item.coverImg"
+          <li v-for="item in product_list" :key="item._id">
+            <router-link
+              :to="{ name: 'product_detail', query: { id: item._id } }"
             >
-              <div slot="footer">
-                <van-button size="mini">
-                  <van-icon class="cart" name="shopping-cart-o" />
-                </van-button>
-              </div>
-            </van-card>
+              <van-card
+                :price="item.price"
+                :desc="item.descriptions"
+                :title="item.name"
+                :thumb="item.coverImg"
+              >
+                <div slot="footer">
+                  <van-button size="mini">
+                    <van-icon class="cart" name="shopping-cart-o" />
+                  </van-button>
+                </div>
+              </van-card>
+            </router-link>
           </li>
         </ul>
       </div>
@@ -161,7 +174,7 @@ export default {
       descriptions: "",
       name: "",
       price: "",
-      product_list: []
+      product_list: [],
     };
   },
   name: "Home",
@@ -195,7 +208,7 @@ export default {
         page: 1,
         name: "",
         product_catgory: "",
-        price: ""
+        price: "",
       }).then(res => {
         // console.log(res);
         for (let i = 0; i < res.data.products.length; i++) {
@@ -203,21 +216,22 @@ export default {
         }
       });
     },
-    getDetail(id) {
-      console.log(id);
-      get("/api/v1/products/" + id).then(res => {
-        console.log(res);
+    // getDetail(id) {
+    //   // console.log(id);
+    //   get("/api/v1/products/" + id).then(res => {
+    //     console.log(res);
 
-        this.$router.push({
-          path: "/product_detail",
-          name: "product_detail"
-        });
-      });
-    }
+    //     this.$router.push({
+    //       path: "/product_detail",
+    //       params: { id: id },
+    //       name: "product_detail",
+    //     });
+    //   });
+    // },
   },
   mounted: function() {
     this.loadProduct();
-  }
+  },
 };
 </script>
 

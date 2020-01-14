@@ -130,13 +130,13 @@ export default {
       class3: ["tolook"],
       list: [],
       ischecked: false,
-      lists: []
+      lists: [],
     };
   },
   // 购物车数据请求
   async created() {
     const res = await get("/api/v1/shop_carts");
-    console.log(res.data);
+    // console.log(res.data);
     if (!res.data.length == 0) {
     } else {
       this.isNothing = !this.isNothing;
@@ -145,7 +145,7 @@ export default {
     res.data.forEach(item => {
       this.list.push({
         ...item,
-        ...{ checked: false }
+        ...{ checked: false },
       });
     });
   },
@@ -159,38 +159,38 @@ export default {
         per: 10,
         page: 2,
         name: "",
-        product_category: ""
+        product_category: "",
       };
       get("/api/v1/products", data).then(res => {
-        console.log(res.data.products);
+        // console.log(res.data.products);
         this.lists = [];
         res.data.products.forEach(p => {
           this.lists.push({
-            ...p
+            ...p,
           });
         });
       });
     },
     onClickLeft() {
       this.$router.push({
-        path: "sort"
+        path: "sort",
       });
     },
     toLook() {
       this.$router.push({
-        path: "/"
+        path: "/",
       });
     },
     login() {
       this.$router.push({
         path: "user",
-        name: "User"
+        name: "User",
       });
     },
     onSubmit() {
       console.log("结算按钮");
-    }
-  }
+    },
+  },
 };
 </script>
 <style scoped>

@@ -29,30 +29,39 @@
       <!-- 商品详情轮播 -->
       <van-swipe :height="450" :autoplay="3000">
         <van-swipe-item>
-          <van-image src="https://img01.hua.com/uploadpic/newpic/9010966.jpg" />
+          <van-image :src="coverImg" />
         </van-swipe-item>
         <van-swipe-item>
-          <van-image src="https://img01.hua.com/uploadpic/newpic/201801162043054106.jpg" />
+          <!-- <van-image :src="coverImg" /> -->
+          <van-image
+            src="https://img01.hua.com/uploadpic/newpic/201801162043054106.jpg"
+          />
         </van-swipe-item>
         <van-swipe-item>
-          <van-image src="https://img01.hua.com/uploadpic/newpic/201909021919180631.jpg" />
+          <!-- <van-image :src="coverImg" /> -->
+          <van-image
+            src="https://img01.hua.com/uploadpic/newpic/201909021919180631.jpg"
+          />
         </van-swipe-item>
         <van-swipe-item>
-          <van-image src="https://img01.hua.com/uploadpic/newpic/201708091719050547.jpg" />
+          <!-- <van-image :src="coverImg" /> -->
+          <van-image
+            src="https://img01.hua.com/uploadpic/newpic/201708091719050547.jpg"
+          />
         </van-swipe-item>
       </van-swipe>
       <!-- 商品标题 -->
       <div class="content">
         <div class="title clean">
           <p>
-            一往情深-精品玫瑰礼盒:19枝红玫瑰，勿忘我0.1扎
+            {{ name }}
             <span>经典爆款，年销售冠军！</span>
           </p>
           <van-icon class="star" name="star-o" size="1.5rem" />
         </div>
         <div class="price clean">
           <p class="newPri fl">
-            ￥ 259
+            ￥ {{ price }}
             <span>￥ 315</span>
           </p>
           <p class="fr">已售11.69万件</p>
@@ -61,13 +70,15 @@
       </div>
       <!-- 商品规格 -->
       <div class="spec">
-        <div>
+        <!-- <div>
           花语
-          <span class="language">你的轻柔像阵微风，让我从容不迫，想让你知道，我对你始终一往情深。</span>
-        </div>
+          <span class="language"
+            >你的轻柔像阵微风，让我从容不迫，想让你知道，我对你始终一往情深。</span
+          >
+        </div> -->
         <div>
           材料
-          <span>高档礼盒装鲜花:19枝红玫瑰，勿忘我0.1扎</span>
+          <span>{{ descriptions }}</span>
         </div>
         <div>
           配送
@@ -82,7 +93,11 @@
             一往情深
           </span>
         </van-cell>
-        <van-popup v-model="selectedsShow" position="bottom" :style="{ height: '45%' }">
+        <van-popup
+          v-model="selectedsShow"
+          position="bottom"
+          :style="{ height: '45%' }"
+        >
           <div class="selected_top clean">
             <img
               class="select_img fl"
@@ -106,15 +121,27 @@
             </van-row>
           </div>
           <van-goods-action>
-            <van-goods-action-button type="warning" text="加入购物车" @click="onClickButton" />
-            <van-goods-action-button type="danger" text="立即购买" @click="onClickButton" />
+            <van-goods-action-button
+              type="warning"
+              text="加入购物车"
+              @click="onClickButton()"
+            />
+            <van-goods-action-button
+              type="danger"
+              text="立即购买"
+              @click="onPayButton"
+            />
           </van-goods-action>
         </van-popup>
         <van-cell is-link @click="Delivery">
           配送至
-          <span class="seleaddress">{{addrInfo}}</span>
+          <span class="seleaddress">{{ addrInfo }}</span>
         </van-cell>
-        <van-popup v-model="showDelivery" position="bottom" :style="{ height: '45%'}">
+        <van-popup
+          v-model="showDelivery"
+          position="bottom"
+          :style="{ height: '45%' }"
+        >
           <van-area
             @confirm="onConfirm"
             @cancel="oncCancel"
@@ -144,44 +171,85 @@
               src="https://img.yzcdn.cn/vant/cat.jpeg"
             />
             <span class="user_name fl">用户名</span>
-            <van-rate class="com_star fr" v-model="starValue" :count="5" size="1rem" readonly />
+            <van-rate
+              class="com_star fr"
+              v-model="starValue"
+              :count="5"
+              size="1rem"
+              readonly
+            />
           </div>
           <div class="com_text">
-            <p>哇！太棒了主要是女朋友开心，年底争取喝喜酒，我俩很幸福，感谢！</p>
+            <p>
+              哇！太棒了主要是女朋友开心，年底争取喝喜酒，我俩很幸福，感谢！
+            </p>
             <van-image
               width="100"
               height="120"
               src="//img.hua.com/reviewpic/app/2019/05/15/638bc4c8179349508252d27fcbf8f77d.jpeg"
             />
-            <van-cell class="address" title="江苏南京市江宁区" icon="location-o" />
+            <van-cell
+              class="address"
+              title="江苏南京市江宁区"
+              icon="location-o"
+            />
           </div>
         </div>
-        <van-button type="default" class="more" to="/comment">查看更多评论</van-button>
+        <van-button type="default" class="more" to="/comment"
+          >查看更多评论</van-button
+        >
       </div>
       <!-- 图文详情 -->
       <div class="details">
         <van-cell class="details_title" value="图文详情" />
-        <van-image src="https://img02.hua.com/pc/images/xianhua_cardstyle.jpg" />
-        <van-image src="https://img01.hua.com/uploadpic/images/by_20180615112041289.jpg" />
-        <van-image src="https://img01.hua.com/uploadpic/images/by_20180615111319404.jpg" />
+        <van-image
+          src="https://img02.hua.com/pc/images/xianhua_cardstyle.jpg"
+        />
+        <van-image
+          src="https://img01.hua.com/uploadpic/images/by_20180615112041289.jpg"
+        />
+        <van-image
+          src="https://img01.hua.com/uploadpic/images/by_20180615111319404.jpg"
+        />
       </div>
     </div>
     <!-- 底部 footer -->
     <van-goods-action>
       <van-goods-action-icon icon="chat-o" text="客服" @click="onClickIcon" />
       <van-goods-action-icon icon="cart-o" text="购物车" @click="onClickIcon" />
-      <van-goods-action-button type="warning" text="加入购物车" @click="onClickButton" />
-      <van-goods-action-button type="danger" text="立即购买" @click="onClickButton" />
+      <van-goods-action-button
+        type="warning"
+        text="加入购物车"
+        @click="onClickButton"
+      />
+      <van-goods-action-button
+        type="danger"
+        text="立即购买"
+        @click="onPayButton"
+      />
     </van-goods-action>
     <!-- 回到顶部按钮 -->
-    <van-icon class="totop" v-show="totop" name="upgrade" size="2.5rem" @click="toTop" />
+    <van-icon
+      class="totop"
+      v-show="totop"
+      name="upgrade"
+      size="2.5rem"
+      @click="toTop"
+    />
   </div>
 </template>
 <script>
+import { get, post } from "../utils/ajax";
 import area from "../assets/area";
+import { Dialog } from "vant";
 export default {
   data() {
     return {
+      id: "",
+      coverImg: "",
+      name: "",
+      descriptions: "",
+      price: "",
       current: 0,
       navShow: false,
       selectedsShow: false,
@@ -190,7 +258,7 @@ export default {
       areaList: area,
       addrInfo: "",
       totop: false,
-      starValue: 3
+      starValue: 3,
     };
   },
   methods: {
@@ -227,7 +295,19 @@ export default {
       alert("点击图标");
     },
     onClickButton() {
-      alert("点击按钮");
+      // alert("点击按钮");
+      console.log(this.id);
+      post("/api/v1/shop_carts", {
+        product: this.id,
+        quantity: 1,
+      }).then(res => {
+        // console.log(res.data);
+        Dialog({ message: res.data.message });
+      });
+    },
+    //立即购买
+    onPayButton() {
+      alert("点击购买按钮");
     },
     //   页面滚动距离
     handleScroll() {
@@ -248,15 +328,30 @@ export default {
           clearInterval(timer);
         }
       }, 20);
-    }
+    },
+    getDetail() {
+      // console.log(id);
+      get("/api/v1/products/" + this.$route.query.id).then(res => {
+        console.log(res.data);
+        this.coverImg = res.data.coverImg;
+        this.name = res.data.name;
+        this.descriptions = res.data.descriptions;
+        this.price = res.data.price;
+        this.id = res.data._id;
+      });
+    },
   },
   mounted() {
     // 监听滚动距离
     window.addEventListener("scroll", this.handleScroll);
+    this.getDetail();
   },
   destroyed() {
     window.removeEventListener("scroll", this.handleScroll);
-  }
+  },
+  created() {
+    console.log(this.$route.query.id);
+  },
 };
 </script>
 <style scoped>
@@ -460,4 +555,3 @@ export default {
   color: #666;
 }
 </style>
-
