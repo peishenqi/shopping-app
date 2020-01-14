@@ -3,7 +3,7 @@
     <van-sticky>
       <header>
         <van-icon @click="Sort" class="icon-left" name="qr" />
-        <van-nav-bar title="没名字" />
+        <van-nav-bar title="花礼网" />
         <i class="icon-right van-icon van-icon-service"></i>
       </header>
     </van-sticky>
@@ -34,35 +34,32 @@
       </van-grid>
 
       <!-- 选择 -->
-      <h5 style="margin:0.5rem 1rem">| 一秒选择</h5>
+      <h5 style="margin:0.5rem 1rem,font-size:1.15rem">| 一秒选择</h5>
       <div class="someone">
         <div>
           <van-image
             @click="Girlfriend"
-            round
             width="10rem"
             height="10rem"
-            src="https://img.yzcdn.cn/vant/cat.jpeg"
+            src="https://img02.hua.com/m/home/img/m_home_use_lover.png"
           />
           <p>送女友</p>
         </div>
         <div>
           <van-image
             @click="Elder"
-            round
             width="10rem"
             height="10rem"
-            src="https://img.yzcdn.cn/vant/cat.jpeg"
+            src="https://img02.hua.com/m/home/img/m_home_use_elder.png"
           />
           <p>送长辈</p>
         </div>
         <div>
           <van-image
             @click="Friend"
-            round
             width="10rem"
             height="10rem"
-            src="https://img.yzcdn.cn/vant/cat.jpeg"
+            src="https://img02.hua.com/m/home/img/m_home_use_friends.png"
           />
           <p>送朋友</p>
         </div>
@@ -92,10 +89,6 @@
           title="商品标题"
           thumb="https://img.yzcdn.cn/vant/t-thirt.jpg"
         >
-          <div slot="tags">
-            <van-tag plain type="danger">标签</van-tag>
-            <van-tag plain type="danger">标签</van-tag>
-          </div>
           <div slot="footer">
             <van-button size="mini">
               <van-icon class="cart" name="shopping-cart-o" />
@@ -114,10 +107,6 @@
           title="商品标题"
           thumb="https://img.yzcdn.cn/vant/t-thirt.jpg"
         >
-          <div slot="tags">
-            <van-tag plain type="danger">标签</van-tag>
-            <van-tag plain type="danger">标签</van-tag>
-          </div>
           <div slot="footer">
             <van-button size="mini">
               <van-icon class="cart" name="shopping-cart-o" />
@@ -185,12 +174,7 @@ export default {
     Special() {
       this.$router.push({ path: "Special" });
     },
-    Special() {
-      this.$router.push({ path: "Special" });
-    },
-    // jump(){
-    //   this.$router.push({path:'Service'})
-    // }
+
     loadProduct() {
       // console.log(12313);
       get("/api/v1/products", {
@@ -201,9 +185,7 @@ export default {
         price: ""
       }).then(res => {
         // console.log(res);
-        for (let i = 0; i < res.data.products.length; i++) {
-          let a = this.product_list.push(res.data.products[i]);
-        }
+        this.product_list = res.data.products;
       });
     },
     getDetail(id) {
@@ -216,6 +198,7 @@ export default {
           name: "product_detail"
         });
       });
+      axi;
     }
   },
   mounted: function() {
@@ -272,6 +255,9 @@ section {
   vertical-align: middle;
 }
 /* 选择 */
+h5 {
+  font-size: 1.15rem;
+}
 .someone {
   display: flex;
   justify-content: space-around;

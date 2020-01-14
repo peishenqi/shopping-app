@@ -166,7 +166,7 @@
     <!-- 底部 footer -->
     <van-goods-action>
       <van-goods-action-icon icon="chat-o" text="客服" @click="onClickIcon" />
-      <van-goods-action-icon icon="cart-o" text="购物车" @click="onClickIcon" />
+      <van-goods-action-icon icon="cart-o" text="购物车" :to="{name:'Cart'}" />
       <van-goods-action-button type="warning" text="加入购物车" @click="onClickButton" />
       <van-goods-action-button type="danger" text="立即购买" @click="onClickButton" />
     </van-goods-action>
@@ -228,6 +228,7 @@ export default {
     //   页面滚动距离
     handleScroll() {
       let scollTop = window.scrollY;
+
       if (scollTop > 1000) {
         this.totop = true; // 回到顶部
       } else {
