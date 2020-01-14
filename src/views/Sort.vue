@@ -2,7 +2,7 @@
   <div class="sort">
     <!-- 搜索 -->
 
-    <van-search class="search" placeholder="搜索鲜花、蛋糕、礼品" shape="round" v-model="value" />
+    <van-search class="search" placeholder="搜索鲜花、蛋糕、礼品" shape="round" v-model="valueSearch" />
     <div class="sort_main">
       <!-- 侧栏导航 -->
       <div class="nav">
@@ -20,7 +20,16 @@
     </div>
   </div>
 </template>
-
+<script>
+export default {
+  data() {
+    return {
+      valueSearch: "",
+      activeKey: 0
+    };
+  },
+};
+</script>
 <style scoped>
 .sort {
   width: 100vw;
@@ -59,19 +68,4 @@
 }
 </style>
 
-<script>
-export default {
-  data() {
-    return {
-      value: "",
-      activeKey: 0,
-      isFixed: false,
-      offsetTop: 0
-    };
-  },
-  //回调中移除监听
-  destroyed() {
-    window.removeEventListener("scroll", this.handleScroll);
-  }
-};
-</script>
+

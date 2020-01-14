@@ -185,6 +185,9 @@ export default {
     Special() {
       this.$router.push({ path: "Special" });
     },
+    Special() {
+      this.$router.push({ path: "Special" });
+    },
     // jump(){
     //   this.$router.push({path:'Service'})
     // }
