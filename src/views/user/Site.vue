@@ -30,7 +30,7 @@
 </template>
 
 <script>
-import { get } from "../../utils/ajax";
+import { get, put, post } from "../../utils/ajax";
 export default {
   data() {
     return {
@@ -71,13 +71,19 @@ export default {
     },
 
     onEdit(item, index) {
-      Toast("编辑地址:" + index);
+      console.log("点击了编辑按钮");
+      put("/api/v1/addresses/" + "5e1d60acbea4634750d84986").then(res => {
+        console.log(res);
+      });
     },
     //获取地址信息
     getAddress() {
       get("/api/v1/addresses", { per: 3, page: 1 }).then(res => {
         console.log(res.data);
         for (let i = 0; i < res.data.addresses.length; i++) {
+          console.log(res.data.addresses[i]);
+          this.id = res.data.addresses[i]._id;
+          this.user = res.data.addresses[i].user;
           this.list.push(res.data.addresses[i]);
         }
       });
