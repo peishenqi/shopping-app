@@ -201,18 +201,7 @@ export default {
         this.product_list = res.data.products;
       });
     },
-    // getDetail(id) {
-    //   // console.log(id);
-    //   get("/api/v1/products/" + id).then(res => {
-    //     console.log(res);
-
-    //     this.$router.push({
-    //       path: "/product_detail",
-    //       params: { id: id },
-    //       name: "product_detail",
-    //     });
-    //   });
-    // },
+    
   },
   mounted: function() {
     this.loadProduct();
