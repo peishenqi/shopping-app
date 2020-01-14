@@ -3,117 +3,88 @@
     <!-- header -->
     <div>
       <!-- <van-nav-bar left-arrow @click-left="onClickLeft" :class="classA" title="购物车" /> -->
-      <van-nav-bar title="购物车" left-arrow @click-left="onClickLeft" :class="classA" />
+      <van-nav-bar
+        title="购物车"
+        left-arrow
+        @click-left="onClickLeft"
+        :class="classA"
+      />
     </div>
     <!-- main  -->
     <div class="main" v-if="isNothing">
       <div class="top">
         <span class="span">登录后将同步您的购物车商品</span>
-        <van-button type="primary" round size="small" :class="class2" @click="login">登录</van-button>
+        <van-button
+          type="primary"
+          round
+          size="small"
+          :class="class2"
+          @click="login"
+          >登录</van-button
+        >
       </div>
       <div class="emptycart">
         <div class="emptycart_t">
-          <img src="https://img02.hua.com/m/Shopping/m_shopping_empty_cart.png?v2" alt />
+          <img
+            src="https://img02.hua.com/m/Shopping/m_shopping_empty_cart.png?v2"
+            alt
+          />
         </div>
         <div class="emptycart_c">
           <p>购物车内暂时没有商品</p>
         </div>
 
         <div class="emptycart_b">
-          <van-button type="primary" round size="small" :class="class3" @click="toLook">去逛逛</van-button>
+          <van-button
+            type="primary"
+            round
+            size="small"
+            :class="class3"
+            @click="toLook"
+            >去逛逛</van-button
+          >
         </div>
       </div>
       <div class="guess">
         <h3>猜你喜欢</h3>
-        <dl>
+        <dl v-for="p in lists" :key="p._id">
           <dt>
-            <img src="https://img01.hua.com/uploadpic/newpic/9010011.jpg" alt />
+            <img :src="p.coverImg" alt />
           </dt>
-          <dd>一往情深.精品玫瑰礼盒:19枝红玫瑰，勿忘我0.1扎</dd>
-          <span>￥259</span>
-        </dl>
-        <dl>
-          <dt>
-            <img src="https://img01.hua.com/uploadpic/newpic/9010011.jpg" alt />
-          </dt>
-          <dd>一往情深.精品玫瑰礼盒:19枝红玫瑰，勿忘我0.1扎</dd>
-          <span>￥259</span>
-        </dl>
-        <dl>
-          <dt>
-            <img src="https://img01.hua.com/uploadpic/newpic/9010011.jpg" alt />
-          </dt>
-          <dd>一往情深.精品玫瑰礼盒:19枝红玫瑰，勿忘我0.1扎</dd>
-          <span>￥259</span>
-        </dl>
-        <dl>
-          <dt>
-            <img src="https://img01.hua.com/uploadpic/newpic/9010011.jpg" alt />
-          </dt>
-          <dd>一往情深.精品玫瑰礼盒:19枝红玫瑰，勿忘我0.1扎</dd>
-          <span>￥259</span>
-        </dl>
-        <dl>
-          <dt>
-            <img src="https://img01.hua.com/uploadpic/newpic/9010011.jpg" alt />
-          </dt>
-          <dd>一往情深.精品玫瑰礼盒:19枝红玫瑰，勿忘我0.1扎</dd>
-          <span>￥259</span>
-        </dl>
-        <dl>
-          <dt>
-            <img src="https://img01.hua.com/uploadpic/newpic/9010011.jpg" alt />
-          </dt>
-          <dd>一往情深.精品玫瑰礼盒:19枝红玫瑰，勿忘我0.1扎</dd>
-          <span>￥259</span>
+          <dd>{{ p.descriptions }}</dd>
+          <span>￥{{ p.price }}</span>
         </dl>
       </div>
       <p class="main_b">已经到底了...</p>
     </div>
-    <div class="main" v-if="isCartShow">
+
+    <div class="main" v-if="!isNothing">
       <div class="main_top">
-        <div>
+        <div v-for="item in list" :key="item.product._id">
           <input type="checkbox" class="singleSel" />
-          <van-card title="【鲜花】忘情巴黎" thumb="https://img.yzcdn.cn/vant/t-thirt.jpg">
+          <van-card
+            :price="item.product.price"
+            :title="item.product.descriptions"
+            :thumb="item.product.coverImg"
+          >
             <div slot="tags">
               数量
-              <van-stepper v-model="value" />
-              <span class="proPrice">￥339</span>
+              <van-stepper v-model="item.quantity" />
+              <!-- <span class="proPrice">{{item.product.price}}</span> -->
             </div>
           </van-card>
         </div>
       </div>
+
       <div class="main_center">
         <van-tabs v-model="active">
           <van-tab title="购买该商品的还购买了">
             <div class="recommend_list">
               <dl>
                 <dt>
-                  <img src="https://img01.hua.com/uploadpic/newpic/9010966.jpg" />
-                </dt>
-                <dd>￥254</dd>
-              </dl>
-              <dl>
-                <dt>
-                  <img src="https://img01.hua.com/uploadpic/newpic/9010966.jpg" />
-                </dt>
-                <dd>￥254</dd>
-              </dl>
-              <dl>
-                <dt>
-                  <img src="https://img01.hua.com/uploadpic/newpic/9010966.jpg" />
-                </dt>
-                <dd>￥254</dd>
-              </dl>
-              <dl>
-                <dt>
-                  <img src="https://img01.hua.com/uploadpic/newpic/9010966.jpg" />
-                </dt>
-                <dd>￥254</dd>
-              </dl>
-              <dl>
-                <dt>
-                  <img src="https://img01.hua.com/uploadpic/newpic/9010966.jpg" />
+                  <img
+                    src="https://img01.hua.com/uploadpic/newpic/9010966.jpg"
+                  />
                 </dt>
                 <dd>￥254</dd>
               </dl>
@@ -123,31 +94,9 @@
             <div class="recommend_list">
               <dl>
                 <dt>
-                  <img src="https://img01.hua.com/uploadpic/newpic/9010966.jpg" />
-                </dt>
-                <dd>￥254</dd>
-              </dl>
-              <dl>
-                <dt>
-                  <img src="https://img01.hua.com/uploadpic/newpic/9010966.jpg" />
-                </dt>
-                <dd>￥254</dd>
-              </dl>
-              <dl>
-                <dt>
-                  <img src="https://img01.hua.com/uploadpic/newpic/9010966.jpg" />
-                </dt>
-                <dd>￥254</dd>
-              </dl>
-              <dl>
-                <dt>
-                  <img src="https://img01.hua.com/uploadpic/newpic/9010966.jpg" />
-                </dt>
-                <dd>￥254</dd>
-              </dl>
-              <dl>
-                <dt>
-                  <img src="https://img01.hua.com/uploadpic/newpic/9010966.jpg" />
+                  <img
+                    src="https://img01.hua.com/uploadpic/newpic/9010966.jpg"
+                  />
                 </dt>
                 <dd>￥254</dd>
               </dl>
@@ -156,26 +105,72 @@
         </van-tabs>
       </div>
       <div class="main_bottom">
-        <van-submit-bar :price="30350" button-text="去结算" @submit="onSubmit" />
+        <van-submit-bar
+          :price="30350"
+          button-text="去结算"
+          @submit="onSubmit"
+        />
       </div>
     </div>
     <div class="foot"></div>
   </div>
 </template>
 <script>
+import { get } from "../utils/ajax";
+// import {loadproduct} from "../utils/cart"
 export default {
   data() {
     return {
       value: 1,
       active: 2,
       isNothing: false,
-      isCartShow: true,
+      // isCartShow: true,
       classA: ["header_left"],
       class2: ["login"],
-      class3: ["tolook"]
+      class3: ["tolook"],
+      list: [],
+      ischecked: false,
+      lists: []
     };
   },
+  // 购物车数据请求
+  async created() {
+    const res = await get("/api/v1/shop_carts");
+    console.log(res.data);
+    if (!res.data.length == 0) {
+    } else {
+      this.isNothing = !this.isNothing;
+    }
+    this.list = [];
+    res.data.forEach(item => {
+      this.list.push({
+        ...item,
+        ...{ checked: false }
+      });
+    });
+  },
+  mounted: function() {
+    this.loadproduct();
+  },
   methods: {
+    //猜你喜欢数据获取
+    loadproduct() {
+      const data = {
+        per: 10,
+        page: 2,
+        name: "",
+        product_category: ""
+      };
+      get("/api/v1/products", data).then(res => {
+        console.log(res.data.products);
+        this.lists = [];
+        res.data.products.forEach(p => {
+          this.lists.push({
+            ...p
+          });
+        });
+      });
+    },
     onClickLeft() {
       this.$router.push({
         path: "sort"
@@ -272,6 +267,7 @@ export default {
   margin-top: 0.3rem;
   background: #fff;
   padding: 0 0.4rem;
+  min-height: 22rem;
 }
 .guess h3 {
   height: 2rem;
@@ -287,9 +283,9 @@ export default {
   box-shadow: 3px 5px 5px #ccc;
   margin-bottom: 0.3rem;
 }
-.guess dl:nth-child(2n) {
+/* .guess dl:nth-child(2n) {
   float: right;
-}
+} */
 .guess dl img {
   width: 100%;
   max-height: 19rem;
@@ -308,6 +304,7 @@ export default {
   height: 2rem;
   line-height: 2rem;
   background: #fff;
+  display: block;
 }
 .foot {
   height: 50px;
