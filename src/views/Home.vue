@@ -15,16 +15,10 @@
           <img src="https://img02.hua.com/slider/18_youflower_m.jpg?830" alt />
         </van-swipe-item>
         <van-swipe-item>
-          <img
-            src="https://img02.hua.com/slider/20_valentine_banner_m.jpg"
-            alt
-          />
+          <img src="https://img02.hua.com/slider/20_valentine_banner_m.jpg" alt />
         </van-swipe-item>
         <van-swipe-item>
-          <img
-            src="https://img02.hua.com/slider/19_birthday_banner_m.jpg"
-            alt
-          />
+          <img src="https://img02.hua.com/slider/19_birthday_banner_m.jpg" alt />
         </van-swipe-item>
         <van-swipe-item>
           <img src="https://img02.hua.com/slider/17_mjz_m.jpg" alt />
@@ -42,8 +36,9 @@
       <!-- 选择 -->
       <h5 style="margin:0.5rem 1rem,font-size:1.15rem">| 一秒选择</h5>
       <div class="someone">
-        <div>
+        <div class="home_nav">
           <van-image
+            class="nav_pic"
             @click="Girlfriend"
             width="10rem"
             height="10rem"
@@ -51,8 +46,9 @@
           />
           <p>送女友</p>
         </div>
-        <div>
+        <div class="home_nav">
           <van-image
+            class="nav_pic"
             @click="Elder"
             width="10rem"
             height="10rem"
@@ -60,8 +56,9 @@
           />
           <p>送长辈</p>
         </div>
-        <div>
+        <div class="home_nav">
           <van-image
+            class="nav_pic"
             @click="Friend"
             width="10rem"
             height="10rem"
@@ -76,21 +73,18 @@
         <div class="hot" @click="HotSale">
           <h4>热卖榜</h4>
           <p>集万千宠爱</p>
-          <img
-            src="http://img1.imgtn.bdimg.com/it/u=1769307511,4173135256&fm=26&gp=0.jpg"
-            alt
-          />
+          <!-- <img src="http://img1.imgtn.bdimg.com/it/u=1769307511,4173135256&fm=26&gp=0.jpg" alt /> -->
         </div>
         <!-- 特价 -->
         <div class="special" @click="Special">
           <h4>特价专区</h4>
           <p>超值好货</p>
-          <img src="http://dpic.tiankong.com/7d/u9/QJ8445891788.jpg" alt />
+          <!-- <img src="http://dpic.tiankong.com/7d/u9/QJ8445891788.jpg" alt /> -->
         </div>
       </div>
-
+      <div class="bg" style="height:0.5rem;"></div>
       <!-- 送女友 -->
-      <div class="girlfriend">
+      <!-- <div class="give">
         <p>/~送女友~/</p>
         <van-card
           price="2.00"
@@ -104,12 +98,12 @@
             </van-button>
           </div>
         </van-card>
-      </div>
+        <van-button class="more" plain hairline type="info">查看更多</van-button>
+      </div>-->
 
       <!-- 送长辈 -->
-      <div class="eldership">
+      <!-- <div class="give">
         <p>/~送长辈~/</p>
-
         <van-card
           price="2.00"
           desc="描述信息"
@@ -122,16 +116,16 @@
             </van-button>
           </div>
         </van-card>
-      </div>
+        <van-button class="more" plain hairline type="info">查看更多</van-button>
+      </div>-->
 
-      <!-- 送朋友 -->
-      <div class="friend">
-        <p>/~送朋友~/</p>
-        <ul>
+      <!-- 鲜花推荐 -->
+
+      <div class="give">
+        <div class="recommend">鲜花推荐</div>
+        <ul class="list">
           <li v-for="item in product_list" :key="item._id">
-            <router-link
-              :to="{ name: 'product_detail', query: { id: item._id } }"
-            >
+            <router-link :to="{ name: 'product_detail', query: { id: item._id } }">
               <van-card
                 :price="item.price"
                 :desc="item.descriptions"
@@ -147,6 +141,7 @@
             </router-link>
           </li>
         </ul>
+        <van-button class="more" plain hairline type="info">查看更多</van-button>
       </div>
     </section>
     <footer></footer>
@@ -163,7 +158,7 @@ export default {
       descriptions: "",
       name: "",
       price: "",
-      product_list: [],
+      product_list: []
     };
   },
   name: "Home",
@@ -195,17 +190,16 @@ export default {
         page: 1,
         name: "",
         product_catgory: "",
-        price: "",
+        price: ""
       }).then(res => {
         // console.log(res);
         this.product_list = res.data.products;
       });
-    },
-    
+    }
   },
   mounted: function() {
     this.loadProduct();
-  },
+  }
 };
 </script>
 
@@ -250,7 +244,9 @@ header .van-nav-bar__title {
 
 section {
   flex: 1;
-  /* overflow-y:auto; */
+}
+.van-swipe {
+  transform: translateZ(0);
 }
 .van-swipe-item img {
   width: 100%;
@@ -265,45 +261,57 @@ h5 {
   justify-content: space-around;
   text-align: center;
 }
-section .van-image {
-  width: 5rem !important;
-  height: 5rem !important;
+.home_nav {
+  position: relative;
+  margin: 1rem 0;
 }
-.someone p {
-  margin-bottom: 0.3rem;
-  font-size: 0.8rem;
+.nav_pic {
+  width: 8rem !important;
+  height: 9rem !important;
+}
+.home_nav p {
+  position: absolute;
+  bottom: 0.6rem;
+  left: 2.5rem;
+  font-size: 1rem;
 }
 /* 热卖榜 */
 .select {
+  display: flex;
+  justify-content: space-evenly;
   width: 100%;
   height: 10rem;
 }
 .hot,
 .special {
-  width: 50%;
-  box-sizing: border-box;
+  width: 49%;
   position: relative;
-  border: 5px solid #ccc;
-  border-radius: 23%;
 }
-.hot img,
-.special img {
-  width: 100%;
-  height: 9rem;
+.hot {
+  border: 1px solid #ccc;
+  background: url(../assets/home_hot_bg.png) no-repeat;
+  background-size: 100%;
+}
+.special {
+  border: 1px solid #ccc;
+  border-left: 0;
+  background: url(../assets/m_home_special2.png) no-repeat;
+  background-size: 100%;
 }
 .hot h4,
 .special h4 {
   position: absolute;
-  top: 0.5rem;
+  top: 1rem;
   left: 1rem;
   color: #4b555f;
 }
 .hot p,
 .special p {
   position: absolute;
-  top: 2rem;
+  top: 3rem;
   left: 1rem;
   color: #6465668f;
+  font-size: 0.5rem;
 }
 .hot {
   float: left;
@@ -311,7 +319,23 @@ section .van-image {
 .special {
   float: right;
 }
-/* 送女友 */
+/* 鲜花推荐 */
+.recommend {
+  width: 100%;
+  height: 4rem;
+  text-align: center;
+  line-height: 4rem;
+  font-size: 1.5rem;
+  font-weight: 900;
+}
+.give {
+  margin: 1.5rem 0 3rem;
+  position: relative;
+}
+.give p {
+  text-align: center;
+  margin: 0.5rem 0;
+}
 .cart {
   font-size: 1.3rem;
 }
@@ -322,12 +346,12 @@ section .van-image {
   background: #fff;
   padding: 0 1rem;
 }
-.girlfriend p,
-.eldership p,
-.friend p {
-  text-align: center;
-  margin: 0.5rem 0;
+.list {
+  width: 100%;
+  height: 34.5rem;
+  overflow: hidden;
 }
+
 .van-card__desc {
   height: 3rem;
 }
@@ -341,5 +365,15 @@ section .van-image {
 footer {
   height: 50px;
   background: #fff;
+}
+.more {
+  width: 7rem;
+  height: 2rem;
+  line-height: 1.5rem;
+  border-color: #333;
+  color: #333;
+  position: absolute;
+  bottom: -3rem;
+  left: 9rem;
 }
 </style>

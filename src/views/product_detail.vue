@@ -68,13 +68,13 @@
             >你的轻柔像阵微风，让我从容不迫，想让你知道，我对你始终一往情深。</span
           >
         </div>-->
-        <div>
-          材料
-          <span>{{ descriptions }}</span>
+        <div class="left">
+          <p>材料</p>
+          <p>配送</p>
         </div>
-        <div>
-          配送
-          <span>全国</span>
+        <div class="right">
+          <p>{{ descriptions }}</p>
+          <p>全国</p>
         </div>
       </div>
       <div class="select">
@@ -390,18 +390,19 @@ export default {
   font-size: 1.14285714rem;
 }
 .spec {
+  display: flex;
   padding: 0 1rem;
   background: #fff;
   font-size: 0.85714286rem;
   line-height: 1rem;
 }
-.spec div {
-  padding: 0.8rem 0;
+.left {
+  display: flex;
+  flex-direction: column;
+  width: 3.5rem;
 }
-.spec span {
-  display: inline-block;
-  width: 80%;
-  margin-left: 1rem;
+.right {
+  flex: 1;
 }
 .selected {
   margin: 0;
@@ -493,7 +494,4 @@ export default {
   z-index: 999;
   color: #666;
 }
-/* .van-tab__text, .van-tabs{
-  margin-top:2rem;
-} */
 </style>
