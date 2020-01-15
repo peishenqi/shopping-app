@@ -9,10 +9,11 @@
         :area-list="areaList"
         show-set-default
         show-search-result
-        :search-result="searchResult"
         :area-columns-placeholder="['请选择', '请选择', '请选择']"
+        :search-result="searchResult"
         @save="onSave"
         @delete="onDelete"
+        @change-area="onChangeArea"
         @change-detail="onChangeDetail"
       />
     </section>
@@ -22,48 +23,57 @@
 <script>
 import areaList from "../../assets/area";
 import { post, get } from "../../utils/ajax";
+
 export default {
   data() {
     return {
       areaList,
       searchResult: [],
+      regions: ""
     };
   },
   methods: {
     onClickLeft() {
       this.$router.push({ path: "/site" });
     },
-
-    onSave() {
-      console.log();
-      post("/api/v1/addresses", {
-        receiver: this.receiver,
-        mobile: this.mobile,
-        regions: this.regions,
-        address: this.address,
-        idDefault: this.idDefault,
-      }).then(res => {
-        console.log(res);
-        this.searchResult.push(res.data);
-      });
+    onChangeArea(val) {
+      let val1 = val[0].name;
+      let val2 = val[1].name;
+      let val3 = val[2].name;
+      this.regions = val1 + "" + val2 + "" + val3;
+      // console.log(this.regions);
     },
-    onDelete() {
-      console.log("shanchu");
-    },
-
     onChangeDetail(val) {
       if (val) {
         this.searchResult = [
           {
-            name: "黄龙万科中心",
-            address: "杭州市西湖区",
-          },
+            name: val,
+            address: this.regions
+          }
         ];
       } else {
         this.searchResult = [];
       }
     },
-  },
+    onSave(content) {
+      console.log(content);
+      let data = {
+        receiver: content.name,
+        mobile: content.tel,
+        regions: content.province + "-" + content.city + "-" + content.county,
+        address: content.addressDetail,
+        idDefault: false
+      };
+      console.log(data);
+      post("/api/v1/addresses", data).then(res => {
+        console.log(res.data.info);
+        this.searchResult = res.data.info.regions;
+      });
+    },
+    onDelete() {
+      console.log("删除事件");
+    }
+  }
 };
 </script>
 

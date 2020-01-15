@@ -7,7 +7,7 @@ Vue.use(VueRouter)
 const routes = [{
     path: '/',
     name: 'Index',
-    redirect: '/home',
+    // redirect: '/home',
     component: () => import('@/Index.vue'),
     children: [
       // 首页
@@ -238,7 +238,6 @@ const routes = [{
     name: 'Address',
     component: () => import('../views/user/Address.vue')
   },
-
   // 详情页
   {
     path: '/product_detail',
@@ -251,6 +250,18 @@ const routes = [{
     path: '/comment',
     name: 'comment',
     component: () => import('../views/comment/comment.vue')
+  },
+  //购物车 订单填写
+  {
+    path: '/order',
+    name: 'Order',
+    component: () => import('../views/cart/Order.vue')
+  },
+  //购物车 支付方式
+  {
+    path: '/payment',
+    name: 'Payment',
+    component: () => import('../views/cart/Payment.vue')
   }
 
 ]

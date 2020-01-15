@@ -33,21 +33,13 @@
         </van-swipe-item>
         <van-swipe-item>
           <!-- <van-image :src="coverImg" /> -->
-          <van-image
-            src="https://img01.hua.com/uploadpic/newpic/201801162043054106.jpg"
-          />
+          <van-image src="https://img01.hua.com/uploadpic/newpic/201801162043054106.jpg" />
         </van-swipe-item>
         <van-swipe-item>
-          <!-- <van-image :src="coverImg" /> -->
-          <van-image
-            src="https://img01.hua.com/uploadpic/newpic/201909021919180631.jpg"
-          />
+          <van-image src="https://img01.hua.com/uploadpic/newpic/201909021919180631.jpg" />
         </van-swipe-item>
         <van-swipe-item>
-          <!-- <van-image :src="coverImg" /> -->
-          <van-image
-            src="https://img01.hua.com/uploadpic/newpic/201708091719050547.jpg"
-          />
+          <van-image src="https://img01.hua.com/uploadpic/newpic/201708091719050547.jpg" />
         </van-swipe-item>
       </van-swipe>
       <!-- 商品标题 -->
@@ -62,7 +54,7 @@
         <div class="price clean">
           <p class="newPri fl">
             ￥ {{ price }}
-            <span>￥ 315</span>
+            <span>￥ 9999</span>
           </p>
           <p class="fr">已售11.69万件</p>
         </div>
@@ -75,14 +67,14 @@
           <span class="language"
             >你的轻柔像阵微风，让我从容不迫，想让你知道，我对你始终一往情深。</span
           >
-        </div> -->
-        <div>
-          材料
-          <span>{{ descriptions }}</span>
+        </div>-->
+        <div class="left">
+          <p>材料</p>
+          <p>配送</p>
         </div>
-        <div>
-          配送
-          <span>全国</span>
+        <div class="right">
+          <p>{{ descriptions }}</p>
+          <p>全国</p>
         </div>
       </div>
       <div class="select">
@@ -90,11 +82,7 @@
           已选
           <span class="seleName0">一往情深</span>
         </van-cell>
-        <van-popup
-          v-model="selectedsShow"
-          position="bottom"
-          :style="{ height: '45%' }"
-        >
+        <van-popup v-model="selectedsShow" position="bottom" :style="{ height: '45%' }">
           <div class="selected_top clean">
             <img
               class="select_img fl"
@@ -118,27 +106,15 @@
             </van-row>
           </div>
           <van-goods-action>
-            <van-goods-action-button
-              type="warning"
-              text="加入购物车"
-              @click="onClickButton()"
-            />
-            <van-goods-action-button
-              type="danger"
-              text="立即购买"
-              @click="onPayButton"
-            />
+            <van-goods-action-button type="warning" text="加入购物车" @click="onClickButton()" />
+            <van-goods-action-button type="danger" text="立即购买" @click="onPayButton" />
           </van-goods-action>
         </van-popup>
         <van-cell is-link @click="Delivery">
           配送至
           <span class="seleaddress">{{ addrInfo }}</span>
         </van-cell>
-        <van-popup
-          v-model="showDelivery"
-          position="bottom"
-          :style="{ height: '45%' }"
-        >
+        <van-popup v-model="showDelivery" position="bottom" :style="{ height: '45%' }">
           <van-area
             @confirm="onConfirm"
             @cancel="oncCancel"
@@ -168,71 +144,37 @@
               src="https://img.yzcdn.cn/vant/cat.jpeg"
             />
             <span class="user_name fl">用户名</span>
-            <van-rate
-              class="com_star fr"
-              v-model="starValue"
-              :count="5"
-              size="1rem"
-              readonly
-            />
+            <van-rate class="com_star fr" v-model="starValue" :count="5" size="1rem" readonly />
           </div>
           <div class="com_text">
-            <p>
-              哇！太棒了主要是女朋友开心，年底争取喝喜酒，我俩很幸福，感谢！
-            </p>
+            <p>哇！太棒了主要是女朋友开心，年底争取喝喜酒，我俩很幸福，感谢！</p>
             <van-image
               width="100"
               height="120"
               src="//img.hua.com/reviewpic/app/2019/05/15/638bc4c8179349508252d27fcbf8f77d.jpeg"
             />
-            <van-cell
-              class="address"
-              title="江苏南京市江宁区"
-              icon="location-o"
-            />
+            <van-cell class="address" title="江苏南京市江宁区" icon="location-o" />
           </div>
         </div>
-        <van-button type="default" class="more" to="/comment"
-          >查看更多评论</van-button
-        >
+        <van-button type="default" class="more" to="/comment">查看更多评论</van-button>
       </div>
       <!-- 图文详情 -->
       <div class="details">
         <van-cell class="details_title" value="图文详情" />
-        <van-image
-          src="https://img02.hua.com/pc/images/xianhua_cardstyle.jpg"
-        />
-        <van-image
-          src="https://img01.hua.com/uploadpic/images/by_20180615112041289.jpg"
-        />
-        <van-image
-          src="https://img01.hua.com/uploadpic/images/by_20180615111319404.jpg"
-        />
+        <van-image src="https://img02.hua.com/pc/images/xianhua_cardstyle.jpg" />
+        <van-image src="https://img01.hua.com/uploadpic/images/by_20180615112041289.jpg" />
+        <van-image src="https://img01.hua.com/uploadpic/images/by_20180615111319404.jpg" />
       </div>
     </div>
     <!-- 底部 footer -->
     <van-goods-action>
       <van-goods-action-icon icon="chat-o" text="客服" @click="onClickIcon" />
-      <van-goods-action-icon icon="cart-o" text="购物车" @click="onClickIcon" />
-      <van-goods-action-button
-        type="warning"
-        text="加入购物车"
-        @click="onClickButton"
-      />
-      <van-goods-action-button
-        type="danger"
-        text="立即购买"
-        @click="onPayButton"
-      />
+      <van-goods-action-icon icon="cart-o" text="购物车" :to="{name: 'Cart'}" />
+      <van-goods-action-button type="warning" text="加入购物车" @click="onClickButton" />
+      <van-goods-action-button type="danger" text="立即购买" @click="onPayButton" />
     </van-goods-action>
     <!-- 回到顶部按钮 -->
-    <van-icon
-      class="totop"
-      v-show="totop"
-      name="upgrade"
-      size="2.5rem"
-      @click="toTop"
-    />
+    <van-icon class="totop" v-show="totop" name="upgrade" size="2.5rem" @click="toTop" />
   </div>
 </template>
 <script>
@@ -255,6 +197,7 @@ export default {
       addrInfo: "",
       totop: false,
       starValue: 3,
+      quantity: 1
     };
   },
   methods: {
@@ -287,15 +230,22 @@ export default {
       this.$router.push("comment");
     },
     // footer 点击事件
-    onClickIcon() {
-      alert("点击图标");
+    onClickIconCart() {
+      console.log("点击购物车图标");
+      this.$router.push("Cart");
     },
+    // console.log("点击客服图标");
+
+    onClickIconService() {
+      this.$router.push("Contact");
+    },
+
     onClickButton() {
       // alert("点击按钮");
       console.log(this.id);
       post("/api/v1/shop_carts", {
         product: this.id,
-        quantity: 1,
+        quantity: this.quantity
       }).then(res => {
         // console.log(res.data);
         Dialog({ message: res.data.message });
@@ -308,6 +258,7 @@ export default {
     //   页面滚动距离
     handleScroll() {
       let scollTop = window.scrollY;
+
       if (scollTop > 1000) {
         this.totop = true; // 回到顶部
       } else {
@@ -334,8 +285,9 @@ export default {
         this.descriptions = res.data.descriptions;
         this.price = res.data.price;
         this.id = res.data._id;
+        localStorage.setItem("num", this.quantity);
       });
-    },
+    }
   },
   mounted() {
     // 监听滚动距离
@@ -347,7 +299,7 @@ export default {
   },
   created() {
     console.log(this.$route.query.id);
-  },
+  }
 };
 </script>
 <style scoped>
@@ -447,18 +399,19 @@ export default {
   font-size: 1.14285714rem;
 }
 .spec {
+  display: flex;
   padding: 0 1rem;
   background: #fff;
   font-size: 0.85714286rem;
   line-height: 1rem;
 }
-.spec div {
-  padding: 0.8rem 0;
+.left {
+  display: flex;
+  flex-direction: column;
+  width: 3.5rem;
 }
-.spec span {
-  display: inline-block;
-  width: 80%;
-  margin-left: 1rem;
+.right {
+  flex: 1;
 }
 .selected {
   margin: 0;

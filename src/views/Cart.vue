@@ -48,11 +48,18 @@
       <div class="guess">
         <h3>猜你喜欢</h3>
         <dl v-for="p in lists" :key="p._id">
+           <router-link :to="{name:'product_detail',query:{id:p._id}}">
           <dt>
-            <img :src="p.coverImg" alt />
+            <img :src="p.coverImg | filterImg" />
           </dt>
           <dd>{{ p.descriptions }}</dd>
           <span>￥{{ p.price }}</span>
+<<<<<<< HEAD
+          <p></p>
+=======
+          <p ></p>
+        </router-link>
+>>>>>>> 7a5c1e610e31295605661cc06fa6786422f8fc98
         </dl>
       </div>
       <p class="main_b">已经到底了...</p>
@@ -60,19 +67,30 @@
 
     <div class="main" v-if="!isNothing">
       <div class="main_top">
-        <div v-for="item in list" :key="item.product._id">
-          <input type="checkbox" class="singleSel" />
-          <van-card
-            :price="item.product.price"
-            :title="item.product.descriptions"
-            :thumb="item.product.coverImg"
-          >
-            <div slot="tags">
-              数量
-              <van-stepper v-model="item.quantity" />
-              <!-- <span class="proPrice">{{item.product.price}}</span> -->
+        <div style="min-height:7.5rem;" v-for="item in list" :key="item._id">
+          <div class="left">
+            <input v-model="item.checked" type="checkbox" class="singleSel" />
+          </div>
+          <div class="right">
+            <van-card
+              :price="item.product.price"
+              :title="item.product.descriptions"
+              :thumb="item.product.coverImg"
+            >
+              <div slot="tags">
+                数量
+                <van-stepper
+                  v-model="item.quantity"
+                  @plus="addNum(item._id)"
+                  @minus="subNum(item._id)"
+                />
+                <!-- <span class="proPrice">{{item.product.price}}</span> -->
+              </div>
+            </van-card>
+            <div @click="del(item._id)" class="delete">
+              <van-icon name="delete" />
             </div>
-          </van-card>
+          </div>
         </div>
       </div>
 
@@ -80,25 +98,24 @@
         <van-tabs v-model="active">
           <van-tab title="购买该商品的还购买了">
             <div class="recommend_list">
-              <dl>
+              <dl v-for="v in like" :key="v._id">
+<<<<<<< HEAD
+                <router-link
+                  :to="{ name: 'product_detail', query: { id: v._id } }"
+                >
+                  <dt>
+                    <img :src="v.coverImg" />
+                  </dt>
+                  <dd>￥{{ v.price }}</dd>
+                </router-link>
+=======
+                <router-link :to="{name:'product_detail',query:{id:v._id}}">
                 <dt>
-                  <img
-                    src="https://img01.hua.com/uploadpic/newpic/9010966.jpg"
-                  />
+                  <img :src="v.coverImg | filterImg" />
                 </dt>
-                <dd>￥254</dd>
-              </dl>
-            </div>
-          </van-tab>
-          <van-tab title="热卖鲜花">
-            <div class="recommend_list">
-              <dl>
-                <dt>
-                  <img
-                    src="https://img01.hua.com/uploadpic/newpic/9010966.jpg"
-                  />
-                </dt>
-                <dd>￥254</dd>
+                <dd>￥{{ v.price }}</dd>
+                 </router-link>
+>>>>>>> 7a5c1e610e31295605661cc06fa6786422f8fc98
               </dl>
             </div>
           </van-tab>
@@ -106,37 +123,64 @@
       </div>
       <div class="main_bottom">
         <van-submit-bar
-          :price="30350"
-          button-text="去结算"
+          :price="total"
+          button-text="提交订单"
           @submit="onSubmit"
-        />
+        >
+          <van-checkbox v-model="checkedAll">全选</van-checkbox>
+        </van-submit-bar>
       </div>
     </div>
     <div class="foot"></div>
   </div>
 </template>
 <script>
-import { get } from "../utils/ajax";
-// import {loadproduct} from "../utils/cart"
+<<<<<<< HEAD
+import { get, del } from "../utils/ajax";
+import { Dialog } from "vant";
+=======
+import { get , del } from "../utils/ajax";
+import { Dialog } from 'vant';
+
+>>>>>>> 7a5c1e610e31295605661cc06fa6786422f8fc98
 export default {
   data() {
     return {
       value: 1,
       active: 2,
       isNothing: false,
-      // isCartShow: true,
       classA: ["header_left"],
       class2: ["login"],
       class3: ["tolook"],
       list: [],
       ischecked: false,
       lists: [],
+<<<<<<< HEAD
+      like: [],
+=======
+      like:[],
+>>>>>>> 7a5c1e610e31295605661cc06fa6786422f8fc98
     };
+  },
+  //过滤图片
+  filters: {
+    // 过滤图片路径 添加服务器前缀
+    filterImg(val) {
+      if (val) {
+        if (val.startsWith('http')) {
+          return val
+        } else {
+          return "http://192.168.16.18:3009" + val
+        }
+      }
+      // return defaultImg
+    }
   },
   // 购物车数据请求
   async created() {
     const res = await get("/api/v1/shop_carts");
-    // console.log(res.data);
+    console.log(res.data);
+    // console.log(res.data.length)
     if (!res.data.length == 0) {
     } else {
       this.isNothing = !this.isNothing;
@@ -145,12 +189,13 @@ export default {
     res.data.forEach(item => {
       this.list.push({
         ...item,
-        ...{ checked: false },
+        ...{ checked: false }
       });
     });
   },
   mounted: function() {
     this.loadproduct();
+    this.and();
   },
   methods: {
     //猜你喜欢数据获取
@@ -159,40 +204,130 @@ export default {
         per: 10,
         page: 2,
         name: "",
-        product_category: "",
+        product_category: ""
       };
       get("/api/v1/products", data).then(res => {
-        // console.log(res.data.products);
+        console.log(res.data.products);
         this.lists = [];
         res.data.products.forEach(p => {
           this.lists.push({
-            ...p,
+            ...p
           });
         });
       });
     },
+    //买了还买了
+    and() {
+      const data = {
+        per: 8,
+        page: 1,
+        name: "",
+        product_category: "",
+      };
+      get("/api/v1/products", data).then(res => {
+        console.log(res.data.products);
+        this.like = [];
+        res.data.products.forEach(v => {
+          this.like.push({
+            ...v,
+          });
+        });
+      });
+    },
+    //返回按钮
     onClickLeft() {
       this.$router.push({
-        path: "sort",
+        path: "sort"
       });
     },
+    //去逛逛
     toLook() {
       this.$router.push({
-        path: "/",
+        path: "/"
       });
     },
+    //登录同步购物车
     login() {
       this.$router.push({
         path: "user",
-        name: "User",
+        name: "User"
       });
     },
+    //提交订单
     onSubmit() {
-      console.log("结算按钮");
+      this.$router.push({
+        path: "order",
+      });
+    },
+    //删除商品
+    del(id) {
+      Dialog.confirm({
+        title: "确认删除",
+        message: "该操作无法撤回，请谨慎选择",
+      })
+        .then(() => {
+          console.log(id);
+          del("/api/v1/shop_carts/" + id).then(res => {
+            console.log(res);
+            window.location.reload();
+          });
+        })
+        .catch(() => {
+          // on cancel
+        });
+    },
+    //数量加按钮
+    addNum(id) {
+      console.log("数量加按钮");
+      console.log(id);
+      get("/api/v1/products/" + id).then(res => {
+        console.log(res);
+        let num = localStorage.getItem("num");
+        console.log(num);
+      });
+<<<<<<< HEAD
+      // console.log(this.$route)
+    },
+    //数量减按钮
+    subNum(id) {
+      console.log("数量减按钮");
+      // console.log("数量加按钮");
+      console.log(id);
+      get("/api/v1/products/" + id).then(res => {
+        console.log(res);
+      });
+      console.log(this.$route);
+=======
+>>>>>>> 7a5c1e610e31295605661cc06fa6786422f8fc98
+    },
+  },
+  computed: {
+    checkedAll: {
+      //单选
+      get() {
+        return (
+          this.list.filter(item => item.checked).length == this.list.length
+        );
+      },
+      //全选
+      set(val) {
+        // console.log(111);
+        this.list.forEach(item => (item.checked = val));
+      },
+    },
+    //总价
+    total() {
+      return this.list
+        .filter(item => item.checked)
+        .reduce(function(v, item) {
+          console.log(item);
+          return v + item.product.price * item.quantity * 100;
+        }, 0);
     },
   },
 };
 </script>
+
 <style scoped>
 .Cart .van-nav-bar__arrow {
   color: #ccc;
@@ -283,12 +418,12 @@ export default {
   box-shadow: 3px 5px 5px #ccc;
   margin-bottom: 0.3rem;
 }
-/* .guess dl:nth-child(2n) {
+.guess dl:nth-child(2n) {
   float: right;
-} */
+}
 .guess dl img {
   width: 100%;
-  max-height: 19rem;
+  height: 14rem;
 }
 .guess dl dd {
   margin-left: 0;
@@ -322,7 +457,7 @@ export default {
   display: inline;
 }
 .van-card__title {
-  height: 1.5rem;
+  height: 2rem;
   font-size: 1rem;
 }
 .van-stepper__input {
@@ -354,10 +489,38 @@ export default {
   text-align: center;
   margin-left: 0;
 }
+
 .van-submit-bar__text {
   text-align: left;
 }
 .van-submit-bar__price {
   color: #ff734c;
+}
+.van-tab__text,
+.van-tabs {
+  margin-top: 2rem;
+}
+.left {
+  width: 10%;
+  min-height: 7rem;
+  float: left;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.right {
+  width: 90%;
+  height: 100%;
+  float: right;
+  position: relative;
+}
+.van-submit-bar__text {
+  padding-left: 2rem;
+}
+.delete {
+  display: inline;
+  position: absolute;
+  right: 1rem;
+  bottom: 1rem;
 }
 </style>
