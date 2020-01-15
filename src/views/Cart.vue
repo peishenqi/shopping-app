@@ -3,35 +3,59 @@
     <!-- header -->
     <div>
       <!-- <van-nav-bar left-arrow @click-left="onClickLeft" :class="classA" title="购物车" /> -->
-      <van-nav-bar title="购物车" left-arrow @click-left="onClickLeft" :class="classA" />
+      <van-nav-bar
+        title="购物车"
+        left-arrow
+        @click-left="onClickLeft"
+        :class="classA"
+      />
     </div>
     <!-- main  -->
     <div class="main" v-if="isNothing">
       <div class="top">
         <span class="span">登录后将同步您的购物车商品</span>
-        <van-button type="primary" round size="small" :class="class2" @click="login">登录</van-button>
+        <van-button
+          type="primary"
+          round
+          size="small"
+          :class="class2"
+          @click="login"
+          >登录</van-button
+        >
       </div>
       <div class="emptycart">
         <div class="emptycart_t">
-          <img src="https://img02.hua.com/m/Shopping/m_shopping_empty_cart.png?v2" alt />
+          <img
+            src="https://img02.hua.com/m/Shopping/m_shopping_empty_cart.png?v2"
+            alt
+          />
         </div>
         <div class="emptycart_c">
           <p>购物车内暂时没有商品</p>
         </div>
 
         <div class="emptycart_b">
-          <van-button type="primary" round size="small" :class="class3" @click="toLook">去逛逛</van-button>
+          <van-button
+            type="primary"
+            round
+            size="small"
+            :class="class3"
+            @click="toLook"
+            >去逛逛</van-button
+          >
         </div>
       </div>
       <div class="guess">
         <h3>猜你喜欢</h3>
         <dl v-for="p in lists" :key="p._id">
+           <router-link :to="{name:'product_detail',query:{id:p._id}}">
           <dt>
-            <img :src="p.coverImg" alt />
+            <img :src="p.coverImg | filterImg" />
           </dt>
           <dd>{{ p.descriptions }}</dd>
           <span>￥{{ p.price }}</span>
-          <p  ></p>
+          <p ></p>
+        </router-link>
         </dl>
       </div>
       <p class="main_b">已经到底了...</p>
@@ -69,7 +93,7 @@
               <dl v-for="v in like" :key="v._id">
                 <router-link :to="{name:'product_detail',query:{id:v._id}}">
                 <dt>
-                  <img :src="v.coverImg" />
+                  <img :src="v.coverImg | filterImg" />
                 </dt>
                 <dd>￥{{ v.price }}</dd>
                  </router-link>
@@ -95,6 +119,7 @@
 <script>
 import { get , del } from "../utils/ajax";
 import { Dialog } from 'vant';
+
 export default {
   data() {
     return {
@@ -108,8 +133,21 @@ export default {
       ischecked: false,
       lists: [],
       like:[],
-
     };
+  },
+  //过滤图片
+  filters: {
+    // 过滤图片路径 添加服务器前缀
+    filterImg(val) {
+      if (val) {
+        if (val.startsWith('http')) {
+          return val
+        } else {
+          return "http://192.168.16.18:3009" + val
+        }
+      }
+      // return defaultImg
+    }
   },
   // 购物车数据请求
   async created() {
@@ -124,7 +162,7 @@ export default {
     res.data.forEach(item => {
       this.list.push({
         ...item,
-        ...{ checked: false },
+        ...{ checked: false }
       });
     });
   },
@@ -139,14 +177,14 @@ export default {
         per: 10,
         page: 2,
         name: "",
-        product_category: "",
+        product_category: ""
       };
       get("/api/v1/products", data).then(res => {
-        // console.log(res.data.products);
+        console.log(res.data.products);
         this.lists = [];
         res.data.products.forEach(p => {
           this.lists.push({
-            ...p,
+            ...p
           });
         });
       });
@@ -155,7 +193,7 @@ export default {
     and(){
        const data = {
         per: 8,
-        page: 4,
+        page: 1,
         name: "",
         product_category: ""
       };
@@ -171,19 +209,21 @@ export default {
     },
     //返回按钮
     onClickLeft() {
-      this.$router.back(-1);
+      this.$router.push({
+        path: "sort"
+      });
     },
     //去逛逛
     toLook() {
       this.$router.push({
-        path: "/",
+        path: "/"
       });
     },
     //登录同步购物车
     login() {
       this.$router.push({
         path: "user",
-        name: "User",
+        name: "User"
       });
     },
     //提交订单
@@ -207,9 +247,8 @@ export default {
       }).catch(() => {
         // on cancel
       });
-    }
+    },
   },
-
   computed: {
      checkedAll: {
       //单选
@@ -334,7 +373,7 @@ export default {
 }
 .guess dl img {
   width: 100%;
-  max-height: 19rem;
+  height: 14rem;
 }
 .guess dl dd {
   margin-left: 0;
