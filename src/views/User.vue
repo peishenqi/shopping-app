@@ -19,18 +19,16 @@
         />
         <div class="username fl">
           <div class="name">{{ nickName }}</div>
-          <div class="vip"><van-icon name="gem" /><span>VIP会员</span></div>
+          <div class="vip">
+            <van-icon name="gem" />
+            <span>VIP会员</span>
+          </div>
         </div>
       </div>
 
       <div class="user_main">
         <div class="order">
-          <van-cell
-            title="我的订单"
-            is-link
-            value="全部订单"
-            to="/all-orders"
-          />
+          <van-cell title="我的订单" is-link value="全部订单" to="/all-orders" />
           <van-grid :column-num="3" :border="false">
             <van-grid-item
               to="/obligation"
@@ -82,13 +80,13 @@ export default {
     return {
       notLogin: true,
       isLogin: false,
-      nickName: "",
+      nickName: ""
     };
   },
   methods: {
     onClickLeft() {
       this.$router.back();
-    },
+    }
   },
   created() {
     let token = localStorage.getItem("token");
@@ -97,15 +95,19 @@ export default {
       this.notLogin = false;
       let userData = {
         headers: {
-          authorization: "Bearer" + token,
-        },
+          authorization: "Bearer" + token
+        }
       };
       get("/api/v1/users/info", userData).then(res => {
-        // console.log(res)
+        console.log(res);
         this.nickName = res.data.userName;
       });
+      /* get("/api/v1/users/info").then(res => {
+        console.log(res);
+        this.nickName = res.data.userName;
+      }); */
     }
-  },
+  }
 };
 </script>
 <style scoped>

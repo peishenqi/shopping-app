@@ -48,12 +48,18 @@
       <div class="guess">
         <h3>猜你喜欢</h3>
         <dl v-for="p in lists" :key="p._id">
+           <router-link :to="{name:'product_detail',query:{id:p._id}}">
           <dt>
-            <img :src="p.coverImg" alt />
+            <img :src="p.coverImg | filterImg" />
           </dt>
           <dd>{{ p.descriptions }}</dd>
           <span>￥{{ p.price }}</span>
+<<<<<<< HEAD
           <p></p>
+=======
+          <p ></p>
+        </router-link>
+>>>>>>> 7a5c1e610e31295605661cc06fa6786422f8fc98
         </dl>
       </div>
       <p class="main_b">已经到底了...</p>
@@ -93,6 +99,7 @@
           <van-tab title="购买该商品的还购买了">
             <div class="recommend_list">
               <dl v-for="v in like" :key="v._id">
+<<<<<<< HEAD
                 <router-link
                   :to="{ name: 'product_detail', query: { id: v._id } }"
                 >
@@ -101,6 +108,14 @@
                   </dt>
                   <dd>￥{{ v.price }}</dd>
                 </router-link>
+=======
+                <router-link :to="{name:'product_detail',query:{id:v._id}}">
+                <dt>
+                  <img :src="v.coverImg | filterImg" />
+                </dt>
+                <dd>￥{{ v.price }}</dd>
+                 </router-link>
+>>>>>>> 7a5c1e610e31295605661cc06fa6786422f8fc98
               </dl>
             </div>
           </van-tab>
@@ -120,8 +135,14 @@
   </div>
 </template>
 <script>
+<<<<<<< HEAD
 import { get, del } from "../utils/ajax";
 import { Dialog } from "vant";
+=======
+import { get , del } from "../utils/ajax";
+import { Dialog } from 'vant';
+
+>>>>>>> 7a5c1e610e31295605661cc06fa6786422f8fc98
 export default {
   data() {
     return {
@@ -134,8 +155,26 @@ export default {
       list: [],
       ischecked: false,
       lists: [],
+<<<<<<< HEAD
       like: [],
+=======
+      like:[],
+>>>>>>> 7a5c1e610e31295605661cc06fa6786422f8fc98
     };
+  },
+  //过滤图片
+  filters: {
+    // 过滤图片路径 添加服务器前缀
+    filterImg(val) {
+      if (val) {
+        if (val.startsWith('http')) {
+          return val
+        } else {
+          return "http://192.168.16.18:3009" + val
+        }
+      }
+      // return defaultImg
+    }
   },
   // 购物车数据请求
   async created() {
@@ -150,7 +189,7 @@ export default {
     res.data.forEach(item => {
       this.list.push({
         ...item,
-        ...{ checked: false },
+        ...{ checked: false }
       });
     });
   },
@@ -165,14 +204,14 @@ export default {
         per: 10,
         page: 2,
         name: "",
-        product_category: "",
+        product_category: ""
       };
       get("/api/v1/products", data).then(res => {
-        // console.log(res.data.products);
+        console.log(res.data.products);
         this.lists = [];
         res.data.products.forEach(p => {
           this.lists.push({
-            ...p,
+            ...p
           });
         });
       });
@@ -181,7 +220,7 @@ export default {
     and() {
       const data = {
         per: 8,
-        page: 4,
+        page: 1,
         name: "",
         product_category: "",
       };
@@ -197,19 +236,21 @@ export default {
     },
     //返回按钮
     onClickLeft() {
-      this.$router.back(-1);
+      this.$router.push({
+        path: "sort"
+      });
     },
     //去逛逛
     toLook() {
       this.$router.push({
-        path: "/",
+        path: "/"
       });
     },
     //登录同步购物车
     login() {
       this.$router.push({
         path: "user",
-        name: "User",
+        name: "User"
       });
     },
     //提交订单
@@ -244,6 +285,7 @@ export default {
         let num = localStorage.getItem("num");
         console.log(num);
       });
+<<<<<<< HEAD
       // console.log(this.$route)
     },
     //数量减按钮
@@ -255,9 +297,10 @@ export default {
         console.log(res);
       });
       console.log(this.$route);
+=======
+>>>>>>> 7a5c1e610e31295605661cc06fa6786422f8fc98
     },
   },
-
   computed: {
     checkedAll: {
       //单选
@@ -380,7 +423,7 @@ export default {
 }
 .guess dl img {
   width: 100%;
-  max-height: 19rem;
+  height: 14rem;
 }
 .guess dl dd {
   margin-left: 0;

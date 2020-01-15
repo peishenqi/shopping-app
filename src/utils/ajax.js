@@ -1,7 +1,8 @@
 import axios from 'axios';
 
 const instance = axios.create({
-  baseURL: 'http://localhost:3009',
+  // baseURL: 'http://api.cat-shop.penkuoer.com',
+  baseURL: 'http://192.168.16.18:3009',
   timeout: 5000, // 超时时间
 });
 
