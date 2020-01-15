@@ -212,8 +212,16 @@
     </div>
     <!-- 底部 footer -->
     <van-goods-action>
-      <van-goods-action-icon icon="chat-o" text="客服" @click="onClickIcon" />
-      <van-goods-action-icon icon="cart-o" text="购物车" @click="onClickIcon" />
+      <van-goods-action-icon
+        icon="chat-o"
+        text="客服"
+        @click="onClickIconService"
+      />
+      <van-goods-action-icon
+        icon="cart-o"
+        text="购物车"
+        @click="onClickIconCart"
+      />
       <van-goods-action-button
         type="warning"
         text="加入购物车"
@@ -255,6 +263,7 @@ export default {
       addrInfo: "",
       totop: false,
       starValue: 3,
+      quantity: 1,
     };
   },
   methods: {
@@ -287,15 +296,22 @@ export default {
       this.$router.push("comment");
     },
     // footer 点击事件
-    onClickIcon() {
-      alert("点击图标");
+    onClickIconCart() {
+      console.log("点击购物车图标");
+      this.$router.push("Cart");
     },
+    // console.log("点击客服图标");
+
+    onClickIconService() {
+      this.$router.push("Contact");
+    },
+
     onClickButton() {
       // alert("点击按钮");
       console.log(this.id);
       post("/api/v1/shop_carts", {
         product: this.id,
-        quantity: 1,
+        quantity: this.quantity,
       }).then(res => {
         // console.log(res.data);
         Dialog({ message: res.data.message });
@@ -335,6 +351,7 @@ export default {
         this.descriptions = res.data.descriptions;
         this.price = res.data.price;
         this.id = res.data._id;
+        localStorage.setItem("num", this.quantity);
       });
     },
   },

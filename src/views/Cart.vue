@@ -3,24 +3,46 @@
     <!-- header -->
     <div>
       <!-- <van-nav-bar left-arrow @click-left="onClickLeft" :class="classA" title="购物车" /> -->
-      <van-nav-bar title="购物车" left-arrow @click-left="onClickLeft" :class="classA" />
+      <van-nav-bar
+        title="购物车"
+        left-arrow
+        @click-left="onClickLeft"
+        :class="classA"
+      />
     </div>
     <!-- main  -->
     <div class="main" v-if="isNothing">
       <div class="top">
         <span class="span">登录后将同步您的购物车商品</span>
-        <van-button type="primary" round size="small" :class="class2" @click="login">登录</van-button>
+        <van-button
+          type="primary"
+          round
+          size="small"
+          :class="class2"
+          @click="login"
+          >登录</van-button
+        >
       </div>
       <div class="emptycart">
         <div class="emptycart_t">
-          <img src="https://img02.hua.com/m/Shopping/m_shopping_empty_cart.png?v2" alt />
+          <img
+            src="https://img02.hua.com/m/Shopping/m_shopping_empty_cart.png?v2"
+            alt
+          />
         </div>
         <div class="emptycart_c">
           <p>购物车内暂时没有商品</p>
         </div>
 
         <div class="emptycart_b">
-          <van-button type="primary" round size="small" :class="class3" @click="toLook">去逛逛</van-button>
+          <van-button
+            type="primary"
+            round
+            size="small"
+            :class="class3"
+            @click="toLook"
+            >去逛逛</van-button
+          >
         </div>
       </div>
       <div class="guess">
@@ -31,7 +53,7 @@
           </dt>
           <dd>{{ p.descriptions }}</dd>
           <span>￥{{ p.price }}</span>
-          <p  ></p>
+          <p></p>
         </dl>
       </div>
       <p class="main_b">已经到底了...</p>
@@ -41,23 +63,27 @@
       <div class="main_top">
         <div style="min-height:7.5rem;" v-for="item in list" :key="item._id">
           <div class="left">
-          <input v-model="item.checked" type="checkbox" class="singleSel" />
+            <input v-model="item.checked" type="checkbox" class="singleSel" />
           </div>
           <div class="right">
-          <van-card
-            :price="item.product.price"
-            :title="item.product.descriptions"
-            :thumb="item.product.coverImg"
-          >
-            <div slot="tags">
-              数量
-              <van-stepper v-model="item.quantity" />
-              <!-- <span class="proPrice">{{item.product.price}}</span> -->
+            <van-card
+              :price="item.product.price"
+              :title="item.product.descriptions"
+              :thumb="item.product.coverImg"
+            >
+              <div slot="tags">
+                数量
+                <van-stepper
+                  v-model="item.quantity"
+                  @plus="addNum(item._id)"
+                  @minus="subNum(item._id)"
+                />
+                <!-- <span class="proPrice">{{item.product.price}}</span> -->
+              </div>
+            </van-card>
+            <div @click="del(item._id)" class="delete">
+              <van-icon name="delete" />
             </div>
-          </van-card>
-          <div @click="del(item._id)" class="delete">
-          <van-icon name="delete" />
-          </div>
           </div>
         </div>
       </div>
@@ -67,12 +93,14 @@
           <van-tab title="购买该商品的还购买了">
             <div class="recommend_list">
               <dl v-for="v in like" :key="v._id">
-                <router-link :to="{name:'product_detail',query:{id:v._id}}">
-                <dt>
-                  <img :src="v.coverImg" />
-                </dt>
-                <dd>￥{{ v.price }}</dd>
-                 </router-link>
+                <router-link
+                  :to="{ name: 'product_detail', query: { id: v._id } }"
+                >
+                  <dt>
+                    <img :src="v.coverImg" />
+                  </dt>
+                  <dd>￥{{ v.price }}</dd>
+                </router-link>
               </dl>
             </div>
           </van-tab>
@@ -86,15 +114,14 @@
         >
           <van-checkbox v-model="checkedAll">全选</van-checkbox>
         </van-submit-bar>
-
       </div>
     </div>
     <div class="foot"></div>
   </div>
 </template>
 <script>
-import { get , del } from "../utils/ajax";
-import { Dialog } from 'vant';
+import { get, del } from "../utils/ajax";
+import { Dialog } from "vant";
 export default {
   data() {
     return {
@@ -107,8 +134,7 @@ export default {
       list: [],
       ischecked: false,
       lists: [],
-      like:[],
-
+      like: [],
     };
   },
   // 购物车数据请求
@@ -130,7 +156,7 @@ export default {
   },
   mounted: function() {
     this.loadproduct();
-    this. and();
+    this.and();
   },
   methods: {
     //猜你喜欢数据获取
@@ -152,19 +178,19 @@ export default {
       });
     },
     //买了还买了
-    and(){
-       const data = {
+    and() {
+      const data = {
         per: 8,
         page: 4,
         name: "",
-        product_category: ""
+        product_category: "",
       };
       get("/api/v1/products", data).then(res => {
         console.log(res.data.products);
         this.like = [];
         res.data.products.forEach(v => {
           this.like.push({
-            ...v
+            ...v,
           });
         });
       });
@@ -189,29 +215,51 @@ export default {
     //提交订单
     onSubmit() {
       this.$router.push({
-        path:'order'
-      })
+        path: "order",
+      });
     },
     //删除商品
-    del(id){
+    del(id) {
       Dialog.confirm({
-        title:"确认删除",
-        message: '该操作无法撤回，请谨慎选择'
-      }).then(() => {
-        console.log(id)
-        del("/api/v1/shop_carts/" + id)
-        .then(res=>{
-          console.log(res)
-          window.location.reload()
+        title: "确认删除",
+        message: "该操作无法撤回，请谨慎选择",
+      })
+        .then(() => {
+          console.log(id);
+          del("/api/v1/shop_carts/" + id).then(res => {
+            console.log(res);
+            window.location.reload();
+          });
         })
-      }).catch(() => {
-        // on cancel
+        .catch(() => {
+          // on cancel
+        });
+    },
+    //数量加按钮
+    addNum(id) {
+      console.log("数量加按钮");
+      console.log(id);
+      get("/api/v1/products/" + id).then(res => {
+        console.log(res);
+        let num = localStorage.getItem("num");
+        console.log(num);
       });
-    }
+      // console.log(this.$route)
+    },
+    //数量减按钮
+    subNum(id) {
+      console.log("数量减按钮");
+      // console.log("数量加按钮");
+      console.log(id);
+      get("/api/v1/products/" + id).then(res => {
+        console.log(res);
+      });
+      console.log(this.$route);
+    },
   },
 
   computed: {
-     checkedAll: {
+    checkedAll: {
       //单选
       get() {
         return (
@@ -222,21 +270,19 @@ export default {
       set(val) {
         // console.log(111);
         this.list.forEach(item => (item.checked = val));
-      }
-  },
-  //总价
-  total() {
+      },
+    },
+    //总价
+    total() {
       return this.list
         .filter(item => item.checked)
         .reduce(function(v, item) {
-           console.log(item);
+          console.log(item);
           return v + item.product.price * item.quantity * 100;
         }, 0);
     },
-
-
-  }
-}
+  },
+};
 </script>
 
 <style scoped>
@@ -407,30 +453,31 @@ export default {
 .van-submit-bar__price {
   color: #ff734c;
 }
-.van-tab__text, .van-tabs{
+.van-tab__text,
+.van-tabs {
   margin-top: 2rem;
 }
-.left{
-  width:10%;
-  min-height:7rem;
-  float:left;
+.left {
+  width: 10%;
+  min-height: 7rem;
+  float: left;
   display: flex;
   justify-content: center;
   align-items: center;
 }
-.right{
-  width:90%;
-  height:100%;
-  float:right;
+.right {
+  width: 90%;
+  height: 100%;
+  float: right;
   position: relative;
 }
-.van-submit-bar__text{
-padding-left: 2rem;
+.van-submit-bar__text {
+  padding-left: 2rem;
 }
-.delete{
+.delete {
   display: inline;
-  position:absolute;
-  right:1rem;
+  position: absolute;
+  right: 1rem;
   bottom: 1rem;
 }
 </style>

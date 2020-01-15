@@ -140,7 +140,11 @@
               >
                 <div slot="footer">
                   <van-button size="mini">
-                    <van-icon class="cart" name="shopping-cart-o" />
+                    <van-icon
+                      class="cart"
+                      name="shopping-cart-o"
+                      @click="onClickIcon"
+                    />
                   </van-button>
                 </div>
               </van-card>
@@ -187,6 +191,10 @@ export default {
     Special() {
       this.$router.push({ path: "Special" });
     },
+    // //商品列表购物车图标
+    // onClickIcon() {
+    //   console.log("点击购物车图标");
+    // },
 
     loadProduct() {
       // console.log(12313);
@@ -199,6 +207,10 @@ export default {
       }).then(res => {
         // console.log(res);
         this.product_list = res.data.products;
+        for(let i=0;i<res.data.products.length;i++){
+console.log(res.data.products[i].coverImg)
+        }
+        
       });
     },
     // getDetail(id) {

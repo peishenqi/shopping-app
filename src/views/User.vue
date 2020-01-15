@@ -74,39 +74,39 @@
   </div>
 </template>
 <script>
-import { get, post } from "../utils/ajax"
-import axios from "axios"
+import { get, post } from "../utils/ajax";
+import axios from "axios";
 
 export default {
   data() {
     return {
       notLogin: true,
       isLogin: false,
-      nickName: ""
-    }
+      nickName: "",
+    };
   },
   methods: {
     onClickLeft() {
-      this.$router.back(-1)
-    }
+      this.$router.back();
+    },
   },
   created() {
-    let token = localStorage.getItem("token")
+    let token = localStorage.getItem("token");
     if (token) {
-      this.isLogin = true
-      this.notLogin = false
+      this.isLogin = true;
+      this.notLogin = false;
       let userData = {
         headers: {
-          authorization: "Bearer" + token
-        }
-      }
+          authorization: "Bearer" + token,
+        },
+      };
       get("/api/v1/users/info", userData).then(res => {
         // console.log(res)
-        this.nickName = res.data.userName
-      })
+        this.nickName = res.data.userName;
+      });
     }
-  }
-}
+  },
+};
 </script>
 <style scoped>
 .clean:after {
