@@ -82,7 +82,6 @@
           <!-- <img src="http://dpic.tiankong.com/7d/u9/QJ8445891788.jpg" alt /> -->
         </div>
       </div>
-      <div class="bg" style="height:0.5rem;"></div>
       <!-- 送女友 -->
       <!-- <div class="give">
         <p>/~送女友~/</p>
@@ -145,7 +144,7 @@
             </router-link>
           </li>
         </ul>
-        <van-button class="more" plain hairline type="info">查看更多</van-button>
+        <van-button class="more" plain hairline type="info" :to="{name:'Sort'}">查看更多</van-button>
       </div>
     </section>
     <footer></footer>
@@ -286,6 +285,7 @@ h5 {
   bottom: 0.6rem;
   left: 2.5rem;
   font-size: 1rem;
+  color: #fff;
 }
 /* 热卖榜 */
 .select {
