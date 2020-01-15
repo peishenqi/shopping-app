@@ -1,21 +1,47 @@
 <template>
   <div class="sort_right">
     <div class="sortBanner">
-      <img
-        src="https://img02.hua.com/m/category/Classification/flower.png?v"
-        alt="banner"
-      />
+      <img src="https://img02.hua.com/m/category/Classification/flower.png?v" alt="banner" />
     </div>
     <van-grid :column-num="3" :border="false">
-      <van-grid-item v-for="value in 24" :key="value">
-        <van-image
-          src="https://img02.hua.com/m/category/Classification/m_category_hot_Lover.png"
-        />
-        <p class="title">送恋人鲜花</p>
+      <van-grid-item v-for="(v, i) in porList" :key="i" :to="{ name: 'product_detail', query: { id: v._id } }">
+        <van-image :src="v.coverImg" />
+        <p class="title">{{v.name}}</p>
       </van-grid-item>
     </van-grid>
   </div>
 </template>
+<script>
+import { get } from "../../utils/ajax";
+export default {
+  data() {
+    return {
+      porList: []
+    };
+  },
+  created() {
+    let listData = {
+      per: 30,
+      page: 1,
+      name: "flower",
+      product_category: "5e1e6dc25d7de811dc09021d"
+    };
+    get("/api/v1/products", listData).then(res => {
+      console.log(res.data.products);
+      let list = res.data.products;
+
+      list.forEach(v => {
+        console.log(v.productCategory.name);
+
+        let categoryID = v.productCategory._id;
+        if (categoryID == listData.product_category) {
+          this.porList.push(v);
+        }
+      });
+    });
+  }
+};
+</script>
 <style scoped>
 .sortBanner {
   width: 100%;
