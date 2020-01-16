@@ -28,7 +28,7 @@
         <dl v-for="p in lists" :key="p._id">
           <router-link :to="{name:'product_detail',query:{id:p._id}}">
             <dt>
-              <img :src="p.coverImg | filterImg" />
+              <img :src="p.coverImg" />
             </dt>
             <dd>{{ p.descriptions }}</dd>
             <span>￥{{ p.price }}</span>
