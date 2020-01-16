@@ -23,9 +23,7 @@
         <van-switch-cell v-model="checked" title="WiFi下自动升级客户端" />
       </van-cell-group>
 
-      <van-button color="#7232dd" size="large" @click="loginOut"
-        >退出登录</van-button
-      >
+      <van-button color="#7232dd" size="large" @click="loginOut">退出登录</van-button>
     </section>
   </div>
 </template>
@@ -35,18 +33,19 @@ export default {
   data() {
     return {
       checked: true
-    }
+    };
   },
   methods: {
     onClickLeft() {
-      this.$router.push({ path: "/User" })
+      this.$router.push({ path: "/User" });
     },
     loginOut() {
-      localStorage.removeItem("token")
-      this.$router.push({ name: "Login" })
+      localStorage.removeItem("userID");
+      localStorage.removeItem("token");
+      this.$router.push({ name: "Login" });
     }
   }
-}
+};
 </script>
 
 <style scoped>

@@ -1,21 +1,24 @@
 <template>
   <div class="address">
     <header>
-      <van-nav-bar title="新增收货地址" left-arrow @click-left="onClickLeft" />
+      <van-nav-bar title="编辑收货地址" left-arrow @click-left="onClickLeft" />
     </header>
 
     <section>
       <van-address-edit
         :area-list="areaList"
         show-postal
+        show-delete
         show-set-default
         show-search-result
         :search-result="searchResult"
         :address-info="editAddress"
         :area-columns-placeholder="['请选择', '请选择', '请选择']"
         @save="onSave"
+        @delete="onDelete"
         @change-area="onChangeArea"
         @change-detail="onChangeDetail"
+        change-default
       />
     </section>
   </div>
@@ -67,10 +70,34 @@ export default {
         idDefault: false
       };
       console.log(data);
-      post("/api/v1/addresses", data).then(res => {
-        console.log(res);
+      let id = localStorage.getItem("userID");
+      post("/api/v1/addresses/" + id, data).then(res => {
+        console.log(res.data);
         this.$router.push("Site");
       });
+    },
+    onDelete() {
+      console.log(1111);
+
+      /* let token = localStorage.getItem("token");
+      let userData = {
+        headers: {
+          authorization: "Bearer " + token
+        }
+      };
+      post(
+        "/api/v1/addresses/" + localStorage.getItem("userID"),
+        userData
+      ).then(res => {
+        console.log(res.data);
+      }); */
+    }
+  },
+  created() {
+    let editAddress = localStorage.getItem("editAddress");
+    if (editAddress) {
+      editAddress = JSON.parse(editAddress);
+      this.editAddress = editAddress;
     }
   }
 };

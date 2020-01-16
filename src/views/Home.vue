@@ -342,7 +342,7 @@ footer {
   border-color: #333;
   color: #333;
   position: absolute;
-  bottom: -3rem;
+  bottom: -2rem;
   left: 9rem;
 }
 </style>
