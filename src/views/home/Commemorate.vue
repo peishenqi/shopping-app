@@ -30,7 +30,7 @@
     </van-sticky>
 
     <section>
-      <div @click="toDetail" v-for="(item, index) in list" :key="index">
+      <div @click="toDetail(item._id)" v-for="(item, index) in list" :key="index">
         <img :src="item.coverImg" alt />
         <p>{{item.name}}</p>
         <p class="desc">{{item.descriptions}}</p>
@@ -73,8 +73,13 @@ export default {
       // this.$router.push({ path: "/" });
       this.$router.back(-1);
     },
-    toDetail() {
-      this.$router.push("product_detail");
+    toDetail(id) {
+      console.log(id);
+
+      this.$router.push({
+        name: "product_detail",
+        query: { id: id }
+      });
     },
     loadProduct() {
       let listData = {

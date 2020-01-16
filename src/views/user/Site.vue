@@ -22,6 +22,7 @@
           default-tag-text="默认"
           @add="onAdd"
           @edit="onEdit"
+          @click-item="isSelect"
         />
       </div>
     </section>
@@ -41,7 +42,7 @@ export default {
   },
   methods: {
     onClickLeft() {
-      this.$router.back(-1);
+      this.$router.push("User");
     },
     address() {
       this.$router.push({ path: "/address" });
@@ -52,7 +53,7 @@ export default {
       if (token) {
         let addressData = {
           headers: {
-            authorization: "Bearer" + token
+            authorization: "Bearer " + token
           },
           per: 3,
           page: 1
@@ -86,21 +87,14 @@ export default {
     // 编辑地址
     onEdit(item, index) {
       console.log(item);
-      console.log(index);
-      /* let editAddressData = {
-        receiver: item.name,
-        mobile: item.tel,
-        regions: item.address,
-        address: item.address,
-        idDefault: item.isDefault
-      };
-      put("/api/v1/addresses/" + item.id, editAddressData)
-        .then(res => {
-          console.log(res);
-        })
-        .catch(err => {
-          console.error(err);
-        }); */
+      localStorage.setItem("editAddress", JSON.stringify(item));
+      this.$router.push("editAddress");
+    },
+    // 选中地址
+    isSelect(item, index) {
+      // console.log(item);
+      localStorage.setItem("selAddress", JSON.stringify(item));
+      // this.$router.push("Order");
     }
   },
   created() {

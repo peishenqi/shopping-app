@@ -238,6 +238,12 @@ const routes = [{
     name: 'Address',
     component: () => import('../views/user/Address.vue')
   },
+  //我的页面 编辑收货地址
+  {
+    path: '/editAddress',
+    name: 'editAddress',
+    component: () => import('../views/user/editAddress.vue')
+  },
   // 详情页
   {
     path: '/product_detail',

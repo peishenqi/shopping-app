@@ -95,17 +95,14 @@ export default {
       this.notLogin = false;
       let userData = {
         headers: {
-          authorization: "Bearer" + token
+          authorization: "Bearer " + token
         }
       };
       get("/api/v1/users/info", userData).then(res => {
         console.log(res);
         this.nickName = res.data.userName;
+        localStorage.setItem("userID", res.data._id);
       });
-      /* get("/api/v1/users/info").then(res => {
-        console.log(res);
-        this.nickName = res.data.userName;
-      }); */
     }
   }
 };

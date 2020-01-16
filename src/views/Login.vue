@@ -34,9 +34,7 @@
         <p>密码</p>
         <input type="text" placeholder="请设置密码" v-model="autoCode" />
       </div>
-      <van-button type="default" round :class="class1" @click="regBtn"
-        >注册</van-button
-      >
+      <van-button type="default" round :class="class1" @click="regBtn">注册</van-button>
 
       <p class="phone" @click="isChange">登录</p>
     </div>
@@ -49,24 +47,17 @@
       </div>
       <div>
         <p>密码</p>
-        <input
-          type="password"
-          placeholder="请输入密码"
-          autocomplete="off"
-          v-model="password"
-        />
+        <input type="password" placeholder="请输入密码" autocomplete="off" v-model="password" />
       </div>
-      <van-button @click="loginHandl" type="default" round :class="class1"
-        >登录</van-button
-      >
+      <van-button @click="loginHandl" type="default" round :class="class1">登录</van-button>
 
       <p class="phone" @click="isChange">注册</p>
     </div>
   </div>
 </template>
 <script>
-import { get, post } from "../utils/ajax"
-import axios from "axios"
+import { get, post } from "../utils/ajax";
+import axios from "axios";
 
 export default {
   data() {
@@ -81,22 +72,22 @@ export default {
       ischange: "",
       userName: "",
       password: ""
-    }
+    };
   },
   methods: {
     header_left() {
       this.$router.push({
         path: "user"
-      })
+      });
     },
     showPopup() {
-      this.navShow = !this.navShow
+      this.navShow = !this.navShow;
     },
 
     isChange() {
       // console.log("这是手机号切换");
-      this.islogin = !this.islogin
-      this.isreg = !this.isreg
+      this.islogin = !this.islogin;
+      this.isreg = !this.isreg;
     },
     regBtn() {
       // console.log(this.phone, this.autoCode);
@@ -107,41 +98,41 @@ export default {
         avatar: "https://img02.hua.com/m/member/center/myinfo_pendingpay.png"
       }).then(res => {
         if (res.data.code == "success") {
-          this.$toast.success({ message: "注册成功" })
-          this.phone = ""
-          this.autoCode = ""
+          this.$toast.success({ message: "注册成功" });
+          this.phone = "";
+          this.autoCode = "";
           var timer = setInterval(() => {
-            this.isreg = false
-            this.islogin = true
-            clearInterval(timer)
-          }, 3000)
+            this.isreg = false;
+            this.islogin = true;
+            clearInterval(timer);
+          }, 3000);
         } else {
-          this.$toast.success({ message: res.data.message })
+          this.$toast.success({ message: res.data.message });
         }
-      })
+      });
     },
     //登录请求
     loginHandl() {
       let data = {
         userName: this.userName,
         password: this.password
-      }
+      };
       post("/api/v1/auth/login", data).then(res => {
         // console.log(res);
         if (res.data.code == "success") {
-          let token = res.data.token
-          localStorage.setItem("token", token)
-          this.$toast.success({ message: "登录成功" })
+          let token = res.data.token;
+          localStorage.setItem("token", token);
+          this.$toast.success({ message: "登录成功" });
           this.$router.push({
             path: "/user"
-          })
+          });
         } else {
-          this.$toast.fail({ message: "用户名或密码错误" })
+          this.$toast.fail({ message: "用户名或密码错误" });
         }
-      })
+      });
     }
   }
-}
+};
 </script>
 <style scoped>
 .header {

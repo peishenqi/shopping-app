@@ -168,7 +168,7 @@
     </div>
     <!-- 底部 footer -->
     <van-goods-action>
-      <van-goods-action-icon icon="chat-o" text="客服" @click="onClickIcon" />
+      <van-goods-action-icon icon="chat-o" text="客服" @click="onClickIconService" />
       <van-goods-action-icon icon="cart-o" text="购物车" :to="{name: 'Cart'}" />
       <van-goods-action-button type="warning" text="加入购物车" @click="onClickButton" />
       <van-goods-action-button type="danger" text="立即购买" @click="onPayButton" />
@@ -229,13 +229,8 @@ export default {
     toComment() {
       this.$router.push("comment");
     },
-    // footer 点击事件
-    onClickIconCart() {
-      console.log("点击购物车图标");
-      this.$router.push("Cart");
-    },
-    // console.log("点击客服图标");
 
+    // console.log("点击客服图标");
     onClickIconService() {
       this.$router.push("Contact");
     },
