@@ -94,7 +94,7 @@
   </div>
 </template>
 <script>
-import { get, del } from "../utils/ajax";
+import { get, del, post } from "../utils/ajax";
 import { Dialog } from "vant";
 export default {
   data() {
@@ -119,7 +119,11 @@ export default {
         if (val.startsWith("http")) {
           return val;
         } else {
+<<<<<<< HEAD
           return "https://192.168.16.18:3009" + val
+=======
+          return "http://192.168.16.18:3009" + val;
+>>>>>>> mdw
         }
       }
       // return defaultImg
@@ -156,7 +160,7 @@ export default {
         product_category: ""
       };
       get("/api/v1/products", data).then(res => {
-        console.log(res.data.products);
+        // console.log(res.data.products);
         this.lists = [];
         res.data.products.forEach(p => {
           this.lists.push({
@@ -165,6 +169,7 @@ export default {
         });
       });
     },
+
     //买了还买了
     and() {
       const data = {
@@ -174,7 +179,7 @@ export default {
         product_category: ""
       };
       get("/api/v1/products", data).then(res => {
-        console.log(res.data.products);
+        // console.log(res.data.products);
         this.like = [];
         res.data.products.forEach(v => {
           this.like.push({
@@ -207,6 +212,57 @@ export default {
       this.$router.push({
         path: "order"
       });
+      //过滤商品是否被选中
+      let order = this.list.filter((currentValue, index, arr) => {
+        // console.log(currentValue.checked == true);
+        return (this.orders = currentValue.checked == true);
+      });
+
+      // console.log(order);
+      if (this.total > 0) {
+        console.log(order);
+      }
+
+      //判断商品是否被选中
+      this.list.forEach(v => {
+        // this.list.filter(item => item.checked).length
+        // console.log(this.total);
+        if (this.total > 0) {
+          if (v.checked) {
+            let data = {
+              receiver: "张三",
+              regions: "河南",
+              address: "郑州",
+              orderDetails: [
+                {
+                  quantity: v.quantity,
+                  product: v._id,
+                  price: v.product.price
+                }
+              ]
+            };
+            post("/api/v1/orders", data).then(res => {
+              // console.log(data.orderDetails[0].product);
+              // console.log(res.data);
+
+              let id = data.orderDetails[0].product;
+              console.log(id);
+
+              this.$router.push({
+                path: "order"
+              });
+              console.log(res);
+              del("/api/v1/shop_carts/" + id).then(res => {
+                console.log(res);
+                window.location.reload();
+              });
+            });
+          }
+          return;
+        } else {
+          Dialog({ message: "请选择要购买商品~~" });
+        }
+      });
     },
     //删除商品
     del(id) {
@@ -236,17 +292,16 @@ export default {
       });
       // console.log(this.$route)
     },
-    //数量减按钮
     subNum(id) {
-      console.log("数量减按钮");
-      // console.log("数量加按钮");
-      console.log(id);
       get("/api/v1/products/" + id).then(res => {
         console.log(res);
+        let num = localStorage.getItem("num");
+        console.log(num);
       });
       console.log(this.$route);
     }
   },
+
   computed: {
     checkedAll: {
       //单选

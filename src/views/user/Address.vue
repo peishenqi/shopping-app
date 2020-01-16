@@ -7,7 +7,10 @@
     <section>
       <van-address-edit
         :area-list="areaList"
+<<<<<<< HEAD
         show-postal
+=======
+>>>>>>> mdw
         show-set-default
         show-search-result
         :search-result="searchResult"
