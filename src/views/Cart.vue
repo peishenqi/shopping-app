@@ -3,63 +3,37 @@
     <!-- header -->
     <div>
       <!-- <van-nav-bar left-arrow @click-left="onClickLeft" :class="classA" title="购物车" /> -->
-      <van-nav-bar
-        title="购物车"
-        left-arrow
-        @click-left="onClickLeft"
-        :class="classA"
-      />
+      <van-nav-bar title="购物车" left-arrow @click-left="onClickLeft" :class="classA" />
     </div>
     <!-- main  -->
     <div class="main" v-if="isNothing">
       <div class="top">
         <span class="span">登录后将同步您的购物车商品</span>
-        <van-button
-          type="primary"
-          round
-          size="small"
-          :class="class2"
-          @click="login"
-          >登录</van-button
-        >
+        <van-button type="primary" round size="small" :class="class2" @click="login">登录</van-button>
       </div>
       <div class="emptycart">
         <div class="emptycart_t">
-          <img
-            src="https://img02.hua.com/m/Shopping/m_shopping_empty_cart.png?v2"
-            alt
-          />
+          <img src="https://img02.hua.com/m/Shopping/m_shopping_empty_cart.png?v2" alt />
         </div>
         <div class="emptycart_c">
           <p>购物车内暂时没有商品</p>
         </div>
 
         <div class="emptycart_b">
-          <van-button
-            type="primary"
-            round
-            size="small"
-            :class="class3"
-            @click="toLook"
-            >去逛逛</van-button
-          >
+          <van-button type="primary" round size="small" :class="class3" @click="toLook">去逛逛</van-button>
         </div>
       </div>
       <div class="guess">
         <h3>猜你喜欢</h3>
         <dl v-for="p in lists" :key="p._id">
-           <router-link :to="{name:'product_detail',query:{id:p._id}}">
-          <dt>
-            <img :src="p.coverImg | filterImg" />
-          </dt>
-          <dd>{{ p.descriptions }}</dd>
-          <span>￥{{ p.price }}</span>
-<<<<<<< HEAD
-          <p></p>
-=======
-          <p ></p>
-        </router-link>
->>>>>>> 7a5c1e610e31295605661cc06fa6786422f8fc98
+          <router-link :to="{name:'product_detail',query:{id:p._id}}">
+            <dt>
+              <img :src="p.coverImg | filterImg" />
+            </dt>
+            <dd>{{ p.descriptions }}</dd>
+            <span>￥{{ p.price }}</span>
+            <p></p>
+          </router-link>
         </dl>
       </div>
       <p class="main_b">已经到底了...</p>
@@ -99,34 +73,19 @@
           <van-tab title="购买该商品的还购买了">
             <div class="recommend_list">
               <dl v-for="v in like" :key="v._id">
-<<<<<<< HEAD
-                <router-link
-                  :to="{ name: 'product_detail', query: { id: v._id } }"
-                >
+                <router-link :to="{ name: 'product_detail', query: { id: v._id } }">
                   <dt>
                     <img :src="v.coverImg" />
                   </dt>
                   <dd>￥{{ v.price }}</dd>
                 </router-link>
-=======
-                <router-link :to="{name:'product_detail',query:{id:v._id}}">
-                <dt>
-                  <img :src="v.coverImg | filterImg" />
-                </dt>
-                <dd>￥{{ v.price }}</dd>
-                 </router-link>
->>>>>>> 7a5c1e610e31295605661cc06fa6786422f8fc98
               </dl>
             </div>
           </van-tab>
         </van-tabs>
       </div>
       <div class="main_bottom">
-        <van-submit-bar
-          :price="total"
-          button-text="提交订单"
-          @submit="onSubmit"
-        >
+        <van-submit-bar :price="total" button-text="提交订单" @submit="onSubmit">
           <van-checkbox v-model="checkedAll">全选</van-checkbox>
         </van-submit-bar>
       </div>
@@ -135,14 +94,8 @@
   </div>
 </template>
 <script>
-<<<<<<< HEAD
 import { get, del } from "../utils/ajax";
 import { Dialog } from "vant";
-=======
-import { get , del } from "../utils/ajax";
-import { Dialog } from 'vant';
-
->>>>>>> 7a5c1e610e31295605661cc06fa6786422f8fc98
 export default {
   data() {
     return {
@@ -155,27 +108,23 @@ export default {
       list: [],
       ischecked: false,
       lists: [],
-<<<<<<< HEAD
-      like: [],
-=======
-      like:[],
->>>>>>> 7a5c1e610e31295605661cc06fa6786422f8fc98
+      like: []
     };
   },
   //过滤图片
-  filters: {
+  /* filters: {
     // 过滤图片路径 添加服务器前缀
     filterImg(val) {
       if (val) {
-        if (val.startsWith('http')) {
-          return val
+        if (val.startsWith("http")) {
+          return val;
         } else {
-          return "http://192.168.16.18:3009" + val
+          return "http://192.168.16.18:3009" + val;
         }
       }
       // return defaultImg
     }
-  },
+  }, */
   // 购物车数据请求
   async created() {
     const res = await get("/api/v1/shop_carts");
@@ -222,14 +171,14 @@ export default {
         per: 8,
         page: 1,
         name: "",
-        product_category: "",
+        product_category: ""
       };
       get("/api/v1/products", data).then(res => {
         console.log(res.data.products);
         this.like = [];
         res.data.products.forEach(v => {
           this.like.push({
-            ...v,
+            ...v
           });
         });
       });
@@ -256,14 +205,14 @@ export default {
     //提交订单
     onSubmit() {
       this.$router.push({
-        path: "order",
+        path: "order"
       });
     },
     //删除商品
     del(id) {
       Dialog.confirm({
         title: "确认删除",
-        message: "该操作无法撤回，请谨慎选择",
+        message: "该操作无法撤回，请谨慎选择"
       })
         .then(() => {
           console.log(id);
@@ -285,7 +234,6 @@ export default {
         let num = localStorage.getItem("num");
         console.log(num);
       });
-<<<<<<< HEAD
       // console.log(this.$route)
     },
     //数量减按钮
@@ -297,9 +245,7 @@ export default {
         console.log(res);
       });
       console.log(this.$route);
-=======
->>>>>>> 7a5c1e610e31295605661cc06fa6786422f8fc98
-    },
+    }
   },
   computed: {
     checkedAll: {
@@ -313,7 +259,7 @@ export default {
       set(val) {
         // console.log(111);
         this.list.forEach(item => (item.checked = val));
-      },
+      }
     },
     //总价
     total() {
@@ -323,8 +269,8 @@ export default {
           console.log(item);
           return v + item.product.price * item.quantity * 100;
         }, 0);
-    },
-  },
+    }
+  }
 };
 </script>
 

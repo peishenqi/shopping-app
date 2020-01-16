@@ -82,41 +82,6 @@
           <!-- <img src="http://dpic.tiankong.com/7d/u9/QJ8445891788.jpg" alt /> -->
         </div>
       </div>
-      <!-- 送女友 -->
-      <!-- <div class="give">
-        <p>/~送女友~/</p>
-        <van-card
-          price="2.00"
-          desc="描述信息"
-          title="商品标题"
-          thumb="https://img.yzcdn.cn/vant/t-thirt.jpg"
-        >
-          <div slot="footer">
-            <van-button size="mini">
-              <van-icon class="cart" name="shopping-cart-o" />
-            </van-button>
-          </div>
-        </van-card>
-        <van-button class="more" plain hairline type="info">查看更多</van-button>
-      </div>-->
-
-      <!-- 送长辈 -->
-      <!-- <div class="give">
-        <p>/~送长辈~/</p>
-        <van-card
-          price="2.00"
-          desc="描述信息"
-          title="商品标题"
-          thumb="https://img.yzcdn.cn/vant/t-thirt.jpg"
-        >
-          <div slot="footer">
-            <van-button size="mini">
-              <van-icon class="cart" name="shopping-cart-o" />
-            </van-button>
-          </div>
-        </van-card>
-        <van-button class="more" plain hairline type="info">查看更多</van-button>
-      </div>-->
 
       <!-- 鲜花推荐 -->
 
@@ -133,11 +98,7 @@
               >
                 <div slot="footer">
                   <van-button size="mini">
-                    <van-icon
-                      class="cart"
-                      name="shopping-cart-o"
-                      @click="onClickIcon"
-                    />
+                    <van-icon class="cart" name="shopping-cart-o" />
                   </van-button>
                 </div>
               </van-card>
@@ -185,10 +146,6 @@ export default {
     Special() {
       this.$router.push({ path: "Special" });
     },
-    // //商品列表购物车图标
-    // onClickIcon() {
-    //   console.log("点击购物车图标");
-    // },
 
     loadProduct() {
       // console.log(12313);
@@ -201,10 +158,9 @@ export default {
       }).then(res => {
         // console.log(res);
         this.product_list = res.data.products;
-        for(let i=0;i<res.data.products.length;i++){
-console.log(res.data.products[i].coverImg)
-        }
-        
+        /* for (let i = 0; i < res.data.products.length; i++) {
+          console.log(res.data.products[i].coverImg);
+        } */
       });
     }
   },
@@ -224,6 +180,7 @@ console.log(res.data.products[i].coverImg)
   flex-direction: column;
   height: 100%;
   width: 100%;
+  overflow-x: hidden;
 }
 header {
   /* background: black; */
@@ -277,8 +234,8 @@ h5 {
   margin: 1rem 0;
 }
 .nav_pic {
-  width: 8rem !important;
-  height: 9rem !important;
+  width: 7.5rem !important;
+  height: 8.5rem !important;
 }
 .home_nav p {
   position: absolute;
