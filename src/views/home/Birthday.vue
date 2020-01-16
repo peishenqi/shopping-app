@@ -1,20 +1,22 @@
 <template>
   <div class="brithday">
+    <van-sticky>
     <header>
       <van-icon @click="onClickLeft" class="icon-left" name="arrow-left" />
       <van-nav-bar title="生日礼物" />
       <van-icon @click="showPopup" class="icon-right" name="wap-nav" />
+                <!-- 右上角导航 -->
       <van-popup v-model="show" position="top" :style="{ height: '25%' }">
-        <p>
+        <p @click="home">
           <van-icon name="wap-home" />首页
         </p>
-        <p>
+        <p @click="hot">
           <van-icon name="star" />分类
         </p>
-        <p>
+        <p @click="cart">
           <van-icon name="shopping-cart" />购物车
         </p>
-        <p>
+        <p @click="user">
           <van-icon name="manager" />我的
         </p>
       </van-popup>
@@ -26,6 +28,7 @@
         </van-grid>
       </div>
     </header>
+    </van-sticky>
 
     <section>
       <div @click="toDetail" v-for="(item, index) in list" :key="index">
@@ -44,11 +47,25 @@ export default {
   data() {
     return {
       show: false,
+       navShow: false,
       list: []
     };
   },
 
   methods: {
+    home(){
+      this.$router.push({ path: "/" });
+    },
+    hot(){
+      this.$router.push({ path: "/hot" });
+
+    },
+    cart(){
+      this.$router.push({ path: "/cart" });
+    },
+    user(){
+      this.$router.push({ path: "/user" });
+    },
     showPopup() {
       this.show = true;
     },
@@ -83,6 +100,14 @@ export default {
   margin: 0;
   padding: 0;
 }
+.clean:after {
+  content: ".";
+  display: block;
+  clear: both;
+  height: 0;
+  overflow: hidden;
+  visibility: hidden;
+}
 .brithday {
   display: flex;
   flex-direction: column;
@@ -92,7 +117,7 @@ export default {
 header {
   position: relative;
 }
-header p {
+ header p {
   font-size: 0.8rem;
   text-align: left;
   line-height: 2rem;
@@ -104,7 +129,7 @@ header .van-icon {
   top: 1.4rem;
   font-size: 1.6rem;
   z-index: 10;
-}
+} 
 header .van-nav-bar {
   height: 4rem;
   line-height: 4rem;
@@ -150,17 +175,17 @@ section div {
   font-size: 0.8rem;
   float: left;
   margin-left: 0.6rem;
-  max-height: 18.5rem;
+  /* max-height: 30.5rem; */
   margin-bottom: 0.3rem;
 }
-section div:nth-child(2n) {
+/* section div:nth-child(2n) {
   float: right;
   margin-right: 0.6rem;
   margin-left: 0;
-}
+} */
 section img {
   width: 100%;
-  height: 100%;
+  height: 90%;
 }
 section div p {
   padding: 0 1rem;
@@ -175,4 +200,26 @@ section div p {
 .price {
   color: #ff734c;
 }
+
+/* .nav {
+  position: absolute;
+  width: 7rem;
+  right: 1rem;
+  top: 3rem;
+  z-index: 999;
+  background: #fff;
+  border-radius: 5px;
+  border: 1px solid #fff;
+  box-shadow: 0px 0px 5px;
+}
+.nav_link {
+  display: block;
+  padding: 0 1rem;
+  height: 3rem;
+  line-height: 3rem;
+  color: #666;
+}
+.nav_link span {
+  margin-left: 0.5rem;
+} */
 </style>

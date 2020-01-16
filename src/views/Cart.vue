@@ -143,7 +143,7 @@ export default {
         if (val.startsWith('http')) {
           return val
         } else {
-          return "http://192.168.16.18:3009" + val
+          return "https://192.168.16.18:3009" + val
         }
       }
       // return defaultImg
@@ -175,7 +175,7 @@ export default {
     loadproduct() {
       const data = {
         per: 10,
-        page: 2,
+        page: 3,
         name: "",
         product_category: ""
       };
