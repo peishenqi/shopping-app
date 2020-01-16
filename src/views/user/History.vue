@@ -10,12 +10,12 @@
         </header>
         </van-sticky>
         <section>
-            <div class="no">
+            <div class="no" v-show="isshow">
                 <img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1578656831451&di=68dfa6e40aaedaf512bc301f5f0f3617&imgtype=0&src=http%3A%2F%2Fres.smzdm.com%2Fzhuanti%2Fdouble12-2019%2Fimg%2Fblank-state.png" alt="">
                 <p>近期暂无浏览记录~</p>
             </div>
 
-            <div class="record">
+            <div class="record" v-show="!isshow">
                 <div>
                     <img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1578656831451&di=68dfa6e40aaedaf512bc301f5f0f3617&imgtype=0&src=http%3A%2F%2Fres.smzdm.com%2Fzhuanti%2Fdouble12-2019%2Fimg%2Fblank-state.png" alt="">
                     <p>开始的dvk kdokdsvkc基本实际上</p>
@@ -36,6 +36,11 @@
 
 <script>
 export default {
+    data() {
+        return {
+            isshow:true,
+        }
+    },
     methods: {
         onClickLeft() {
             // console.log(111)

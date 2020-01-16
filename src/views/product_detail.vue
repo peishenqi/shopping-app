@@ -503,4 +503,11 @@ export default {
   z-index: 999;
   color: #666;
 }
+.van-image{
+  width:100%;
+  height: 100%;
+}
+/* .van-tab__text, .van-tabs{
+  margin-top:2rem;
+} */
 </style>

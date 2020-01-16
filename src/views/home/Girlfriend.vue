@@ -1,20 +1,21 @@
 <template>
   <div class="Girlfriend">
+    <van-sticky>
     <header>
       <van-icon @click="onClickLeft" class="icon-left" name="arrow-left" />
       <van-nav-bar title="送女友" />
       <van-icon @click="showPopup" class="icon-right" name="wap-nav" />
       <van-popup v-model="show" position="top" :style="{ height: '25%' }">
-        <p>
+        <p @click="home">
           <van-icon name="wap-home" />首页
         </p>
-        <p>
+        <p @click="hot">
           <van-icon name="star" />分类
         </p>
-        <p>
+        <p @click="cart">
           <van-icon name="shopping-cart" />购物车
         </p>
-        <p>
+        <p @click="user">
           <van-icon name="manager" />我的
         </p>
       </van-popup>
@@ -25,6 +26,7 @@
         </van-grid>
       </div>
     </header>
+    </van-sticky>
 
     <section>
       <div @click="toDetail" v-for="(item, index) in list" :key="index">
@@ -50,6 +52,19 @@ export default {
   },
 
   methods: {
+    home(){
+      this.$router.push({ path: "/" });
+    },
+    hot(){
+      this.$router.push({ path: "/hot" });
+
+    },
+    cart(){
+      this.$router.push({ path: "/cart" });
+    },
+    user(){
+      this.$router.push({ path: "/user" });
+    },
     showPopup() {
       this.show = true;
     },

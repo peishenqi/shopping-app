@@ -1,5 +1,6 @@
 <template>
   <div class="about">
+    <van-sticky>
     <header>
       <van-icon @click="onClickLeft" class="icon-left" name="arrow-left" />
       <van-nav-bar title="关于我们" />
@@ -19,6 +20,7 @@
         </p>
       </van-popup>
     </header>
+    </van-sticky>
 
     <section>
       <div>
