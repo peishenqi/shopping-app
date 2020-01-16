@@ -33,7 +33,7 @@
             <dd>{{ p.descriptions }}</dd>
             <span>￥{{ p.price }}</span>
 
-            <p></p>=======
+            <p></p>
             <p></p>
           </router-link>
         </dl>
@@ -173,6 +173,7 @@ export default {
         });
       });
     },
+
     //买了还买了
     and() {
       const data = {
@@ -212,12 +213,18 @@ export default {
     },
     //提交订单
     onSubmit() {
+      //过滤商品是否被选中
+      let order = this.list.filter((currentValue, index, arr) => {
+        // console.log(currentValue.checked == true);
+        return (this.orders = currentValue.checked == true);
+      });
+
+      // console.log(order);
+      if (this.total > 0) {
+        console.log(order);
+      }
+
       //判断商品是否被选中
-      // for (let i = 0; i < this.list.length; i++) {
-      //   if (this.list[i].checked == false) {
-      //     console.log(11);
-      //   }
-      // }
       this.list.forEach(v => {
         // this.list.filter(item => item.checked).length
         // console.log(this.total);
@@ -235,25 +242,26 @@ export default {
                 }
               ]
             };
-
             post("/api/v1/orders", data).then(res => {
-              console.log(data.orderDetails.products);
-              console.log(res.data);
+              // console.log(data.orderDetails[0].product);
+              // console.log(res.data);
+
+              let id = data.orderDetails[0].product;
+              console.log(id);
+
+              this.$router.push({
+                path: "order"
+              });
               console.log(res);
-              let id = "data.orderDetails.product";
-              // this.$router.push({
-              //   path: "order"
-              // });
-              // del("/api/v1/shop_carts/" + id).then(res => {
-              //   console.log(res);
-              //   window.location.reload();
-              // });
+              del("/api/v1/shop_carts/" + id).then(res => {
+                console.log(res);
+                window.location.reload();
+              });
             });
           }
-
           return;
         } else {
-          Dialog({ message: "请选择要购买商品" });
+          Dialog({ message: "请选择要购买商品~~" });
         }
       });
     },
@@ -283,8 +291,16 @@ export default {
         let num = localStorage.getItem("num");
         console.log(num);
       });
+    },
+    subNum(id) {
+      get("/api/v1/products/" + id).then(res => {
+        console.log(res);
+        let num = localStorage.getItem("num");
+        console.log(num);
+      });
     }
   },
+
   computed: {
     checkedAll: {
       //单选

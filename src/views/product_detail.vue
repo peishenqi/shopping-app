@@ -168,7 +168,7 @@
     </div>
     <!-- 底部 footer -->
     <van-goods-action>
-      <van-goods-action-icon icon="chat-o" text="客服" @click="onClickIcon" />
+      <van-goods-action-icon icon="chat-o" text="客服" />
       <van-goods-action-icon icon="cart-o" text="购物车" :to="{name: 'Cart'}" />
       <van-goods-action-button type="warning" text="加入购物车" @click="onClickButton" />
       <van-goods-action-button type="danger" text="立即购买" @click="onPayButton" />
@@ -253,7 +253,27 @@ export default {
     },
     //立即购买
     onPayButton() {
-      alert("点击购买按钮");
+      // console.log("点击购买按钮");
+      // console.log(this.$route.query.id);
+      let data = {
+        receiver: "张三",
+        regions: "河南",
+        address: "郑州",
+        orderDetails: [
+          {
+            quantity: 1,
+            product: this.$route.query.id,
+            price: this.price
+          }
+        ]
+      };
+      post("/api/v1/orders", data).then(res => {
+        console.log(res.data.info.order._id);
+        localStorage.setItem("id", JSON.stringify(res.data.info.order._id));
+        this.$router.push({
+          path: "order"
+        });
+      });
     },
     //   页面滚动距离
     handleScroll() {
