@@ -1,5 +1,6 @@
 <template>
   <div class="order">
+    <van-sticky>
     <header>
       <van-nav-bar
         title="填写订单"
@@ -7,10 +8,11 @@
         @click-left="onClickLeft"
       />
     </header>
+    </van-sticky>
 
     <section>
       <!--<van-cell title="收货人" is-link value="请添加收货人地址" />-->
-      <div class="site">
+      <div class="site" @click="add">
         <div class="left">
           <p>姓名</p>
         </div>
@@ -73,6 +75,11 @@ export default {
       this.show = false;
       this.date = this.formatDate(date);
     },
+    add(){
+      this.$router.push({
+        path:"/site"
+      })
+    },
     //支付
     onSubmit(){
         this.$router.push({
@@ -100,6 +107,7 @@ section {
   flex: 1;
   background: #cccccc54;
   padding: 1rem;
+  min-height: 40rem;
 }
 
 .site{
