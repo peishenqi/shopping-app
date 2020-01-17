@@ -157,7 +157,7 @@ export default {
   padding-top: 1.5rem;
 }
 .portrait {
-  margin-left: 25%;
+  margin-left: 20%;
   border: 2px solid #fff;
 }
 .username {
