@@ -15,10 +15,21 @@
           <p>地址</p>
         </div>
       </div>
-      <van-cell class="day" title="送达日期" :value="date" @click="show = true" />
+      <van-cell
+        class="day"
+        title="送达日期"
+        :value="date"
+        @click="show = true"
+      />
       <van-calendar v-model="show" @confirm="onConfirm" />
 
-      <van-card num="1" :price="price" :desc="descriptions" :title="name" :thumb="coverImg" />
+      <van-card
+        num="1"
+        :price="price"
+        :desc="descriptions"
+        :title="name"
+        :thumb="coverImg"
+      />
 
       <van-cell class="top" title="发票" value="选填" />
       <van-field
@@ -49,13 +60,13 @@ export default {
       descriptions: "",
       price: "",
       coverImg: "",
-      total: ""
+      total: "",
     };
   },
   methods: {
     onClickLeft() {
       this.$router.push({
-        path: "cart"
+        path: "cart",
       });
     },
     formatDate(date) {
@@ -68,13 +79,32 @@ export default {
     //支付
     onSubmit() {
       this.$router.push({
-        path: "payment"
+        path: "payment",
       });
     },
     //获取订单详情
     getOoderDetail() {
       let id = JSON.parse(localStorage.getItem("id"));
-
+      // let a = JSON.parse(localStorage.getItem("ordersId"));
+      // // console.log(a);
+      // for (let i = 0; i < a.length; i++) {
+      //   const element = a[i];
+      //   // console.log(element);
+      //   get("/api/v1/orders/" + a[i]).then(res => {
+      //     console.log(res);
+      //     let pid = res.data.details[0].product.id;
+      //     // get("/api/v1/products/" + pid).then(res => {
+      //     //   console.log(res.data.coverImg);
+      //     //   this.coverImg = res.data.coverImg;
+      //     //   this.price = res.data.price;
+      //     //   this.descriptions = res.data.descriptions;
+      //     //   this.name = res.data.name;
+      //     //   this.total = this.price * 1 * 100;
+      //     //   // console.log(this.total);
+      //     //   // console.log(this.coverImg, this.name, this.descriptions, this.price);
+      //     // });
+      //   });
+      // }
       get("/api/v1/orders/" + id).then(res => {
         // console.log(res);
         let pid = res.data.details[0].product._id;
@@ -85,15 +115,15 @@ export default {
           this.descriptions = res.data.descriptions;
           this.name = res.data.name;
           this.total = this.price * 1 * 100;
-          console.log(this.total);
+          // console.log(this.total);
           // console.log(this.coverImg, this.name, this.descriptions, this.price);
         });
       });
-    }
+    },
   },
   mounted() {
     this.getOoderDetail();
-  }
+  },
 };
 </script>
 

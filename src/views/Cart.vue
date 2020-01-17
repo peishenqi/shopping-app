@@ -3,32 +3,54 @@
     <!-- header -->
     <div>
       <!-- <van-nav-bar left-arrow @click-left="onClickLeft" :class="classA" title="购物车" /> -->
-      <van-nav-bar title="购物车" left-arrow @click-left="onClickLeft" :class="classA" />
+      <van-nav-bar
+        title="购物车"
+        left-arrow
+        @click-left="onClickLeft"
+        :class="classA"
+      />
     </div>
     <!-- main  -->
     <div class="main" v-if="isNothing">
       <div class="top">
         <span class="span">登录后将同步您的购物车商品</span>
-        <van-button type="primary" round size="small" :class="class2" @click="login">登录</van-button>
+        <van-button
+          type="primary"
+          round
+          size="small"
+          :class="class2"
+          @click="login"
+          >登录</van-button
+        >
       </div>
       <div class="emptycart">
         <div class="emptycart_t">
-          <img src="https://img02.hua.com/m/Shopping/m_shopping_empty_cart.png?v2" alt />
+          <img
+            src="https://img02.hua.com/m/Shopping/m_shopping_empty_cart.png?v2"
+            alt
+          />
         </div>
         <div class="emptycart_c">
           <p>购物车内暂时没有商品</p>
         </div>
 
         <div class="emptycart_b">
-          <van-button type="primary" round size="small" :class="class3" @click="toLook">去逛逛</van-button>
+          <van-button
+            type="primary"
+            round
+            size="small"
+            :class="class3"
+            @click="toLook"
+            >去逛逛</van-button
+          >
         </div>
       </div>
       <div class="guess">
         <h3>猜你喜欢</h3>
         <dl v-for="p in lists" :key="p._id">
-          <router-link :to="{name:'product_detail',query:{id:p._id}}">
+          <router-link :to="{ name: 'product_detail', query: { id: p._id } }">
             <dt>
-              <img :src="p.coverImg | filterImg" />
+              <img :src="p.coverImg" />
             </dt>
             <dd>{{ p.descriptions }}</dd>
             <span>￥{{ p.price }}</span>
@@ -73,7 +95,9 @@
           <van-tab title="购买该商品的还购买了">
             <div class="recommend_list">
               <dl v-for="v in like" :key="v._id">
-                <router-link :to="{ name: 'product_detail', query: { id: v._id } }">
+                <router-link
+                  :to="{ name: 'product_detail', query: { id: v._id } }"
+                >
                   <dt>
                     <img :src="v.coverImg" />
                   </dt>
@@ -85,7 +109,11 @@
         </van-tabs>
       </div>
       <div class="main_bottom">
-        <van-submit-bar :price="total" button-text="提交订单" @submit="onSubmit">
+        <van-submit-bar
+          :price="total"
+          button-text="提交订单"
+          @submit="onSubmit"
+        >
           <van-checkbox v-model="checkedAll">全选</van-checkbox>
         </van-submit-bar>
       </div>
@@ -108,7 +136,8 @@ export default {
       list: [],
       ischecked: false,
       lists: [],
-      like: []
+      like: [],
+      orders: [],
     };
   },
   //过滤图片
@@ -119,11 +148,7 @@ export default {
         if (val.startsWith("http")) {
           return val;
         } else {
-<<<<<<< HEAD
           return "https://192.168.16.18:3009" + val
-=======
-          return "http://192.168.16.18:3009" + val;
->>>>>>> mdw
         }
       }
       // return defaultImg
@@ -142,7 +167,7 @@ export default {
     res.data.forEach(item => {
       this.list.push({
         ...item,
-        ...{ checked: false }
+        ...{ checked: false },
       });
     });
   },
@@ -157,14 +182,14 @@ export default {
         per: 10,
         page: 3,
         name: "",
-        product_category: ""
+        product_category: "",
       };
       get("/api/v1/products", data).then(res => {
         // console.log(res.data.products);
         this.lists = [];
         res.data.products.forEach(p => {
           this.lists.push({
-            ...p
+            ...p,
           });
         });
       });
@@ -176,14 +201,14 @@ export default {
         per: 8,
         page: 1,
         name: "",
-        product_category: ""
+        product_category: "",
       };
       get("/api/v1/products", data).then(res => {
         // console.log(res.data.products);
         this.like = [];
         res.data.products.forEach(v => {
           this.like.push({
-            ...v
+            ...v,
           });
         });
       });
@@ -191,42 +216,26 @@ export default {
     //返回按钮
     onClickLeft() {
       this.$router.push({
-        path: "sort"
+        path: "sort",
       });
     },
     //去逛逛
     toLook() {
       this.$router.push({
-        path: "/"
+        path: "/",
       });
     },
     //登录同步购物车
     login() {
       this.$router.push({
         path: "user",
-        name: "User"
+        name: "User",
       });
     },
     //提交订单
     onSubmit() {
-      this.$router.push({
-        path: "order"
-      });
-      //过滤商品是否被选中
-      let order = this.list.filter((currentValue, index, arr) => {
-        // console.log(currentValue.checked == true);
-        return (this.orders = currentValue.checked == true);
-      });
-
-      // console.log(order);
-      if (this.total > 0) {
-        console.log(order);
-      }
-
       //判断商品是否被选中
       this.list.forEach(v => {
-        // this.list.filter(item => item.checked).length
-        // console.log(this.total);
         if (this.total > 0) {
           if (v.checked) {
             let data = {
@@ -237,23 +246,23 @@ export default {
                 {
                   quantity: v.quantity,
                   product: v._id,
-                  price: v.product.price
-                }
-              ]
+                  price: v.product.price,
+                },
+              ],
             };
             post("/api/v1/orders", data).then(res => {
-              // console.log(data.orderDetails[0].product);
-              // console.log(res.data);
-
               let id = data.orderDetails[0].product;
-              console.log(id);
+
+              // this.orders.push(res.data.info.order._id);
+              // console.log(this.orders);
+              // localStorage.setItem("ordersId", JSON.stringify(this.orders));
 
               this.$router.push({
-                path: "order"
+                path: "order",
               });
               console.log(res);
               del("/api/v1/shop_carts/" + id).then(res => {
-                console.log(res);
+                // console.log(res);
                 window.location.reload();
               });
             });
@@ -268,7 +277,7 @@ export default {
     del(id) {
       Dialog.confirm({
         title: "确认删除",
-        message: "该操作无法撤回，请谨慎选择"
+        message: "该操作无法撤回，请谨慎选择",
       })
         .then(() => {
           console.log(id);
@@ -299,7 +308,7 @@ export default {
         console.log(num);
       });
       console.log(this.$route);
-    }
+    },
   },
 
   computed: {
@@ -314,7 +323,7 @@ export default {
       set(val) {
         // console.log(111);
         this.list.forEach(item => (item.checked = val));
-      }
+      },
     },
     //总价
     total() {
@@ -324,8 +333,8 @@ export default {
           console.log(item);
           return v + item.product.price * item.quantity * 100;
         }, 0);
-    }
-  }
+    },
+  },
 };
 </script>
 
