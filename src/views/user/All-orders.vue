@@ -25,14 +25,16 @@
             </div>
 
             <div v-show="!isshow" class="YesOrders">
-                <div  v-for="(item, index) in orderDetails" :key="index">
+                <div class="dd" v-for="(item, index) in orderDetails" :key="index">
                 <p>订单号：{{item.no}}</p>
                 <van-card
+                num="2"
                 :price="item.price"
                 desc="描述信息"
                 title="商品标题"
                 thumb="https://img.yzcdn.cn/vant/t-thirt.jpg"
                 />
+                <van-icon name="delete" @click="del(item._id)"/>
                 </div>
             </div>
         </section>
@@ -42,7 +44,8 @@
 </template>
 
 <script>
-import { get} from "../../utils/ajax";
+import { get, del} from "../../utils/ajax";
+import { Dialog } from "vant";
 export default {
     data() {
     return {
@@ -59,7 +62,7 @@ export default {
       };
       get("/api/v1/orders", data).then(res => {
         console.log(res);
-        console.log(res.data.orders);
+        // console.log(res.data.orders);
         
          this.orderDetails = res.data.orders
         //  console.log(this.orderDetails);
@@ -74,26 +77,23 @@ export default {
       });
   },
 
-//   async created() {
-//     const res = await get("/api/v1/orders");
-//     console.log(res.data);
-//     // console.log(res.data.length)
-//     // if (!res.data.length == 0) {
-//     // } else {
-//     //   this.isshow = !this.isshow;
-//     // }
-//     this.list = [];
-//     res.data.forEach(item => {
-//       this.list.push({
-//         ...item,
-//       });
-//     });
-//   },
+
     methods:{
         onClickLeft() {
         this.$router.push({path:"/user"})
     },
-     
+     del(id){
+        Dialog.confirm({
+        title: "确认删除",
+        message: "该操作无法撤回，请谨慎选择"
+      }).then(()=>{
+          console.log(id)
+          del('/api/v1/orders/'+id).then(res=>{
+              console.log(res)
+              window.location.reload();
+          })
+      })
+     }
     }
 }
 </script>
@@ -139,6 +139,27 @@ section{
     
 }
 .van-grid-item__text{
+    color:red;
+}
+.van-card {
+    padding:0;
+     background: #fff;
+}
+.dd{
+    margin: 1rem;
+    background: #fff;
+    padding: 0.5rem;
+    border-radius: 10px;
+    position: relative;
+}
+.dd p{
+    margin: 0;
+    font-size: 0.8rem;
+}
+.van-icon-delete{
+    position: absolute;
+    top:1rem;
+    right:1rem;
     color:red;
 }
 </style>
