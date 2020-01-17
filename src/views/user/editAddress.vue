@@ -26,7 +26,7 @@
 
 <script>
 import areaList from "../../assets/area";
-import { post, get } from "../../utils/ajax";
+import { del, put } from "../../utils/ajax";
 
 export default {
   data() {
@@ -60,6 +60,7 @@ export default {
         ];
       }
     },
+    // 地址修改
     onSave(content) {
       console.log(content);
       let data = {
@@ -70,27 +71,17 @@ export default {
         idDefault: false
       };
       console.log(data);
-      let id = localStorage.getItem("userID");
-      post("/api/v1/addresses/" + id, data).then(res => {
-        console.log(res.data);
+      put("/api/v1/addresses/" + content.id, data).then(res => {
+        console.log(res);
         this.$router.push("Site");
       });
     },
-    onDelete() {
-      console.log(1111);
-
-      /* let token = localStorage.getItem("token");
-      let userData = {
-        headers: {
-          authorization: "Bearer " + token
-        }
-      };
-      post(
-        "/api/v1/addresses/" + localStorage.getItem("userID"),
-        userData
-      ).then(res => {
-        console.log(res.data);
-      }); */
+    // 地址删除
+    onDelete(content) {
+      del("/api/v1/addresses/" + content.id).then(res => {
+        console.log(res);
+        this.$router.push("Site");
+      });
     }
   },
   created() {
