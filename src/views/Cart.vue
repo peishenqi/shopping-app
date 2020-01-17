@@ -209,9 +209,9 @@ export default {
     },
     //提交订单
     onSubmit() {
-      this.$router.push({
-        path: "order"
-      });
+      // this.$router.push({
+      //   path: "order"
+      // });
       //过滤商品是否被选中
       let order = this.list.filter((currentValue, index, arr) => {
         // console.log(currentValue.checked == true);
